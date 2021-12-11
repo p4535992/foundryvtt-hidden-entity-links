@@ -77,8 +77,8 @@ class Settings {
 // API SUPPORT
 // ==================
 
-class HiddentEntityLinks {
-  static API = 'hiddentEntityLinks';
+class HiddenEntityLinks {
+  static API = 'hiddenEntityLinks';
 
   socket = undefined;
 
@@ -324,42 +324,42 @@ class HiddentEntityLinks {
         // Do nothing
       }
     }
-  }
+  };
 }
 
 // ==================
 // SOCKET SUPPORT (We don' needed for now)
 // ==================
 /*
-export let hiddentEntityLinksSocket;
+export let hiddenEntityLinksSocket;
 
 Hooks.once('socketlib.ready', () => {
-  hiddentEntityLinksSocket = socketlib.registerModule(HIDDEN_ENTITY_LINKS_MODULE_NAME);
-  hiddentEntityLinksSocket.register(
+  hiddenEntityLinksSocket = socketlib.registerModule(HIDDEN_ENTITY_LINKS_MODULE_NAME);
+  hiddenEntityLinksSocket.register(
     'updateHiddenEntityLinks',
-    HiddentEntityLinksSocketFunctions.updateHiddenEntityLinks,
+    HiddenEntityLinksSocketFunctions.updateHiddenEntityLinks,
   );
-  hiddentEntityLinksSocket.register(
+  hiddenEntityLinksSocket.register(
     'directoryRenderedHiddenEntityLinks',
-    HiddentEntityLinksSocketFunctions.directoryRenderedHiddenEntityLinks,
+    HiddenEntityLinksSocketFunctions.directoryRenderedHiddenEntityLinks,
   );
-  hiddentEntityLinksSocket.register(
+  hiddenEntityLinksSocket.register(
     'hideRenderedHiddenEntityLinks',
-    HiddentEntityLinksSocketFunctions.hideRenderedHiddenEntityLinks,
+    HiddenEntityLinksSocketFunctions.hideRenderedHiddenEntityLinks,
   );
 });
 
-class HiddentEntityLinksSocketFunctions {
+class HiddenEntityLinksSocketFunctions {
   static updateHiddenEntityLinks(entityData, html, data) {
-    game.hiddentEntityLinks.updateHiddenEntityLinks(entityData, html, data);
+    game.hiddenEntityLinks.updateHiddenEntityLinks(entityData, html, data);
   }
 
   static directoryRenderedHiddenEntityLinks(obj, html, data, entities) {
-    game.hiddentEntityLinks.directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game.hiddenEntityLinks.directoryRenderedHiddenEntityLinks(obj, html, data, entities);
   }
 
   static hideRenderedHiddenEntityLinks(sheet, html, data) {
-    game.hiddentEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
+    game.hiddenEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
   }
 }
 */
@@ -378,49 +378,49 @@ Hooks.once('ready', async function () {
   //   return;
   // }
 
-  // game[HiddentEntityLinks.API].socket = hiddentEntityLinksSocket;
+  // game[HiddenEntityLinks.API].socket = hiddenEntityLinksSocket;
 
   Hooks.on('updateJournalEntry', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#journal.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
   Hooks.on('updateScene', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#scenes.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
   Hooks.on('updateActor', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#actors.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
   Hooks.on('updateItem', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#items.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
   // Hooks.on('updateMacro', directoryRenderedHiddenEntityLinks);
   Hooks.on('updateRollTable', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#tables.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
   Hooks.on('updateCards', (entityData, data) => {
     if (data.flags && data.flags['hidden-entity-links']) {
       let html = $('#cards.sidebar-tab');
-      // hiddentEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
-      game[HiddentEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
+      // hiddenEntityLinksSocket.executeForEveryone('updateHiddenEntityLinks', entityData, html, data);
+      game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, html, data);
     }
   });
 
@@ -465,7 +465,7 @@ Hooks.once('init', async function () {
   //   return;
   // }
 
-  game[HiddentEntityLinks.API] = new HiddentEntityLinks();
+  game[HiddenEntityLinks.API] = new HiddenEntityLinks();
 });
 
 Hooks.once('setup', async function () {
@@ -488,63 +488,63 @@ Hooks.once('setup', async function () {
 
   Hooks.on('renderJournalDirectory', (obj, html, data) => {
     const entities = game.journal;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
   Hooks.on('renderSceneDirectory', (obj, html, data) => {
     const entities = game.scenes;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
   Hooks.on('renderActorDirectory', (obj, html, data) => {
     const entities = game.actors;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
   Hooks.on('renderItemDirectory', (obj, html, data) => {
     const entities = game.items;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
   // Hooks.on('renderMacroDirectory', directoryRenderedHiddenEntityLinks);
   Hooks.on('renderRollTableDirectory', (obj, html, data) => {
     const entities = game.tables;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
   Hooks.on('renderCardsDirectory', (obj, html, data) => {
     const entities = game.cards;
-    // if (hiddentEntityLinksSocket) {
-    //   hiddentEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
-    //   hiddentEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
+    // if (hiddenEntityLinksSocket) {
+    //   hiddenEntityLinksSocket.executeForEveryone('directoryRenderedHiddenEntityLinks', obj, html, data, entities);
+    //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
     // } else {
-    game[HiddentEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-    game[HiddentEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
+    game[HiddenEntityLinks.API].directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(obj, html, data);
     // }
   });
 
