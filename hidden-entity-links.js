@@ -325,6 +325,13 @@ class HiddenEntityLinks {
       }
     }
   };
+
+  // _checkPermission = function(entity, user){
+  //   return
+  //     entity.testUserPermission(game.user, 'OBSERVER') ||
+  //     entity.testUserPermission(game.user, 'LIMITED') ||
+  //     entity.testUserPermission(game.user, 'OWNER')
+  // }
 }
 
 // ==================
@@ -577,7 +584,6 @@ Hooks.once('setup', async function () {
   // =======================
 
   if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-journals')) {
-
     libWrapper.register(
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'JournalEntry.prototype.visible',
@@ -586,7 +592,13 @@ Hooks.once('setup', async function () {
           return true;
         }
         if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          return this.testUserPermission(game.user, 'OBSERVER');
+          // return this.testUserPermission(game.user, 'OBSERVER');
+          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
+          return (
+            this.testUserPermission(game.user, 'OBSERVER') ||
+            this.testUserPermission(game.user, 'LIMITED') ||
+            this.testUserPermission(game.user, 'OWNER')
+          );
         }
       },
       'OVERRIDE',
@@ -757,7 +769,13 @@ Hooks.once('setup', async function () {
           return true;
         }
         if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          return this.testUserPermission(game.user, 'OBSERVER');
+          // return this.testUserPermission(game.user, 'OBSERVER');
+          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
+          return (
+            this.testUserPermission(game.user, 'OBSERVER') ||
+            this.testUserPermission(game.user, 'LIMITED') ||
+            this.testUserPermission(game.user, 'OWNER')
+          );
         }
       },
       'OVERRIDE',
@@ -889,7 +907,13 @@ Hooks.once('setup', async function () {
           return true;
         }
         if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          return this.testUserPermission(game.user, 'OBSERVER');
+          // return this.testUserPermission(game.user, 'OBSERVER');
+          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
+          return (
+            this.testUserPermission(game.user, 'OBSERVER') ||
+            this.testUserPermission(game.user, 'LIMITED') ||
+            this.testUserPermission(game.user, 'OWNER')
+          );
         }
       },
       'OVERRIDE',
@@ -1021,7 +1045,13 @@ Hooks.once('setup', async function () {
           return true;
         }
         if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          return this.testUserPermission(game.user, 'OBSERVER');
+          // return this.testUserPermission(game.user, 'OBSERVER');
+          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
+          return (
+            this.testUserPermission(game.user, 'OBSERVER') ||
+            this.testUserPermission(game.user, 'LIMITED') ||
+            this.testUserPermission(game.user, 'OWNER')
+          );
         }
       },
       'OVERRIDE',
@@ -1164,7 +1194,13 @@ Hooks.once('setup', async function () {
           return true;
         }
         if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          return this.testUserPermission(game.user, 'OBSERVER');
+          // return this.testUserPermission(game.user, 'OBSERVER');
+          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
+          return (
+            this.testUserPermission(game.user, 'OBSERVER') ||
+            this.testUserPermission(game.user, 'LIMITED') ||
+            this.testUserPermission(game.user, 'OWNER')
+          );
         }
       },
       'OVERRIDE',

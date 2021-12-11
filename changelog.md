@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Add check for 'LIMITED' and 'OWNER' permissions
+
 ## 1.0.4
 
 - Add check on hooks for disable css not only context voice
