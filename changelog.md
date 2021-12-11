@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- Update labels
+
 ## 1.0.2
 
 - rename HiddentEntityLinks to HiddenEntityLinks
