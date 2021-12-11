@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+- BUg fix
+
 ## 1.0.5
 
 - Add check for 'LIMITED' and 'OWNER' permissions

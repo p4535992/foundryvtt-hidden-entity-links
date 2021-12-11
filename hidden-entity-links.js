@@ -260,6 +260,14 @@ class HiddenEntityLinks {
     }
   };
 
+  _EntityMap = {
+    "JournalEntry" : "journal",
+    "Actor"        : "actors",
+    "RollTable"    : "tables",
+    "Scene"        : "scenes",
+    "Item"         : "items",
+  };
+
   /**
    * For any link in the text which points to a document which is not visible to the current player
    * it will be replaced by the non-link text (so the player will be NOT aware that a link exists)
@@ -271,9 +279,15 @@ class HiddenEntityLinks {
     if (!game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disguise-unreachable-links')) {
       return;
     }
+    // Only check for link visibility if NOT a gm
     if (game.user.isGM) {
       return;
     }
+    // Original link:
+    //     <a class="entity-link" draggable="true" [ data-entity="JournalEntry" | data-pack="packname" ] data-id=".....">
+    //     <i class="fas fa-th-list">::before</i>
+    //     plain text
+    //     </a>
     // If the "data-id" isn't observable by the current user, then replace with just "plain text"
     html
       .find('a.entity-link')
@@ -284,7 +298,7 @@ class HiddenEntityLinks {
           // Compendium packs are only limited at the PACK level, not an individual document level
           return game.packs.get(a.getAttribute('data-pack'))?.private;
         }
-        const entity = _EntityMap[dataentity];
+        const entity = this._EntityMap[dataentity];
         if (!entity) {
           console.warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
           return false;
