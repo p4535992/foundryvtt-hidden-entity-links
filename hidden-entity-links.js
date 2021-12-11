@@ -14,6 +14,23 @@ class Settings {
       type: Boolean,
       default: false,
     });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-actors', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-actors.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-actors.hint`,
+      scope: 'world',
+      config: true,
+      default: 3,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+        4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`),
+      },
+    });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-items', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-items.name`,
       hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-items.hint`,
@@ -21,6 +38,23 @@ class Settings {
       config: true,
       type: Boolean,
       default: false,
+    });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-items', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-items.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-items.hint`,
+      scope: 'world',
+      config: true,
+      default: 3,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+        4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`),
+      },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-journals', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-journals.name`,
@@ -30,6 +64,23 @@ class Settings {
       type: Boolean,
       default: false,
     });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-journals', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-journals.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-journals.hint`,
+      scope: 'world',
+      config: true,
+      default: 3,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+        4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`),
+      },
+    });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-rolltables', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-rolltables.name`,
       hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-rolltables.hint`,
@@ -37,6 +88,23 @@ class Settings {
       config: true,
       type: Boolean,
       default: false,
+    });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-rolltables', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-rolltables.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-rolltables.hint`,
+      scope: 'world',
+      config: true,
+      default: 3,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+        4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`),
+      },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-scenes.name`,
@@ -53,6 +121,23 @@ class Settings {
       config: true,
       type: Boolean,
       default: false,
+    });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.hint`,
+      scope: 'world',
+      config: true,
+      default: 3,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+        4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`),
+      },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.no-background-only-symbol.name`,
@@ -261,11 +346,21 @@ class HiddenEntityLinks {
   };
 
   _EntityMap = {
-    "JournalEntry" : "journal",
-    "Actor"        : "actors",
-    "RollTable"    : "tables",
-    "Scene"        : "scenes",
-    "Item"         : "items",
+    JournalEntry: 'journal',
+    Actor: 'actors',
+    RollTable: 'tables',
+    Scene: 'scenes',
+    Item: 'items',
+  };
+
+  _permissions = {
+    OBSERVER: 0,
+    LIMITED: 1,
+    OWNER: 2,
+    OBSERVER_LIMITED: 3,
+    OBSERVER_OWNER: 4,
+    LIMITED_OWNER: 5,
+    OBSERVER_LIMITED_OWNER: 6,
   };
 
   /**
@@ -340,12 +435,44 @@ class HiddenEntityLinks {
     }
   };
 
-  // _checkPermission = function(entity, user){
-  //   return
-  //     entity.testUserPermission(game.user, 'OBSERVER') ||
-  //     entity.testUserPermission(game.user, 'LIMITED') ||
-  //     entity.testUserPermission(game.user, 'OWNER')
-  // }
+  _checkPermission = function (entity, user, setting) {
+    // const result =
+    //   entity.testUserPermission(user, 'OBSERVER') ||
+    //   entity.testUserPermission(user, 'LIMITED') ||
+    //   entity.testUserPermission(user, 'OWNER')
+    let result = false;
+    let set;
+    if (setting == 'level-permission-actors') {
+      set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-actors');
+    } else if (setting == 'level-permission-items') {
+      set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-items');
+    } else if (setting == 'level-permission-journals') {
+      set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-journals');
+    } else if (setting == 'level-permission-rolltables') {
+      set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-rolltables');
+    } else if (setting == 'level-permission-scenes') {
+      set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes');
+    }
+    if (set == this._permissions.OBSERVER) {
+      result = entity.testUserPermission(user, 'OBSERVER');
+    } else if (set == this._permissions.LIMITED) {
+      result = entity.testUserPermission(user, 'LIMITED');
+    } else if (set == this._permissions.OWNER) {
+      result = entity.testUserPermission(user, 'OWNER');
+    } else if (set == this._permissions.OBSERVER_LIMITED) {
+      result = entity.testUserPermission(user, 'OBSERVER') || entity.testUserPermission(user, 'LIMITED');
+    } else if (set == this._permissions.OBSERVER_OWNER) {
+      result = entity.testUserPermission(user, 'OBSERVER') || entity.testUserPermission(user, 'OWNER');
+    } else if (set == this._permissions.LIMITED_OWNER) {
+      result = entity.testUserPermission(user, 'LIMITED') || entity.testUserPermission(user, 'OWNER');
+    } else if (set == this._permissions.OBSERVER_LIMITED_OWNER) {
+      result =
+        entity.testUserPermission(user, 'OBSERVER') ||
+        entity.testUserPermission(user, 'LIMITED') ||
+        entity.testUserPermission(user, 'OWNER');
+    }
+    return result;
+  };
 }
 
 // ==================
@@ -605,14 +732,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          // return this.testUserPermission(game.user, 'OBSERVER');
-          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
-          return (
-            this.testUserPermission(game.user, 'OBSERVER') ||
-            this.testUserPermission(game.user, 'LIMITED') ||
-            this.testUserPermission(game.user, 'OWNER')
-          );
+        if(game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-journals')){
+          if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+            // return this.testUserPermission(game.user, 'OBSERVER');
+            // return game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-journals');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return !this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
         }
       },
       'OVERRIDE',
@@ -782,14 +911,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          // return this.testUserPermission(game.user, 'OBSERVER');
-          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
-          return (
-            this.testUserPermission(game.user, 'OBSERVER') ||
-            this.testUserPermission(game.user, 'LIMITED') ||
-            this.testUserPermission(game.user, 'OWNER')
-          );
+        if(game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-items')){
+          if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+            // return this.testUserPermission(game.user, 'OBSERVER');
+            // return game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-items');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return !this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
         }
       },
       'OVERRIDE',
@@ -920,14 +1051,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          // return this.testUserPermission(game.user, 'OBSERVER');
-          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
-          return (
-            this.testUserPermission(game.user, 'OBSERVER') ||
-            this.testUserPermission(game.user, 'LIMITED') ||
-            this.testUserPermission(game.user, 'OWNER')
-          );
+        if(game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-actors')){
+          if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+            // return this.testUserPermission(game.user, 'OBSERVER');
+            // return game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-actors');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return !this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
         }
       },
       'OVERRIDE',
@@ -1058,14 +1191,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          // return this.testUserPermission(game.user, 'OBSERVER');
-          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
-          return (
-            this.testUserPermission(game.user, 'OBSERVER') ||
-            this.testUserPermission(game.user, 'LIMITED') ||
-            this.testUserPermission(game.user, 'OWNER')
-          );
+        if(game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-rolltables')){
+          if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+            // return this.testUserPermission(game.user, 'OBSERVER');
+            // return game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-rolltables');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return !this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
         }
       },
       'OVERRIDE',
@@ -1207,14 +1342,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
-          // return this.testUserPermission(game.user, 'OBSERVER');
-          // return game[HiddenEntityLinks.API]._checkPermission(this,game.user);
-          return (
-            this.testUserPermission(game.user, 'OBSERVER') ||
-            this.testUserPermission(game.user, 'LIMITED') ||
-            this.testUserPermission(game.user, 'OWNER')
-          );
+        if(game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-scenes')){
+          if (!this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+            // return this.testUserPermission(game.user, 'OBSERVER');
+            // return game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-scenes');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return !this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
         }
       },
       'OVERRIDE',
