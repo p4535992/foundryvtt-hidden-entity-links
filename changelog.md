@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Add check on hooks for disable css not only context voice
+
 ## 1.0.3
 
 - Update labels
