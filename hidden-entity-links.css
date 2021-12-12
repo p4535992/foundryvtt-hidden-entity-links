@@ -8,6 +8,16 @@
   ) !important;
 }
 
+.hidden-entity-links-show {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(28, 189, 233, 0.2) 10px,
+    rgba(28, 189, 233, 0.2) 20px
+  ) !important;
+}
+
 .hidden-entity-links-scene {
   background: repeating-linear-gradient(
     135deg,
@@ -23,7 +33,27 @@
   height: 100%;
 }
 
+.hidden-entity-links-scene-show {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1) 10px,
+    rgba(28, 189, 233, 1) 10px,
+    rgba(28, 189, 233, 1) 20px
+  ) !important;
+  max-width: max-content;
+  margin: auto 5px;
+  line-height: initial;
+  display: block ruby;
+  height: 100%;
+}
+
 .hidden-entity-links-scene .fa-lightbulb {
+  color: transparent;
+  text-shadow: 0 0 8px transparent;
+}
+
+.hidden-entity-links-scene .fa-low-vision {
   color: transparent;
   text-shadow: 0 0 8px transparent;
 }
