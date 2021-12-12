@@ -94,35 +94,37 @@ Remember the permission on foundry are from lowest to highest NONE,LIMITED,OBSER
 
 Below is an example where as GM we set the values -, NONE, LIMITED, OBSERVER, OWNER, ONLY LIMITED, ONLY OBSERVER respectively in the dropdown. Showing the view by the player that he has these exact privileges in the other distinct entities.
 
+**NOTE: the following screenshots of the example start from the fact that there are no entities set explicitly with 'hide' and 'show', the explicit configurations of 'hide' and 'show' have priority over the permissions configurations.**
+
 What GM always see:
 
 ![permgmsee](./wiki/perm_gm_view.png)
 
-Here what player see with the empty value "-":
+Here what player see with the default value "-":
 
 ![permempty](./wiki/perm_player_view_empty.png)
 
-Here what player see with the empty value "NONE":
+Here what player see with the value "NONE":
 
 ![permnone](./wiki/perm_player_view_none.png)
 
-Here what player see with the empty value "LIMITED":
+Here what player see with the value "LIMITED":
 
 ![permlimited](./wiki/perm_player_view_limited.png)
 
-Here what player see with the empty value "OBSERVER":
+Here what player see with the value "OBSERVER":
 
 ![permobserver](./wiki/perm_player_view_observer.png)
 
-Here what player see with the empty value "OWNER":
+Here what player see with the value "OWNER":
 
 ![permowner](./wiki/perm_player_view_owner.png)
 
-Here what player see with the empty value "ONLY LIMITED":
+Here what player see with the value "ONLY LIMITED":
 
 ![permonlylimited](./wiki/perm_player_view_onlylimited.png)
 
-Here what player see with the empty value "ONLY OBSERVER":
+Here what player see with the value "ONLY OBSERVER":
 
 ![permonlyobserver](./wiki/perm_player_view_onlyobserver.png)
 
