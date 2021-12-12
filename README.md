@@ -50,6 +50,7 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 ## Known issue
 
 - I hate myself for this, but I could not find a way to update the elements on the sidebar to change the flag on the entities the method ui.sidebar.render (true); it should have worked, but that doesn't seem to be the case ... if anyone can find a solution let me know. FOR NOW YOU ARE FORCED TO REFRESH THE WEB PAGE.
+- When change the modules setting it's required (preferable) A REFRESH OF THE WEB PAGE.
 
 ## Features
 

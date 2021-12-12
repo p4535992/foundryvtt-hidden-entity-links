@@ -1035,10 +1035,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'JournalDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
@@ -1121,10 +1121,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'JournalDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
@@ -1234,10 +1234,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ItemDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        } 
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
@@ -1320,10 +1320,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ItemDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
@@ -1433,10 +1433,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ActorDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
@@ -1519,10 +1519,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ActorDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
@@ -1643,10 +1643,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'RollTableDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
@@ -1729,10 +1729,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'RollTableDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
@@ -1842,10 +1842,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'SceneDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
@@ -1949,10 +1949,10 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'SceneDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
-        if (game.settings.get('disable-voices')) {
-          return wrapped(...args);
-        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+          return options;
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
