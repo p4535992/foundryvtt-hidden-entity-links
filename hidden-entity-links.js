@@ -130,25 +130,25 @@ class Settings {
       type: Boolean,
       default: false,
     });
-    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes', {
-      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.name`,
-      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.none`),
-        1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
-        2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
-        3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
-        // 4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
-        // 5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
-        // 6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
-        // 7: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`)
-        10: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.default`),
-      },
-    });
+    // game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes', {
+    //   name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.name`,
+    //   hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission-scenes.hint`,
+    //   scope: 'world',
+    //   config: true,
+    //   default: 0,
+    //   type: Number,
+    //   choices: {
+    //     0: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.none`),
+    //     1: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
+    //     2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
+    //     3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+    //     // 4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimited`),
+    //     // 5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerowner`),
+    //     // 6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limitedowner`),
+    //     // 7: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observerlimitedowner`)
+    //     10: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.default`),
+    //   },
+    // });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol', {
       name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.no-background-only-symbol.name`,
       hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.no-background-only-symbol.hint`,
