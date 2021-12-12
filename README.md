@@ -86,7 +86,7 @@ From version 1.0.7 you can hide by default the entites based on the permissions 
 
 On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
 
-![perm1](:/../wiki/perm_dropdown.png)
+![perm1](./wiki/perm_dropdown.png)
 
 Remember the permission on foundry are from lowest to highest NONE,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER,LIMITED,NONE to the player, the permissions of LIMITED also associate the permissions of NONE etc.
 
