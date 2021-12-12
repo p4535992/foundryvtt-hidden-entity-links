@@ -881,8 +881,11 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
           return false;
+        }
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+          return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-journals')) {
           return false;
@@ -944,7 +947,10 @@ Hooks.once('setup', async function () {
               const journal = game.journal.get(li.data('entityId'))
                 ? game.journal.get(li.data('entityId'))
                 : game.journal.get(li.data('documentId'));
-              if (game.user.isGM && !journal.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
                 return true;
               } else {
                 return false;
@@ -958,13 +964,39 @@ Hooks.once('setup', async function () {
             },
           },
           {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (li) => {
+              const journal = game.journal.get(li.data('entityId'))
+                ? game.journal.get(li.data('entityId'))
+                : game.journal.get(li.data('documentId'));
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (li) => {
+              const journal = game.journal.get(li.data('entityId'))
+                ? game.journal.get(li.data('entityId'))
+                : game.journal.get(li.data('documentId'));
+              await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+            },
+          },
+          {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
             icon: '<i class="fas fa-lightbulb"></i>',
             condition: (li) => {
               const journal = game.journal.get(li.data('entityId'))
                 ? game.journal.get(li.data('entityId'))
                 : game.journal.get(li.data('documentId'));
-              if (game.user.isGM && journal.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE
+              )){
                 return true;
               } else {
                 return false;
@@ -1051,8 +1083,11 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
           return false;
+        }
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+          return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-items')) {
           return false;
@@ -1075,7 +1110,10 @@ Hooks.once('setup', async function () {
               const item = game.items.get(li.data('entityId'))
                 ? game.items.get(li.data('entityId'))
                 : game.items.get(li.data('documentId'));
-              if (game.user.isGM && !item.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
                 return true;
               } else {
                 return false;
@@ -1089,13 +1127,39 @@ Hooks.once('setup', async function () {
             },
           },
           {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (li) => {
+              const item = game.items.get(li.data('entityId'))
+                ? game.items.get(li.data('entityId'))
+                : game.items.get(li.data('documentId'));
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (li) => {
+              const item = game.items.get(li.data('entityId'))
+                ? game.items.get(li.data('entityId'))
+                : game.items.get(li.data('documentId'));
+              await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+            },
+          },
+          {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
             icon: '<i class="fas fa-lightbulb"></i>',
             condition: (li) => {
               const item = game.items.get(li.data('entityId'))
                 ? game.items.get(li.data('entityId'))
                 : game.items.get(li.data('documentId'));
-              if (game.user.isGM && item.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE
+              )){
                 return true;
               } else {
                 return false;
@@ -1366,8 +1430,11 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
           return false;
+        }
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+          return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-rolltables')) {
           return false;
@@ -1401,7 +1468,10 @@ Hooks.once('setup', async function () {
               const rolltable = game.tables.get(li.data('entityId'))
                 ? game.tables.get(li.data('entityId'))
                 : game.tables.get(li.data('documentId'));
-              if (game.user.isGM && !rolltable.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
                 return true;
               } else {
                 return false;
@@ -1415,13 +1485,39 @@ Hooks.once('setup', async function () {
             },
           },
           {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (li) => {
+              const rolltable = game.tables.get(li.data('entityId'))
+                ? game.tables.get(li.data('entityId'))
+                : game.tables.get(li.data('documentId'));
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (li) => {
+              const rolltable = game.tables.get(li.data('entityId'))
+                ? game.tables.get(li.data('entityId'))
+                : game.tables.get(li.data('documentId'));
+              await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+            },
+          },
+          {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
             icon: '<i class="fas fa-lightbulb"></i>',
             condition: (li) => {
               const rolltable = game.tables.get(li.data('entityId'))
                 ? game.tables.get(li.data('entityId'))
                 : game.tables.get(li.data('documentId'));
-              if (game.user.isGM && rolltable.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE
+              )){
                 return true;
               } else {
                 return false;
@@ -1508,8 +1604,11 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
           return false;
+        }
+        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+          return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-scenes')) {
           return false;
@@ -1532,7 +1631,10 @@ Hooks.once('setup', async function () {
               const scene = game.scenes.get(li.data('entityId'))
                 ? game.scenes.get(li.data('entityId'))
                 : game.scenes.get(li.data('documentId'));
-              if (game.user.isGM && !scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
                 return true;
               } else {
                 return false;
@@ -1558,13 +1660,39 @@ Hooks.once('setup', async function () {
             },
           },
           {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (li) => {
+              const scene = game.scenes.get(li.data('entityId'))
+                ? game.scenes.get(li.data('entityId'))
+                : game.scenes.get(li.data('documentId'));
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW
+              )){
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (li) => {
+              const scene = game.scenes.get(li.data('entityId'))
+                ? game.scenes.get(li.data('entityId'))
+                : game.scenes.get(li.data('documentId'));
+              await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+            },
+          },
+          {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
             icon: '<i class="fas fa-lightbulb"></i>',
             condition: (li) => {
               const scene = game.scenes.get(li.data('entityId'))
                 ? game.scenes.get(li.data('entityId'))
                 : game.scenes.get(li.data('documentId'));
-              if (game.user.isGM && scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
+              if (game.user.isGM && (
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE
+              )){
                 return true;
               } else {
                 return false;
