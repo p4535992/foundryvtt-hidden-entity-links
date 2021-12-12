@@ -149,6 +149,27 @@ Show the specific entity
 
 `game.hiddenEntityLinks.showEntityLink = async function (entityID, entities)`
 
+## Settings
+
+- **Enable/disable the hidden functionality globally for Actors:** If enabled and you are not a GM, users will not see hidden actors in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission actors to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Items:** If enabled and you are not a GM, users will not see hidden items in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission items to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Journal Entries:** If enabled and you are not a GM, users will not see hidden journals in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission journals to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Roll Tables:** If enabled and you are not a GM, users will not see hidden roll tables in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission rolltables to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Scenes:** If enabled and you are not a GM, users will not see hidden scenes in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission scenes to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Scenes on navigation bar:** If enabled and you are not a GM, and the setting 'Hide Scenes' is enabled too, users will not see hidden scenes in the navigation bar and the permission on the scene wil be limited only to GM
+- **Enable/disable the hidden functionality globally for Cards:** If enabled and you are not a GM, users will not see hidden cards in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Disable the background just add the symbol image:** If enable the background of the entity is no more colored, will just add the symbol image like in the default scene directory, can be useful for compatibility with others modules
+- **Disguise unreachable links for all non GM player:** When displaying journal entries or actors to players, if the linked document is not reachable then the special link presentation will be replaced by just the normal text. Thus players will not realise that there is another document to which they don't have access. By accessible, we mean that the player has at least LIMITED permission on that document
+- **Set level permission to show the referenced link on the javascript editor of foundry to hide for non GM user:** This property hide all the referenced link on the javascript editor for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Add css style to all the entity are not in the 'hide state' or the 'show state':** If enable this setting enable the css background/image to all the entities on the sidebars
+- **Set level permission to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Disable voice from the right click context entities and folders:** Someone can find the permission manager just enough for their use, this setting let you the possibility to disable the voice feature. ATTENTION: It will not reset already esisting entities
+
 # Build
 
 ## Install all packages

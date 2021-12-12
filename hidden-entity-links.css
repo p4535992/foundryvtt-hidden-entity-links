@@ -78,8 +78,7 @@
 .hidden-entity-links-scene-show .fa-lightbulb,
 .hidden-entity-links-scene-show .fa-low-vision,
 .hidden-entity-links-scene-unhideshow .fa-lightbulb,
-.hidden-entity-links-scene-unhideshow .fa-low-vision
-{
+.hidden-entity-links-scene-unhideshow .fa-low-vision {
   color: transparent;
   text-shadow: 0 0 8px transparent;
 }

@@ -168,6 +168,14 @@ class Settings {
       type: Boolean,
       default: false,
     });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.disable-voices.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.disable-voices.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    });
   }
 }
 
@@ -215,15 +223,15 @@ class HiddenEntityLinks {
       let folder = game.folders.find((f) => {
         return folderObject.id == liFolder.attr('data-folder-id');
       });
-      if(folder){
+      if (folder) {
         // let list =
         //   liFolder.find('li.directory-item.document')?.length > 0
         //     ? liFolder.find('li.directory-item.document')
         //     : liFolder.find('li.directory-item.entity');
-        game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData,liFolder,undefined);
+        game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData, liFolder, undefined);
       }
     }
-  }
+  };
 
   updateHiddenEntityLinks = async function (entityData, html, data) {
     let list =
@@ -235,7 +243,7 @@ class HiddenEntityLinks {
       if (entityData.id == li.attr('data-document-id') || entityData.id == li.attr('data-entity-id')) {
         //let isHidden = data.flags['hidden-entity-links']?.hidden; // why is undefined ??
         let state = this._checkState(entityData);
-        if (state==this._state.HIDE) {
+        if (state == this._state.HIDE) {
           if (!game.user.isGM) {
             //
           } else {
@@ -267,15 +275,14 @@ class HiddenEntityLinks {
             //   entityData instanceof Scene ||
             //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
             // ) {
-              li.find('.hidden-entity-links-scene-show').remove();
-              li.find('.hidden-entity-links-scene-unhideshow').remove();
+            li.find('.hidden-entity-links-scene-show').remove();
+            li.find('.hidden-entity-links-scene-unhideshow').remove();
             // } else {
-              li.removeClass('hidden-entity-links-show');
-              li.removeClass('hidden-entity-links-unhideshow');
+            li.removeClass('hidden-entity-links-show');
+            li.removeClass('hidden-entity-links-unhideshow');
             // }
           }
-        } 
-        else if(state==this._state.SHOW) {
+        } else if (state == this._state.SHOW) {
           if (!game.user.isGM) {
             //
           } else {
@@ -301,15 +308,14 @@ class HiddenEntityLinks {
             //   entityData instanceof Scene ||
             //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
             // ) {
-              li.find('.hidden-entity-links-scene').remove();
-              li.find('.hidden-entity-links-scene-unhideshow').remove();
+            li.find('.hidden-entity-links-scene').remove();
+            li.find('.hidden-entity-links-scene-unhideshow').remove();
             // } else {
-              li.removeClass('hidden-entity-links');
-              li.removeClass('hidden-entity-links-unhideshow');
+            li.removeClass('hidden-entity-links');
+            li.removeClass('hidden-entity-links-unhideshow');
             // }
           }
-        }
-        else {
+        } else {
           if (!game.user.isGM) {
             //
           } else {
@@ -318,13 +324,13 @@ class HiddenEntityLinks {
             //   entityData instanceof Scene ||
             //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
             // ) {
-              li.find('.hidden-entity-links-scene').remove();
-              li.find('.hidden-entity-links-scene-show').remove();
+            li.find('.hidden-entity-links-scene').remove();
+            li.find('.hidden-entity-links-scene-show').remove();
             // } else {
-              li.removeClass('hidden-entity-links');
-              li.removeClass('hidden-entity-links-show');
+            li.removeClass('hidden-entity-links');
+            li.removeClass('hidden-entity-links-show');
             // }
-            if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')){
+            if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')) {
               if (
                 entityData instanceof Scene ||
                 game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
@@ -383,7 +389,7 @@ class HiddenEntityLinks {
           //   : document.getFlag(mod, 'hidden');
           // let isHidden = document.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
           let state = this._checkState(document);
-          if (state==this._state.HIDE) {
+          if (state == this._state.HIDE) {
             if (!game.user.isGM) {
               //setProperty(document, 'visible', false);
               // TODO why i must do this ?????
@@ -414,8 +420,7 @@ class HiddenEntityLinks {
                 }
               }
             }
-          }
-          else if (state==this._state.SHOW) {
+          } else if (state == this._state.SHOW) {
             if (!game.user.isGM) {
               //setProperty(document, 'visible', false);
               // TODO why i must do this ?????
@@ -446,14 +451,13 @@ class HiddenEntityLinks {
                 }
               }
             }
-          }
-          else {
+          } else {
             if (!game.user.isGM) {
               //setProperty(document, 'visible', true);
               // TODO why i must do this ?????
               // li.show();
             } else {
-              if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')){
+              if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')) {
                 if (
                   obj instanceof SceneDirectory ||
                   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
@@ -504,11 +508,11 @@ class HiddenEntityLinks {
     OWNER: 4,
   };
 
-  _state ={
+  _state = {
     HIDE: 0,
     UNHIDE: 1,
-    SHOW: 2
-  }
+    SHOW: 2,
+  };
 
   /**
    * For any link in the text which points to a document which is not visible to the current player
@@ -545,15 +549,21 @@ class HiddenEntityLinks {
           console.warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
           return false;
         }
-        if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-disguise-unreachable-links') == this._permissions.EMPTY){
+        if (
+          game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-disguise-unreachable-links') ==
+          this._permissions.EMPTY
+        ) {
           const item = game[entity].get(a.getAttribute('data-id'));
           return !item || !item.testUserPermission(game.user, 'LIMITED');
-        }else{
+        } else {
           const reference = game[entity].get(a.getAttribute('data-id'));
-          if(reference){
+          if (reference) {
             // const perm = this._checkPermission(reference, game.user,'level-permission-disguise-unreachable-links');
             // return perm;
-            const perm = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-disguise-unreachable-links');
+            const perm = game.settings.get(
+              HIDDEN_ENTITY_LINKS_MODULE_NAME,
+              'level-permission-disguise-unreachable-links',
+            );
             if (perm == this._permissions.EMPTY) {
               return !reference.testUserPermission(game.user, 'LIMITED');
             } else if (perm == this._permissions.NONE) {
@@ -565,7 +575,7 @@ class HiddenEntityLinks {
             } else if (perm == this._permissions.OWNER) {
               return !reference.testUserPermission(game.user, 'OWNER');
             }
-          }else{
+          } else {
             return true;
           }
         }
@@ -627,8 +637,8 @@ class HiddenEntityLinks {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-journals');
     } else if (setting == 'level-permission-rolltables') {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-rolltables');
-    // } else if (setting == 'level-permission-scenes') {
-    //   set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes');
+      // } else if (setting == 'level-permission-scenes') {
+      //   set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-scenes');
     } else if (setting == 'level-permission-disguise-unreachable-links') {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-disguise-unreachable-links');
     }
@@ -663,21 +673,21 @@ class HiddenEntityLinks {
     return !result;
   };
 
-  _checkState = function (entity){
-    const hasFlagHide = 
-      hasProperty(entity.data, `flags.${HIDDEN_ENTITY_LINKS_MODULE_NAME}.hidden`)
-      && entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') != null
-      && entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') != undefined;
-    if(hasFlagHide){
-      if(entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')){
+  _checkState = function (entity) {
+    const hasFlagHide =
+      hasProperty(entity.data, `flags.${HIDDEN_ENTITY_LINKS_MODULE_NAME}.hidden`) &&
+      entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') != null &&
+      entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') != undefined;
+    if (hasFlagHide) {
+      if (entity.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden')) {
         return this._state.HIDE;
-      }else{
+      } else {
         return this._state.SHOW;
       }
     } else {
       return this._state.UNHIDE;
     }
-  }
+  };
 }
 
 // ==================
@@ -816,7 +826,7 @@ Hooks.once('ready', async function () {
   Hooks.on('renderJournalSheet', (sheet, html, data) => {
     // if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-journals')) {
     //   if (data.flags && data.flags['hidden-entity-links']) {
-      game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
     //   }
     // }
   });
@@ -824,14 +834,14 @@ Hooks.once('ready', async function () {
   Hooks.on('renderActorSheet', (sheet, html, data) => {
     // if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-actors')) {
     //   if (data.flags && data.flags['hidden-entity-links']) {
-      game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
     //   }
     // }
   });
   Hooks.on('renderItemSheet', (sheet, html, data) => {
     // if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-items')) {
     //   if (data.flags && data.flags['hidden-entity-links']) {
-      game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
+    game[HiddenEntityLinks.API].hideRenderedHiddenEntityLinks(sheet, html, data);
     //   }
     // }
   });
@@ -962,10 +972,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE
+        ) {
           return false;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW
+        ) {
           return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-journals')) {
@@ -1019,6 +1035,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'JournalDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         return [
           {
@@ -1028,10 +1047,11 @@ Hooks.once('setup', async function () {
               const journal = game.journal.get(li.data('entityId'))
                 ? game.journal.get(li.data('entityId'))
                 : game.journal.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1051,10 +1071,11 @@ Hooks.once('setup', async function () {
               const journal = game.journal.get(li.data('entityId'))
                 ? game.journal.get(li.data('entityId'))
                 : game.journal.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1074,10 +1095,11 @@ Hooks.once('setup', async function () {
               const journal = game.journal.get(li.data('entityId'))
                 ? game.journal.get(li.data('entityId'))
                 : game.journal.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1099,6 +1121,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'JournalDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
         return [
           {
@@ -1185,10 +1210,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE
+        ) {
           return false;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW
+        ) {
           return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-items')) {
@@ -1203,6 +1234,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ItemDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         return [
           {
@@ -1212,10 +1246,11 @@ Hooks.once('setup', async function () {
               const item = game.items.get(li.data('entityId'))
                 ? game.items.get(li.data('entityId'))
                 : game.items.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1235,10 +1270,11 @@ Hooks.once('setup', async function () {
               const item = game.items.get(li.data('entityId'))
                 ? game.items.get(li.data('entityId'))
                 : game.items.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1258,10 +1294,11 @@ Hooks.once('setup', async function () {
               const item = game.items.get(li.data('entityId'))
                 ? game.items.get(li.data('entityId'))
                 : game.items.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1283,6 +1320,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ItemDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
         return [
           {
@@ -1369,10 +1409,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE
+        ) {
           return false;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW
+        ) {
           return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-actors')) {
@@ -1387,6 +1433,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ActorDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         return [
           {
@@ -1396,10 +1445,11 @@ Hooks.once('setup', async function () {
               const actor = game.actors.get(li.data('entityId'))
                 ? game.actors.get(li.data('entityId'))
                 : game.actors.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1419,10 +1469,11 @@ Hooks.once('setup', async function () {
               const actor = game.actors.get(li.data('entityId'))
                 ? game.actors.get(li.data('entityId'))
                 : game.actors.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1442,10 +1493,11 @@ Hooks.once('setup', async function () {
               const actor = game.actors.get(li.data('entityId'))
                 ? game.actors.get(li.data('entityId'))
                 : game.actors.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1467,6 +1519,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'ActorDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
         return [
           {
@@ -1553,10 +1608,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE
+        ) {
           return false;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW
+        ) {
           return true;
         }
         if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-rolltables')) {
@@ -1582,6 +1643,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'RollTableDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         return [
           {
@@ -1591,10 +1655,11 @@ Hooks.once('setup', async function () {
               const rolltable = game.tables.get(li.data('entityId'))
                 ? game.tables.get(li.data('entityId'))
                 : game.tables.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1614,10 +1679,11 @@ Hooks.once('setup', async function () {
               const rolltable = game.tables.get(li.data('entityId'))
                 ? game.tables.get(li.data('entityId'))
                 : game.tables.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1637,10 +1703,11 @@ Hooks.once('setup', async function () {
               const rolltable = game.tables.get(li.data('entityId'))
                 ? game.tables.get(li.data('entityId'))
                 : game.tables.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1662,6 +1729,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'RollTableDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
         return [
           {
@@ -1748,10 +1818,16 @@ Hooks.once('setup', async function () {
         if (game.user.isGM) {
           return true;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.HIDE
+        ) {
           return false;
         }
-        if (!game.user.isGM && game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW) {
+        if (
+          !game.user.isGM &&
+          game[HiddenEntityLinks.API]._checkState(this) == game[HiddenEntityLinks.API]._state.SHOW
+        ) {
           return true;
         }
         // if (game[HiddenEntityLinks.API]._checkPermission(this, game.user, 'level-permission-scenes')) {
@@ -1766,6 +1842,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'SceneDirectory.prototype._getEntryContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         return [
           {
@@ -1775,10 +1854,11 @@ Hooks.once('setup', async function () {
               const scene = game.scenes.get(li.data('entityId'))
                 ? game.scenes.get(li.data('entityId'))
                 : game.scenes.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1810,10 +1890,11 @@ Hooks.once('setup', async function () {
               const scene = game.scenes.get(li.data('entityId'))
                 ? game.scenes.get(li.data('entityId'))
                 : game.scenes.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1833,10 +1914,11 @@ Hooks.once('setup', async function () {
               const scene = game.scenes.get(li.data('entityId'))
                 ? game.scenes.get(li.data('entityId'))
                 : game.scenes.get(li.data('documentId'));
-              if (game.user.isGM && (
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
-                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE
-              )){
+              if (
+                game.user.isGM &&
+                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE)
+              ) {
                 return true;
               } else {
                 return false;
@@ -1867,6 +1949,9 @@ Hooks.once('setup', async function () {
       HIDDEN_ENTITY_LINKS_MODULE_NAME,
       'SceneDirectory.prototype._getFolderContextOptions',
       function (wrapped, ...args) {
+        if (game.settings.get('disable-voices')) {
+          return wrapped(...args);
+        }
         const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
         return [
           {

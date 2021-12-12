@@ -2,11 +2,12 @@
 
 ## 1.0.6
 
-- Add permissions manager feature
-- Add unhide/unshow voice context
-- Add show voice context
+- NEW FEATURE: Add permissions manager feature (details on the readme)
+- NEW FEATURE: Add unhide/unshow voice context (details on the readme)
+- NEW FEATURE: Add show voice context (details on the readme)
 - Clean up the code
-- update api
+- update api (details on the readme)
+- Add a bunch of new settings for a more customized experience (details on the readme)
 
 ## 1.0.5
 
