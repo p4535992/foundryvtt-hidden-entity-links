@@ -193,6 +193,23 @@ class HiddenEntityLinks {
   //   }
   // }
 
+  updateFolderHiddenEntityLinks = async function (entityData, html, data) {
+    let listFolder = html.parent().parent().find('li.directory-item.folder');
+    for (let liFolder of listFolder) {
+      liFolder = $(liFolder);
+      let folder = game.folders.find((f) => {
+        return folderObject.id == liFolder.attr('data-folder-id');
+      });
+      if(folder){
+        // let list =
+        //   liFolder.find('li.directory-item.document')?.length > 0
+        //     ? liFolder.find('li.directory-item.document')
+        //     : liFolder.find('li.directory-item.entity');
+        game[HiddenEntityLinks.API].updateHiddenEntityLinks(entityData,liFolder,undefined);
+      }
+    }
+  }
+
   updateHiddenEntityLinks = async function (entityData, html, data) {
     let list =
       html.find('li.directory-item.document')?.length > 0
@@ -227,7 +244,7 @@ class HiddenEntityLinks {
                 li.append(div);
               }
             } else {
-              if (li.find('.hidden-entity-links').length <= 0) {
+              if (!li.hasClass('hidden-entity-links')) {
                 li.addClass('hidden-entity-links');
               }
             }
@@ -261,7 +278,7 @@ class HiddenEntityLinks {
                 li.append(div);
               }
             } else {
-              if (li.find('.hidden-entity-links-show').length <= 0) {
+              if (!li.hasClass('hidden-entity-links-show')) {
                 li.addClass('hidden-entity-links-show');
               }
             }
@@ -307,7 +324,7 @@ class HiddenEntityLinks {
                   li.append(div);
                 }
               } else {
-                if (li.find('.hidden-entity-links-unhideshow').length <= 0) {
+                if (!li.hasClass('hidden-entity-links-unhideshow')) {
                   li.addClass('hidden-entity-links-unhideshow');
                 }
               }
@@ -377,7 +394,7 @@ class HiddenEntityLinks {
                   li.append(div);
                 }
               } else {
-                if (li.find('.hidden-entity-links').length <= 0) {
+                if (!li.hasClass('hidden-entity-links')) {
                   li.addClass('hidden-entity-links');
                 }
               }
@@ -409,7 +426,7 @@ class HiddenEntityLinks {
                   li.append(div);
                 }
               } else {
-                if (li.find('.hidden-entity-links-show').length <= 0) {
+                if (!li.hasClass('hidden-entity-links-show')) {
                   li.addClass('hidden-entity-links-show');
                 }
               }
@@ -436,7 +453,7 @@ class HiddenEntityLinks {
                     li.append(div);
                   }
                 } else {
-                  if (li.find('.hidden-entity-links-unhideshow').length <= 0) {
+                  if (!li.hasClass('hidden-entity-links-unhideshow')) {
                     li.addClass('hidden-entity-links-unhideshow');
                   }
                 }
@@ -1027,7 +1044,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && !folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1040,6 +1056,28 @@ Hooks.once('setup', async function () {
                 .filter((journal) => journal.data.folder === folderObject.id)
                 .map(async (journal) => {
                   await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+                });
+            },
+          },
+          {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              if (game.user.isGM) {
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              const updates = game.journal
+                .filter((journal) => journal.data.folder === folderObject.id)
+                .map(async (journal) => {
+                  await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
                 });
             },
           },
@@ -1190,7 +1228,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && !folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1203,6 +1240,28 @@ Hooks.once('setup', async function () {
                 .filter((item) => item.data.folder === folderObject.id)
                 .map(async (item) => {
                   await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+                });
+            },
+          },
+          {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              if (game.user.isGM) {
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              const updates = game.items
+                .filter((item) => item.data.folder === folderObject.id)
+                .map(async (item) => {
+                  await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
                 });
             },
           },
@@ -1548,7 +1607,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && !folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1561,6 +1619,28 @@ Hooks.once('setup', async function () {
                 .filter((rolltable) => rolltable.data.folder === folderObject.id)
                 .map(async (rolltable) => {
                   await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+                });
+            },
+          },
+          {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              if (game.user.isGM) {
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              const updates = game.tables
+                .filter((rolltable) => rolltable.data.folder === folderObject.id)
+                .map(async (rolltable) => {
+                  await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
                 });
             },
           },
@@ -1732,7 +1812,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && !folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1765,6 +1844,28 @@ Hooks.once('setup', async function () {
                   }));
                 return Scene.update(updates);
               }
+            },
+          },
+          {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              if (game.user.isGM) {
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              const updates = game.scenes
+                .filter((scene) => scene.data.folder === folderObject.id)
+                .map(async (scene) => {
+                  await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+                });
             },
           },
           {
