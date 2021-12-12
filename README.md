@@ -53,7 +53,7 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 
 ## Features
 
-![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)![show](./wiki/actor_show.png)
+![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
 
 ### Hide entity with right cick context integration
 
@@ -61,29 +61,33 @@ You can force to hide some specifc entity.
 
 NOTE: this bypass the check used with the feature "Permission manager integration".
 
+![hide](./wiki/actor_hide.png)
+
 ### Show entity with right click context integration
 
 From version 1.0.7 you can force to show some entity.
 
 NOTE: this bypass the check used with the feature "Permission manager integration".
 
+![show](./wiki/actor_show.png)
+
 ## Unhide/Unshow entity with right click context integration
 
 From version 1.0.7 you can remove the flag of hidden with a voice on the right context.
 
-We can hide the css style to all the entites are not hide or show
+By module settings we can apply the css style to all the entites are not hide or show
 
 ![nohideshow](./wiki/actor_nohideshow.png)
 
 ### Permission manager integration 
 
-From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so it advisable to use the togheter with the module [Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)
+From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so for this feature it is highly recommended to install and use this module together with the module **[Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)**
 
 On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
 
 ![perm1](:/../wiki/perm_dropdown.png)
 
-Remember the 5 permission on foundry are from lowest to highest NONE,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER,LIMITED,NONE to the player, the permissions of LIMITED also associate the permissions of NONE etc.
+Remember the permission on foundry are from lowest to highest NONE,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER,LIMITED,NONE to the player, the permissions of LIMITED also associate the permissions of NONE etc.
 
 Here are some screenshots to highlight the problem
 
