@@ -53,11 +53,27 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 
 ## Features
 
-### Hide with right cick context integration
+![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)![show](./wiki/actor_show.png)
 
-Here some screenshots
+### Hide entity with right cick context integration
 
-![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
+You can force to hide some specifc entity.
+
+NOTE: this bypass the check used with the feature "Permission manager integration".
+
+### Show entity with right click context integration
+
+From version 1.0.7 you can force to show some entity.
+
+NOTE: this bypass the check used with the feature "Permission manager integration".
+
+## Unhide/Unshow entity with right click context integration
+
+From version 1.0.7 you can remove the flag of hidden with a voice on the right context.
+
+We can hide the css style to all the entites are not hide or show
+
+![nohideshow](./wiki/actor_nohideshow.png)
 
 ### Permission manager integration 
 
@@ -110,6 +126,8 @@ Here what player see with the empty value "OWNER":
 `game.hiddenEntityLinks.hideEntityLink = async function (entityID, entities)`
 
 `game.hiddenEntityLinks.unhideEntityLink = async function (entityID, entities)`
+
+`game.hiddenEntityLinks.showEntityLink = async function (entityID, entities)`
 
 # Build
 

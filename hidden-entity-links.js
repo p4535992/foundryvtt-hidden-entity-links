@@ -145,6 +145,14 @@ class Settings {
       type: Boolean,
       default: false,
     });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.add-css-unhideshow.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.add-css-unhideshow.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    });
   }
 }
 
@@ -230,8 +238,10 @@ class HiddenEntityLinks {
               game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
             ) {
               li.find('.hidden-entity-links-scene-show').remove();
+              li.find('hidden-entity-links-unhideshow').remove();
             } else {
               li.removeClass('hidden-entity-links-show');
+              li.removeClass('hidden-entity-links-unhideshow');
             }
           }
         } 
@@ -262,8 +272,10 @@ class HiddenEntityLinks {
               game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
             ) {
               li.find('.hidden-entity-links-scene').remove();
+              li.find('hidden-entity-links-unhideshow').remove();
             } else {
               li.removeClass('hidden-entity-links');
+              li.removeClass('hidden-entity-links-unhideshow');
             }
           }
         }
@@ -287,6 +299,26 @@ class HiddenEntityLinks {
               li.removeClass('hidden-entity-links');
               li.removeClass('hidden-entity-links-show');
               // }
+            }
+            if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')){
+              if (
+                entityData instanceof Scene ||
+                game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
+              ) {
+                if (li.find('.hidden-entity-links-scene-unhideshow').length <= 0) {
+                  let div = $(
+                    `<div class="hidden-entity-links-scene-unhideshow">
+                      <i class="fas fa-lightbulb"/>
+                    </div>`,
+                  );
+                  //li.find('.entity-name').after(div);
+                  li.append(div);
+                }
+              } else {
+                if (li.find('.hidden-entity-links-unhideshow').length <= 0) {
+                  li.addClass('hidden-entity-links-unhideshow');
+                }
+              }
             }
           }
         }
@@ -397,7 +429,26 @@ class HiddenEntityLinks {
               // TODO why i must do this ?????
               // li.show();
             } else {
-              //
+              if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')){
+                if (
+                  obj instanceof SceneDirectory ||
+                  game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
+                ) {
+                  if (li.find('.hidden-entity-links-scene-unhideshow').length <= 0) {
+                    let div = $(
+                      `<div class="hidden-entity-links-scene-unhideshow">
+                        <i class="fas fa-lightbulb"/>
+                      </div>`,
+                    );
+                    //li.find('.entity-name').after(div);
+                    li.append(div);
+                  }
+                } else {
+                  if (li.find('.hidden-entity-links-unhideshow').length <= 0) {
+                    li.addClass('hidden-entity-links-unhideshow');
+                  }
+                }
+              }
             }
           }
         } catch (e) {
