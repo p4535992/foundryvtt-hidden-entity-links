@@ -26,17 +26,35 @@ The concept is hide everything on the sidebar, but still have permissions , a cl
 
 The graphic interaction with new choices on the sidebar context let you decide the entity/document you want to make secret with a simple right click on the specific element or the folder of the sidebar, so you can hide , unhide multiple elements with one click.
 
-Any issues feel free to ping me on Discord (@Erceron#0370)
+There is a integration based on the permission applied on the entities.
+
+## Features
+
+### Hide with right cick context integration
 
 Here some screenshots
 
 ![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
 
-## Contribution from 'earlSt1'
+### Permission manager integration 
 
-If you'd like to support more module of this kind, i invite you to support 'earlSt1' on his kofi
+From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so it advisable to use the togheter with the module [Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/erceron)
+On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
+
+![perm1](:/../wiki/perm_dropdown.png)
+
+Remember the 5 permission on foundry are from lowest to highest NONE,DEFAULT,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER, LIMITED, DEFAULT to the player, the permissions of LIMITED also associate the permissions of DEFAULT etc.
+
+Here are some screenshots to highlight the problem
+
+**ATTENTION:** Permissions help in certain contexts, but you can still force the hide feature from the context menu for example settanfo LIMITED all the entity with permission LIMITED for that player are "hide" by default, but maybe you want to "hide" some entity with observer permission you can still do that with the standard right click on the entity. The hide feature has priority over the "permissions control manager".
+
+Below is an example where as GM we set the 5 values NONE, LIMITED, OBSERVER, OWNER, DEFAULT respectively in the dropdown. Showing the view by the player that he has these exact privileges in 5 distinct entities.
+
+What GM see:
+
+
 
 
 ## Installation
@@ -164,5 +182,9 @@ This Foundry VTT module is licensed under a [Creative Commons Attribution 4.0 In
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
 
 ## Credit
+
+- **Contribution from 'earlSt1'** If you'd like to support more module of this kind, i invite you to support 'earlSt1' on his kofi
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/erceron)
 
 - A little part of code is inspired from [farling42](https://github.com/farling42) and the module [fvtt-disguise-unreachable-links](https://github.com/farling42/fvtt-disguise-unreachable-links)
