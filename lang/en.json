@@ -29,6 +29,7 @@
   "hidden-entity-links.settings.disguise-unreachable-links.hint": "When displaying journal entries or actors to players, if the linked document is not reachable then the special link presentation will be replaced by just the normal text. Thus players will not realise that there is another document to which they don't have access. By accessible, we mean that the player has at least LIMITED permission on that document",
   "hidden-entity-links.settings.level-permission.name": "Set level permission to hide for non GM user",
   "hidden-entity-links.settings.level-permission.hint": "This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.",
+  "hidden-entity-links.settings.level-permission.empty": "-",
   "hidden-entity-links.settings.level-permission.none": "NONE",
   "hidden-entity-links.settings.level-permission.observer": "OBSERVER",
   "hidden-entity-links.settings.level-permission.limited": "LIMITED",

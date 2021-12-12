@@ -28,35 +28,6 @@ The graphic interaction with new choices on the sidebar context let you decide t
 
 There is a integration based on the permission applied on the entities.
 
-## Features
-
-### Hide with right cick context integration
-
-Here some screenshots
-
-![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
-
-### Permission manager integration 
-
-From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so it advisable to use the togheter with the module [Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)
-
-On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
-
-![perm1](:/../wiki/perm_dropdown.png)
-
-Remember the 5 permission on foundry are from lowest to highest NONE,DEFAULT,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER, LIMITED, DEFAULT to the player, the permissions of LIMITED also associate the permissions of DEFAULT etc.
-
-Here are some screenshots to highlight the problem
-
-**ATTENTION:** Permissions help in certain contexts, but you can still force the hide feature from the context menu for example settanfo LIMITED all the entity with permission LIMITED for that player are "hide" by default, but maybe you want to "hide" some entity with observer permission you can still do that with the standard right click on the entity. The hide feature has priority over the "permissions control manager".
-
-Below is an example where as GM we set the 5 values NONE, LIMITED, OBSERVER, OWNER, DEFAULT respectively in the dropdown. Showing the view by the player that he has these exact privileges in 5 distinct entities.
-
-What GM see:
-
-
-
-
 ## Installation
 
 It's always easiest to install modules from the in game add-on browser.
@@ -79,6 +50,54 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 ## Known issue
 
 - I hate myself for this, but I could not find a way to update the elements on the sidebar to change the flag on the entities the method ui.sidebar.render (true); it should have worked, but that doesn't seem to be the case ... if anyone can find a solution let me know. FOR NOW YOU ARE FORCED TO REFRESH THE WEB PAGE.
+
+## Features
+
+### Hide with right cick context integration
+
+Here some screenshots
+
+![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
+
+### Permission manager integration 
+
+From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so it advisable to use the togheter with the module [Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)
+
+On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
+
+![perm1](:/../wiki/perm_dropdown.png)
+
+Remember the 5 permission on foundry are from lowest to highest NONE,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER,LIMITED,NONE to the player, the permissions of LIMITED also associate the permissions of NONE etc.
+
+Here are some screenshots to highlight the problem
+
+**ATTENTION:** Permissions help in certain contexts, but you can still force the hide feature from the context menu for example set the value to LIMITED  and all the entity with permission LIMITED for that player are "hide" by default, but maybe you want to "hide" some entity with observer permission you can still do that with the standard right click on the entity. The hide feature has priority over the "permissions control manager".
+
+Below is an example where as GM we set the values -, NONE, LIMITED, OBSERVER, OWNER respectively in the dropdown. Showing the view by the player that he has these exact privileges in the other distinct entities.
+
+What GM always see:
+
+![perm2](./wiki/perm_gm_view.png)
+
+Here what player see with the empty value "-":
+
+![permempty](./wiki/perm_player_view_empty.png)
+
+Here what player see with the empty value "NONE":
+
+![permnone](./wiki/perm_player_view_none.png)
+
+Here what player see with the empty value "LIMITED":
+
+![permlimited](./wiki/perm_player_view_limited.png)
+
+Here what player see with the empty value "OBSERVER":
+
+![permobserver](./wiki/perm_player_view_observer.png)
+
+Here what player see with the empty value "OWNER":
+
+![permowner](./wiki/perm_player_view_owner.png)
 
 ## API
 
