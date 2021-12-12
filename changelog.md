@@ -2,7 +2,11 @@
 
 ## 1.0.6
 
-- BUg fix
+- Add permissions manager feature
+- Add unhide/unshow voice context
+- Add show voice context
+- Clean up the code
+- update api
 
 ## 1.0.5
 

@@ -42,5 +42,8 @@
   "hidden-entity-links.label.show-entity": "Show entity",
   "hidden-entity-links.label.hide-folder": "Hide all entities on this folder",
   "hidden-entity-links.label.unhide-folder": "Unhide all entities on this folder",
-  "hidden-entity-links.label.show-folder": "Show all entities on this folder"
+  "hidden-entity-links.label.show-folder": "Show all entities on this folder",
+  "hidden-entity-links.settings.level-permission-disguise-unreachable-links.name": "Set level permission to show the referenced link on the javascript editor of foundry to hide for non GM user",
+  "hidden-entity-links.settings.level-permission-disguise-unreachable-links.hint": "This property hide all the referenced link on the javascript editor for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting."
+  
 }
