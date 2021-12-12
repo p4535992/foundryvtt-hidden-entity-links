@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.6
+## 1.0.7 [BRAKING CHNAGES]
 
 - NEW FEATURE: Add permissions manager feature (details on the readme)
 - NEW FEATURE: Add unhide/unshow voice context (details on the readme)
@@ -8,6 +8,10 @@
 - Clean up the code
 - update api (details on the readme)
 - Add a bunch of new settings for a more customized experience (details on the readme)
+
+## 1.0.6
+
+- Bug fix on the visualization check
 
 ## 1.0.5
 
