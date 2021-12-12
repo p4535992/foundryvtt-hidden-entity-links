@@ -41,6 +41,8 @@
   "hidden-entity-links.settings.level-permission.limited": "LIMITED",
   "hidden-entity-links.settings.level-permission.owner": "OWNER",
   "hidden-entity-links.settings.level-permission.default": "DEFAULT",
+  "hidden-entity-links.settings.level-permission.onlyobserver": "ONLY OBSERVER",
+  "hidden-entity-links.settings.level-permission.onlylimited": "ONLY LIMITED",
   "hidden-entity-links.label.hide-entity": "Hide entity",
   "hidden-entity-links.label.unhide-entity": "Unhide/Unshow entity",
   "hidden-entity-links.label.show-entity": "Show entity",

@@ -27,6 +27,8 @@ class Settings {
         2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
         3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
         4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlylimited`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlyobserver`),
       },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-items', {
@@ -50,6 +52,8 @@ class Settings {
         2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
         3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
         4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlylimited`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlyobserver`),
       },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-journals', {
@@ -73,6 +77,8 @@ class Settings {
         2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
         3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
         4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlylimited`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlyobserver`),
       },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-rolltables', {
@@ -96,6 +102,8 @@ class Settings {
         2: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.limited`),
         3: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.observer`),
         4: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.owner`),
+        5: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlylimited`),
+        6: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.level-permission.onlyobserver`),
       },
     });
     game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes', {
@@ -506,6 +514,8 @@ class HiddenEntityLinks {
     LIMITED: 2,
     OBSERVER: 3,
     OWNER: 4,
+    ONLY_LIMITED: 5,
+    ONLY_OBSERVER: 6,
   };
 
   _state = {
@@ -627,8 +637,9 @@ class HiddenEntityLinks {
     //   entity.testUserPermission(user, 'OBSERVER') ||
     //   entity.testUserPermission(user, 'LIMITED') ||
     //   entity.testUserPermission(user, 'OWNER')
-    let result = false;
+    let result = true;
     let set;
+    // let setOnly = false;
     if (setting == 'level-permission-actors') {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-actors');
     } else if (setting == 'level-permission-items') {
@@ -643,34 +654,63 @@ class HiddenEntityLinks {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-disguise-unreachable-links');
     }
     if (set == this._permissions.EMPTY) {
-      result = true;
+      result = false;
       // } else if (set == this._permissions.NONE) {
       //   result = entity.testUserPermission(user, 'NONE')
       //     && !entity.testUserPermission(user, 'LIMITED')
       //     && !entity.testUserPermission(user, 'OBSERVER')
       //     && !entity.testUserPermission(user, 'OWNER');
     } else if (set == this._permissions.NONE) {
-      result = entity.testUserPermission(user, 'LIMITED');
+      // if(setOnly){
+      //   result = entity.testUserPermission(user, 'NONE', {exact:true})
+      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
+      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
+      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
+      // }else{
+      result = !entity.testUserPermission(user, 'LIMITED');
+      // }
     } else if (set == this._permissions.LIMITED) {
-      result = entity.testUserPermission(user, 'OBSERVER');
+      // if(setOnly){
+      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
+      //     && entity.testUserPermission(user, 'LIMITED', {exact:true})
+      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
+      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
+      // }else{
+      result = !entity.testUserPermission(user, 'OBSERVER');
+      // }
     } else if (set == this._permissions.OBSERVER) {
-      result = entity.testUserPermission(user, 'OWNER');
+      // if(setOnly){
+      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
+      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
+      //     && entity.testUserPermission(user, 'OBSERVER', {exact:true})
+      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
+      // }else{
+      result = !entity.testUserPermission(user, 'OWNER');
+      // }
     } else if (set == this._permissions.OWNER) {
-      result = false;
+      // if(setOnly){
+      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
+      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
+      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
+      //     && entity.testUserPermission(user, 'OWNER', {exact:true});
+      // }else{
+      result = true;
+      // }
+    } else if (set == this._permissions.ONLY_LIMITED) {
+      result =
+        !entity.testUserPermission(user, 'NONE', { exact: true }) &&
+        entity.testUserPermission(user, 'LIMITED', { exact: true }) &&
+        !entity.testUserPermission(user, 'OBSERVER', { exact: true }) &&
+        !entity.testUserPermission(user, 'OWNER', { exact: true });
+    } else if (set == this._permissions.ONLY_OBSERVER) {
+      result =
+        !entity.testUserPermission(user, 'NONE', { exact: true }) &&
+        !entity.testUserPermission(user, 'LIMITED', { exact: true }) &&
+        entity.testUserPermission(user, 'OBSERVER', { exact: true }) &&
+        !entity.testUserPermission(user, 'OWNER', { exact: true });
     }
-    // } else if (set == this._permissions.OBSERVER_LIMITED) {
-    //   result = entity.testUserPermission(user, 'OBSERVER') || entity.testUserPermission(user, 'LIMITED');
-    // } else if (set == this._permissions.OBSERVER_OWNER) {
-    //   result = entity.testUserPermission(user, 'OBSERVER') || entity.testUserPermission(user, 'OWNER');
-    // } else if (set == this._permissions.LIMITED_OWNER) {
-    //   result = entity.testUserPermission(user, 'LIMITED') || entity.testUserPermission(user, 'OWNER');
-    // } else if (set == this._permissions.OBSERVER_LIMITED_OWNER) {
-    //   result =
-    //     entity.testUserPermission(user, 'OBSERVER') ||
-    //     entity.testUserPermission(user, 'LIMITED') ||
-    //     entity.testUserPermission(user, 'OWNER');
-    // }
-    return !result;
+
+    return result;
   };
 
   _checkState = function (entity) {
@@ -1237,7 +1277,7 @@ Hooks.once('setup', async function () {
         const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
-        } 
+        }
         return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),

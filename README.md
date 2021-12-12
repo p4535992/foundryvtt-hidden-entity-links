@@ -120,6 +120,14 @@ Here what player see with the empty value "OWNER":
 
 ![permowner](./wiki/perm_player_view_owner.png)
 
+Here what player see with the empty value "ONLY LIMITED":
+
+![permonlylimited](./wiki/perm_player_view_onlylimited.png)
+
+Here what player see with the empty value "ONLY OBSERVER":
+
+![permonlyobserver](./wiki/perm_player_view_onlyobserver.png)
+
 ## API
 
 Update css on the folder (not ready need more developing...)
