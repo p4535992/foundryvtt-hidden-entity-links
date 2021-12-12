@@ -205,9 +205,7 @@ class HiddenEntityLinks {
         let state = this._checkState(entityData);
         if (state==this._state.HIDE) {
           if (!game.user.isGM) {
-            //setProperty(entityData, 'visible', false);
-            // TODO why i must do this ?????
-            // li.hide();
+            //
           } else {
             // let div = $(
             //   `<div class="hidden-entity-links" style="position:absolute;padding-left:45px;">
@@ -233,21 +231,21 @@ class HiddenEntityLinks {
                 li.addClass('hidden-entity-links');
               }
             }
-            if (
-              entityData instanceof Scene ||
-              game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
-            ) {
+            // if (
+            //   entityData instanceof Scene ||
+            //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
+            // ) {
               li.find('.hidden-entity-links-scene-show').remove();
-              li.find('hidden-entity-links-unhideshow').remove();
-            } else {
+              li.find('.hidden-entity-links-scene-unhideshow').remove();
+            // } else {
               li.removeClass('hidden-entity-links-show');
               li.removeClass('hidden-entity-links-unhideshow');
-            }
+            // }
           }
         } 
         else if(state==this._state.SHOW) {
           if (!game.user.isGM) {
-
+            //
           } else {
             if (
               entityData instanceof Scene ||
@@ -267,39 +265,33 @@ class HiddenEntityLinks {
                 li.addClass('hidden-entity-links-show');
               }
             }
-            if (
-              entityData instanceof Scene ||
-              game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
-            ) {
+            // if (
+            //   entityData instanceof Scene ||
+            //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
+            // ) {
               li.find('.hidden-entity-links-scene').remove();
-              li.find('hidden-entity-links-unhideshow').remove();
-            } else {
+              li.find('.hidden-entity-links-scene-unhideshow').remove();
+            // } else {
               li.removeClass('hidden-entity-links');
               li.removeClass('hidden-entity-links-unhideshow');
-            }
+            // }
           }
         }
         else {
           if (!game.user.isGM) {
-            //setProperty(entityData, 'visible', true);
-            // TODO why i must do this ?????
-            // li.show();
+            //
           } else {
             // li.find('.hidden-entity-links').remove();
-            if (
-              entityData instanceof Scene ||
-              game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
-            ) {
-              // if(li.find('.hidden-entity-links-scene').length > 0){
+            // if (
+            //   entityData instanceof Scene ||
+            //   game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'no-background-only-symbol')
+            // ) {
               li.find('.hidden-entity-links-scene').remove();
               li.find('.hidden-entity-links-scene-show').remove();
-              // }
-            } else {
-              // if(li.find('.hidden-entity-links').length > 0){
+            // } else {
               li.removeClass('hidden-entity-links');
               li.removeClass('hidden-entity-links-show');
-              // }
-            }
+            // }
             if(game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'add-css-unhideshow')){
               if (
                 entityData instanceof Scene ||
@@ -1017,8 +1009,6 @@ Hooks.once('setup', async function () {
                 .map(async (journal) => {
                   await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
                 });
-              //await folderObject.setFlag(mod, 'hidden', true);
-              //return Journal.update(updates);
             },
           },
           {
@@ -1028,7 +1018,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1042,8 +1031,6 @@ Hooks.once('setup', async function () {
                 .map(async (journal) => {
                   await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
                 });
-              //await folderObject.setFlag(mod, 'hidden', false);
-              //return Journal.update(updates);
             },
           },
         ].concat(options);
@@ -1153,8 +1140,6 @@ Hooks.once('setup', async function () {
                 .map(async (item) => {
                   await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
                 });
-              //await folderObject.setFlag(mod, 'hidden', true);
-              //return Item.update(updates);
             },
           },
           {
@@ -1164,7 +1149,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1178,8 +1162,6 @@ Hooks.once('setup', async function () {
                 .map(async (item) => {
                   await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
                 });
-              //await folderObject.setFlag(mod, 'hidden', false);
-              //return Item.update(updates);
             },
           },
         ].concat(options);
@@ -1307,7 +1289,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && !folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1321,8 +1302,28 @@ Hooks.once('setup', async function () {
                 .map(async (actor) => {
                   await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
                 });
-              //await folderObject.setFlag(mod, 'hidden', true);
-              //return Actor.update(updates);
+            },
+          },
+          {
+            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+            icon: '<i class="fas fa-low-vision"></i>',
+            condition: (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              if (game.user.isGM) {
+                return true;
+              } else {
+                return false;
+              }
+            },
+            callback: async (header) => {
+              const folderId = header.parent().data('folderId');
+              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+              const updates = game.actors
+                .filter((actor) => actor.data.folder === folderObject.id)
+                .map(async (actor) => {
+                  await actor.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+                });
             },
           },
           {
@@ -1332,7 +1333,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1346,8 +1346,6 @@ Hooks.once('setup', async function () {
                 .map(async (actor) => {
                   await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
                 });
-              //await folderObject.setFlag(mod, 'hidden', false);
-              //return Actor.update(updates);
             },
           },
         ].concat(options);
@@ -1468,8 +1466,6 @@ Hooks.once('setup', async function () {
                 .map(async (rolltable) => {
                   await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
                 });
-              //await folderObject.setFlag(mod, 'hidden', true);
-              //return Rolltable.update(updates);
             },
           },
           {
@@ -1479,7 +1475,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1493,8 +1488,6 @@ Hooks.once('setup', async function () {
                 .map(async (rolltable) => {
                   await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
                 });
-              //await folderObject.setFlag(mod, 'hidden', false);
-              //return Rolltable.update(updates);
             },
           },
         ].concat(options);
@@ -1625,7 +1618,7 @@ Hooks.once('setup', async function () {
                 .map(async (scene) => {
                   await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
                 });
-              //await folderObject.setFlag(mod, 'hidden', true);
+
               if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
                 const updates = game.scenes
                   .filter((scene) => scene.data.folder === folderObject.id)
@@ -1653,7 +1646,6 @@ Hooks.once('setup', async function () {
               const folderId = header.parent().data('folderId');
               const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
               if (game.user.isGM) {
-                // && folderObject.getFlag(mod, 'hidden')) {
                 return true;
               } else {
                 return false;
@@ -1667,7 +1659,7 @@ Hooks.once('setup', async function () {
                 .map(async (scene) => {
                   await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
                 });
-              //await folderObject.setFlag(mod, 'hidden', false);
+
               if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
                 const updates = game.scenes
                   .filter((scene) => scene.data.folder === folderObject.id)
