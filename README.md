@@ -90,15 +90,13 @@ On the module setting you can see a dropdown menu where to choose the permission
 
 Remember the permission on foundry are from lowest to highest NONE,LIMITED,OBSERVER,OWNER. and remember each level of permissions in foundry inherits the permissions of the previous lower levels, therefore the permissions of OWNER also associate the permissions of OBSERVER,LIMITED,NONE to the player, the permissions of LIMITED also associate the permissions of NONE etc.
 
-Here are some screenshots to highlight the problem
-
 **ATTENTION:** Permissions help in certain contexts, but you can still force the hide feature from the context menu for example set the value to LIMITED  and all the entity with permission LIMITED for that player are "hide" by default, but maybe you want to "hide" some entity with observer permission you can still do that with the standard right click on the entity. The hide feature has priority over the "permissions control manager".
 
-Below is an example where as GM we set the values -, NONE, LIMITED, OBSERVER, OWNER respectively in the dropdown. Showing the view by the player that he has these exact privileges in the other distinct entities.
+Below is an example where as GM we set the values -, NONE, LIMITED, OBSERVER, OWNER, ONLY LIMITED, ONLY OBSERVER respectively in the dropdown. Showing the view by the player that he has these exact privileges in the other distinct entities.
 
 What GM always see:
 
-![perm2](./wiki/perm_gm_view.png)
+![permgmsee](./wiki/perm_gm_view.png)
 
 Here what player see with the empty value "-":
 
