@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8
+
+- Add [CHANGELOGS & CONFLICTS](https://github.com/theripper93/libChangelogs) hooks for betetr management of the conflicts
+
 ## 1.0.7 [BREAKING CHANGES]
 
 - NEW FEATURE: Add permissions manager feature (details on the readme)

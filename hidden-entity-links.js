@@ -766,6 +766,16 @@ class HiddenEntityLinksSocketFunctions {
   }
 }
 */
+
+Hooks.once('libChangelogsReady', function () {
+  //@ts-ignore
+  libChangelogs.register(
+    HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    'Add [CHANGELOGS & CONFLICTS](https://github.com/theripper93/libChangelogs) hooks for better management of the conflicts',
+    'minor',
+  );
+});
+
 Hooks.once('ready', async function () {
   if (!game.modules.get('lib-wrapper')?.active && game.user.isGM) {
     ui.notifications.error(
