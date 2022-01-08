@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9
+
+- Update module.json for foundryvtt 9
+
 ## 1.0.8
 
 - Add [CHANGELOGS & CONFLICTS](https://github.com/theripper93/libChangelogs) hooks for betetr management of the conflicts

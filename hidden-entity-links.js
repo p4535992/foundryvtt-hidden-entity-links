@@ -771,7 +771,7 @@ Hooks.once('libChangelogsReady', function () {
   //@ts-ignore
   libChangelogs.register(
     HIDDEN_ENTITY_LINKS_MODULE_NAME,
-    'Add [CHANGELOGS & CONFLICTS](https://github.com/theripper93/libChangelogs) hooks for better management of the conflicts',
+    'Update module.json for foundryvtt 9',
     'minor',
   );
 });
