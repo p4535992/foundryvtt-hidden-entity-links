@@ -82,3 +82,24 @@
   color: transparent;
   text-shadow: 0 0 8px transparent;
 }
+
+:root {
+  --hidden-entity-links-Hidden: initial;
+  --hidden-entity-links-Display: block;
+  --hidden-entity-links-Flex: flex;
+}
+
+#currently-playing .playlist-sounds .sound > .sound-name {
+  display: var(--hidden-entity-links-Display);
+}
+
+#currently-playing .playlist-sounds .sound > .sound-controls {
+  display: var(--hidden-entity-links-Flex);
+}
+#currently-playing .playlist-sounds .sound .sound-playback .sound-control {
+  display: var(--hidden-entity-links-Display);
+}
+
+#playlists .directory-list {
+  display: var(--hidden-entity-links-Display);
+}

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.10
+
+- Add feature for hide the soundtrack, a customized version of [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)
+
 ## 1.0.9
 
 - Update module.json for foundryvtt 9

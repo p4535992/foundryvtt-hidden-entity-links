@@ -16,6 +16,8 @@
 
 A module for FoundryVTT which hides entities in the sidebar if players have Limited access to them. This means you can provide secret documents to your players without them seeing them in the sidebar.
 
+Plus has many settings for hide navigation to scene , soundtrack, ecc.
+
 ![hidden_links6](./wiki/shocase_hidden_entity_link.gif)
 
 ## Instructions
@@ -178,6 +180,7 @@ Show the specific entity
 - **Add css style to all the entity are not in the 'hide state' or the 'show state':** If enable this setting enable the css background/image to all the entities on the sidebars
 - **Set level permission to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Disable voice from the right click context entities and folders:** Someone can find the permission manager just enough for their use, this setting let you the possibility to disable the voice feature. ATTENTION: It will not reset already esisting entities
+- **Enable/disable the hidden functionality globally for Soundtracks:** If enabled and you are not a GM, users will not see the soundtrack name and the playlist controlls
 
 # Build
 
@@ -264,6 +267,8 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 - **[fvtt-disguise-unreachable-links](https://github.com/farling42/fvtt-disguise-unreachable-links)** : [MIT](https://github.com/farling42/fvtt-disguise-unreachable-links/blob/master/LICENSE)
 
+- **[Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)** : [MIT](https://github.com/kandashi/Hidden-Soundtracks/blob/master/LICENSE)
+
 This Foundry VTT module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
@@ -275,3 +280,5 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/erceron)
 
 - A little part of code is inspired from [farling42](https://github.com/farling42) and the module [fvtt-disguise-unreachable-links](https://github.com/farling42/fvtt-disguise-unreachable-links)
+
+- A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)

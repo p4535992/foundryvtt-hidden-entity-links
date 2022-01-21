@@ -184,6 +184,14 @@ class Settings {
       type: Boolean,
       default: false,
     });
+    game.settings.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-soundtracks', {
+      name: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-soundtracks.name`,
+      hint: `${HIDDEN_ENTITY_LINKS_MODULE_NAME}.settings.hide-soundtracks.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    });
   }
 }
 
@@ -769,11 +777,7 @@ class HiddenEntityLinksSocketFunctions {
 
 Hooks.once('libChangelogsReady', function () {
   //@ts-ignore
-  libChangelogs.register(
-    HIDDEN_ENTITY_LINKS_MODULE_NAME,
-    'Update module.json for foundryvtt 9',
-    'minor',
-  );
+  libChangelogs.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'Add feature for hide the soundtrack', 'minor');
 });
 
 Hooks.once('ready', async function () {
@@ -782,6 +786,12 @@ Hooks.once('ready', async function () {
       `The '${HIDDEN_ENTITY_LINKS_MODULE_NAME}' module requires to install and activate the 'libWrapper' module.`,
     );
     return;
+  }
+
+  if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-soundtracks') && !game.user.isGM) {
+    document.documentElement.style.setProperty('--hidden-entity-links-Display', 'none');
+    document.documentElement.style.setProperty('--hidden-entity-links-Hidden', 'hidden');
+    document.documentElement.style.setProperty('--hidden-entity-links-Flex', 'none');
   }
 
   // if (!game.modules.get('socketlib')?.active && game.user.isGM) {
