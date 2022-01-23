@@ -391,13 +391,10 @@ class HiddenEntityLinks {
         : html.find('li.directory-item.entity');
     for (let li of list) {
       li = $(li);
-      // let document = collection.get(li.attr('data-document-id'))
-      //   ? collection.get(li.attr('data-document-id'))
-      //   : collection.get(li.attr('data-entity-id'));
       let document = collection.find((d) => {
         return d.id == li.attr('data-document-id') || d.id == li.attr('data-entity-id');
       });
-
+      // let document = collection.get(li.attr("data-document-id"))
       if (document) {
         try {
           // let isHidden = data._id == document.id && data.flags["hidden-entity-links"]?.hidden
@@ -641,13 +638,8 @@ class HiddenEntityLinks {
   };
 
   _checkPermission = function (entity, user, setting) {
-    // const result =
-    //   entity.testUserPermission(user, 'OBSERVER') ||
-    //   entity.testUserPermission(user, 'LIMITED') ||
-    //   entity.testUserPermission(user, 'OWNER')
     let result = true;
     let set;
-    // let setOnly = false;
     if (setting == 'level-permission-actors') {
       set = game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'level-permission-actors');
     } else if (setting == 'level-permission-items') {
@@ -663,47 +655,14 @@ class HiddenEntityLinks {
     }
     if (set == this._permissions.EMPTY) {
       result = false;
-      // } else if (set == this._permissions.NONE) {
-      //   result = entity.testUserPermission(user, 'NONE')
-      //     && !entity.testUserPermission(user, 'LIMITED')
-      //     && !entity.testUserPermission(user, 'OBSERVER')
-      //     && !entity.testUserPermission(user, 'OWNER');
     } else if (set == this._permissions.NONE) {
-      // if(setOnly){
-      //   result = entity.testUserPermission(user, 'NONE', {exact:true})
-      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
-      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
-      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
-      // }else{
       result = !entity.testUserPermission(user, 'LIMITED');
-      // }
     } else if (set == this._permissions.LIMITED) {
-      // if(setOnly){
-      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
-      //     && entity.testUserPermission(user, 'LIMITED', {exact:true})
-      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
-      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
-      // }else{
       result = !entity.testUserPermission(user, 'OBSERVER');
-      // }
     } else if (set == this._permissions.OBSERVER) {
-      // if(setOnly){
-      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
-      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
-      //     && entity.testUserPermission(user, 'OBSERVER', {exact:true})
-      //     && !entity.testUserPermission(user, 'OWNER', {exact:true});
-      // }else{
       result = !entity.testUserPermission(user, 'OWNER');
-      // }
     } else if (set == this._permissions.OWNER) {
-      // if(setOnly){
-      //   result = !entity.testUserPermission(user, 'NONE', {exact:true})
-      //     && !entity.testUserPermission(user, 'LIMITED', {exact:true})
-      //     && !entity.testUserPermission(user, 'OBSERVER', {exact:true})
-      //     && entity.testUserPermission(user, 'OWNER', {exact:true});
-      // }else{
       result = true;
-      // }
     } else if (set == this._permissions.ONLY_LIMITED) {
       result =
         !entity.testUserPermission(user, 'NONE', { exact: true }) &&
@@ -736,6 +695,15 @@ class HiddenEntityLinks {
       return this._state.UNHIDE;
     }
   };
+
+  userUpdated(user) {
+    for (let user_div of $(".hidden-entity-links-user")) {
+        let id = $(user_div).attr("data-user-id")
+        if (id == user.id) {
+            $(user_div).css('background-color', user.data.color)
+        }
+    }
+  }
 }
 
 // ==================
