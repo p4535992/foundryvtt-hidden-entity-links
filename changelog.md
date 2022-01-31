@@ -1,8 +1,12 @@
 # Changelog
 
+## 1.0.11
+
+- Add feature for hide the rolltable, a customized version of [Hidden Tables](https://github.com/kandashi/hidden-tables/) just avoid to install another module
+
 ## 1.0.10
 
-- Add feature for hide the soundtrack, a customized version of [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)
+- Add feature for hide the soundtrack, a customized version of [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks) just avoid to install another module
 
 ## 1.0.9
 

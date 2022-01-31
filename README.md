@@ -130,6 +130,11 @@ Here what player see with the value "ONLY OBSERVER":
 
 ![permonlyobserver](./wiki/perm_player_view_onlyobserver.png)
 
+### Other features
+
+- Hides the soundtrack name and the playlist controlls from non GM accounts (as they cant use it anyway)
+- Adds an option to change the table roll to GM only.
+
 ## API
 
 Update css on the folder (not ready need more developing...)
@@ -282,3 +287,5 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 - A little part of code is inspired from [farling42](https://github.com/farling42) and the module [fvtt-disguise-unreachable-links](https://github.com/farling42/fvtt-disguise-unreachable-links)
 
 - A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)
+
+- A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Tables](https://github.com/kandashi/hidden-tables)

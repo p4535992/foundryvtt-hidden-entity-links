@@ -696,13 +696,24 @@ class HiddenEntityLinks {
     }
   };
 
-  userUpdated(user) {
-    for (let user_div of $(".hidden-entity-links-user")) {
-        let id = $(user_div).attr("data-user-id")
-        if (id == user.id) {
-            $(user_div).css('background-color', user.data.color)
-        }
+  // userUpdated(user) {
+  //   for (let user_div of $('.hidden-entity-links-user')) {
+  //     let id = $(user_div).attr('data-user-id');
+  //     if (id == user.id) {
+  //       $(user_div).css('background-color', user.data.color);
+  //     }
+  //   }
+  // }
+
+  hiddenTable(wrapped, ...args) {
+    if (this.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hiddenTable')) {
+      try {
+        args[0].rollMode = 'gmroll';
+      } catch {
+        args.push({ rollMode: 'gmroll' });
+      }
     }
+    return wrapped(...args);
   }
 }
 
@@ -892,8 +903,14 @@ Hooks.once('init', async function () {
   //   );
   //   return;
   // }
-
   game[HiddenEntityLinks.API] = new HiddenEntityLinks();
+
+  libWrapper.register(
+    HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    'RollTable.prototype.draw',
+    game[HiddenEntityLinks.API].hiddenTable,
+    'WRAPPER',
+  );
 });
 
 Hooks.once('setup', async function () {
@@ -913,6 +930,18 @@ Hooks.once('setup', async function () {
   //   );
   //   return;
   // }
+
+  Hooks.on('renderRollTableConfig', (config, html, css) => {
+    const isHidden = config.object.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hiddenTable');
+    let lastBox = html.find('.results');
+    let checkboxHTML = `
+    <div class="form-group">
+        <label>${game.i18n.format('hidden-entity-links.label.tableTextHiddenTable')}</label>
+        <input type="checkbox" name="flags.${HIDDEN_ENTITY_LINKS_MODULE_NAME}.hiddenTable" ${isHidden ? 'checked' : ''}>
+    </div>
+    `;
+    lastBox.before(checkboxHTML);
+  });
 
   Hooks.on('renderJournalDirectory', (obj, html, data) => {
     if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-journals')) {
