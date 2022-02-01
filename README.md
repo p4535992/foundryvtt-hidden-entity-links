@@ -14,9 +14,13 @@
 
 ![GitHub all releases](https://img.shields.io/github/downloads/p4535992/vtt-hidden-entity-links/total?style=for-the-badge) 
 
-A module for FoundryVTT which hides entities in the sidebar if players have Limited access to them. This means you can provide secret documents to your players without them seeing them in the sidebar.
+A module for FoundryVTT for hide things...
 
-Plus has many settings for hide navigation to scene , soundtrack, ecc.
+- Hides entities in the sidebar if players have Limited access to them. This means you can provide secret documents to your players without them seeing them in the sidebar, both permission and manual setting are allowed.
+- Hides the soundtrack name and the playlist controlls from non GM accounts (as they cant use it anyway)
+- Adds an option to change the table roll to GM only.
+- Hide link on the text editor tinymce based on the level of permission for that entity.
+Plus has many settings for hide navigation to scene, soundtrack, ecc.,
 
 ![hidden_links6](./wiki/shocase_hidden_entity_link.gif)
 
@@ -134,6 +138,7 @@ Here what player see with the value "ONLY OBSERVER":
 
 - Hides the soundtrack name and the playlist controlls from non GM accounts (as they cant use it anyway)
 - Adds an option to change the table roll to GM only.
+- Hide link on the text editor tinymce based on the level of permission for that entity.
 
 ## API
 
