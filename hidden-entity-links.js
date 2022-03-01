@@ -1088,15 +1088,16 @@ Hooks.once('setup', async function () {
       'MIXED',
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'JournalDirectory.prototype._getEntryContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'JournalDirectory.prototype._getEntryContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    Hooks.on('getJournalDirectoryEntryContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1169,20 +1170,22 @@ Hooks.once('setup', async function () {
               await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'JournalDirectory.prototype._getFolderContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'JournalDirectory.prototype._getFolderContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    Hooks.on('getJournalDirectoryFolderContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1249,9 +1252,10 @@ Hooks.once('setup', async function () {
                 });
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
   }
 
@@ -1287,15 +1291,16 @@ Hooks.once('setup', async function () {
       'OVERRIDE',
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'ItemDirectory.prototype._getEntryContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'ItemDirectory.prototype._getEntryContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    Hooks.on('getItemDirectoryEntryContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1368,20 +1373,22 @@ Hooks.once('setup', async function () {
               await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'ItemDirectory.prototype._getFolderContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'ItemDirectory.prototype._getFolderContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    Hooks.on('getItemDirectoryFolderContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(// return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1448,9 +1455,10 @@ Hooks.once('setup', async function () {
                 });
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
   }
 
@@ -1486,15 +1494,16 @@ Hooks.once('setup', async function () {
       'OVERRIDE',
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'ActorDirectory.prototype._getEntryContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'ActorDirectory.prototype._getEntryContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    Hooks.on('getActorDirectoryEntryContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1567,20 +1576,22 @@ Hooks.once('setup', async function () {
               await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );// ].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'ActorDirectory.prototype._getFolderContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'ActorDirectory.prototype._getFolderContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    Hooks.on('getActorDirectoryFolderContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1647,9 +1658,10 @@ Hooks.once('setup', async function () {
                 });
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );// ].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
   }
 
@@ -1696,15 +1708,16 @@ Hooks.once('setup', async function () {
       'WRAPPER',
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'RollTableDirectory.prototype._getEntryContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'RollTableDirectory.prototype._getEntryContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    Hooks.on('getRollTableDirectoryEntryContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1777,20 +1790,22 @@ Hooks.once('setup', async function () {
               await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'RollTableDirectory.prototype._getFolderContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'RollTableDirectory.prototype._getFolderContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    Hooks.on('getRollTableDirectoryFolderContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1857,9 +1872,10 @@ Hooks.once('setup', async function () {
                 });
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
   }
 
@@ -1895,15 +1911,16 @@ Hooks.once('setup', async function () {
       'OVERRIDE',
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'SceneDirectory.prototype._getEntryContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'SceneDirectory.prototype._getEntryContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
+    Hooks.on('getSceneDirectoryEntryContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -1997,20 +2014,22 @@ Hooks.once('setup', async function () {
               }
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
 
-    libWrapper.register(
-      HIDDEN_ENTITY_LINKS_MODULE_NAME,
-      'SceneDirectory.prototype._getFolderContextOptions',
-      function (wrapped, ...args) {
-        const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    // libWrapper.register(
+    //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    //   'SceneDirectory.prototype._getFolderContextOptions',
+    //   function (wrapped, ...args) {
+    //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+    Hooks.on('getSceneDirectoryFolderContext', (html, options) => {
         if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
           return options;
         }
-        return [
+        options.push(//return [
           {
             name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
             icon: '<i class="far fa-lightbulb"></i>',
@@ -2109,9 +2128,10 @@ Hooks.once('setup', async function () {
               }
             },
           },
-        ].concat(options);
-      },
-      'MIXED',
+        );//].concat(options);
+      // },
+      // 'MIXED',
+      }
     );
   }
 });

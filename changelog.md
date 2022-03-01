@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.12
+
+- Replace wrapper with hooks for entry context and folder context
+
 ## 1.0.11
 
 - Add feature for hide the rolltable, a customized version of [Hidden Tables](https://github.com/kandashi/hidden-tables/) just avoid to install another module
