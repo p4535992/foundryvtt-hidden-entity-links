@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.13
+
+- Added chanlog and concflict
+
 ## 1.0.12
 
 - Replace wrapper with hooks for entry context and folder context

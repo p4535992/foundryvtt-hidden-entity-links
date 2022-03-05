@@ -1,5 +1,62 @@
 export const HIDDEN_ENTITY_LINKS_MODULE_NAME = 'hidden-entity-links';
 
+/* ------------------------------------ */
+/* Initialize module					*/
+/* ------------------------------------ */
+Hooks.once('init', async function () {
+  //
+});
+
+/* ------------------------------------ */
+/* Setup module							*/
+/* ------------------------------------ */
+Hooks.once('setup', function () {
+  //
+});
+
+/* ------------------------------------ */
+/* When ready							*/
+/* ------------------------------------ */
+Hooks.once('ready', async function () {
+  if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
+    let word = 'install and activate';
+    if (game.modules.get('lib-wrapper')) word = 'activate';
+    throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+  }
+});
+
+/* ------------------------------------ */
+/* Other Hooks							*/
+/* ------------------------------------ */
+
+Hooks.once('libChangelogsReady', function () {
+  //@ts-ignore
+  libChangelogs.registerConflict(
+    HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    'disguise-unreachable-links',
+    `Redundancy of features you can disable 'Disguise Unreachable Links' module if you want`,
+    'major',
+  );
+
+  //@ts-ignore
+  libChangelogs.registerConflict(
+    HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    'hidden-tables',
+    `Redundancy of features you can disable 'Hidden Tables' module if you want`,
+    'major',
+  );
+  //@ts-ignore
+  libChangelogs.registerConflict(
+    HIDDEN_ENTITY_LINKS_MODULE_NAME,
+    'hiddensoundtracks',
+    `Redundancy of features you can disable 'Hidden Soundtracks' module if you want`,
+    'major',
+  );
+
+  //@ts-ignore
+  libChangelogs.register(HIDDEN_ENTITY_LINKS_MODULE_NAME, `Added changelog and conflict`, 'minor');
+});
+
 // ==================
 // SETTINGS SUPPORT
 // ==================
@@ -1094,87 +1151,87 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
     Hooks.on('getJournalDirectoryEntryContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-            },
+          callback: async (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const journal = game.journal.get(li.data('entityId'))
-                ? game.journal.get(li.data('entityId'))
-                : game.journal.get(li.data('documentId'));
-              await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(journal) == game[HiddenEntityLinks.API]._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const journal = game.journal.get(li.data('entityId'))
+              ? game.journal.get(li.data('entityId'))
+              : game.journal.get(li.data('documentId'));
+            await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
 
     // libWrapper.register(
     //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
@@ -1182,81 +1239,81 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
     Hooks.on('getJournalDirectoryFolderContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.journal
-                .filter((journal) => journal.data.folder === folderObject.id)
-                .map(async (journal) => {
-                  await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-                });
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.journal
-                .filter((journal) => journal.data.folder === folderObject.id)
-                .map(async (journal) => {
-                  await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-                });
-            },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.journal
+              .filter((journal) => journal.data.folder === folderObject.id)
+              .map(async (journal) => {
+                await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+              });
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.journal
-                .filter((journal) => journal.data.folder === folderObject.id)
-                .map(async (journal) => {
-                  await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-                });
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.journal
+              .filter((journal) => journal.data.folder === folderObject.id)
+              .map(async (journal) => {
+                await journal.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.journal
+              .filter((journal) => journal.data.folder === folderObject.id)
+              .map(async (journal) => {
+                await journal.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+              });
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
   }
 
   // =======================
@@ -1297,87 +1354,87 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
     Hooks.on('getItemDirectoryEntryContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-            },
+          callback: async (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const item = game.items.get(li.data('entityId'))
-                ? game.items.get(li.data('entityId'))
-                : game.items.get(li.data('documentId'));
-              await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(item) == game[HiddenEntityLinks.API]._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const item = game.items.get(li.data('entityId'))
+              ? game.items.get(li.data('entityId'))
+              : game.items.get(li.data('documentId'));
+            await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
 
     // libWrapper.register(
     //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
@@ -1385,81 +1442,81 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
     Hooks.on('getItemDirectoryFolderContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(// return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.items
-                .filter((item) => item.data.folder === folderObject.id)
-                .map(async (item) => {
-                  await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-                });
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        // return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.items
-                .filter((item) => item.data.folder === folderObject.id)
-                .map(async (item) => {
-                  await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-                });
-            },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.items
+              .filter((item) => item.data.folder === folderObject.id)
+              .map(async (item) => {
+                await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+              });
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.items
-                .filter((item) => item.data.folder === folderObject.id)
-                .map(async (item) => {
-                  await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-                });
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.items
+              .filter((item) => item.data.folder === folderObject.id)
+              .map(async (item) => {
+                await item.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.items
+              .filter((item) => item.data.folder === folderObject.id)
+              .map(async (item) => {
+                await item.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+              });
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
   }
 
   // =======================
@@ -1500,87 +1557,87 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
     Hooks.on('getActorDirectoryEntryContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              await actor.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-            },
+          callback: async (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const actor = game.actors.get(li.data('entityId'))
-                ? game.actors.get(li.data('entityId'))
-                : game.actors.get(li.data('documentId'));
-              await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );// ].concat(options);
+          callback: async (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            await actor.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(actor) == game[HiddenEntityLinks.API]._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const actor = game.actors.get(li.data('entityId'))
+              ? game.actors.get(li.data('entityId'))
+              : game.actors.get(li.data('documentId'));
+            await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+          },
+        },
+      ); // ].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
 
     // libWrapper.register(
     //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
@@ -1588,81 +1645,81 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
     Hooks.on('getActorDirectoryFolderContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.actors
-                .filter((actor) => actor.data.folder === folderObject.id)
-                .map(async (actor) => {
-                  await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-                });
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.actors
-                .filter((actor) => actor.data.folder === folderObject.id)
-                .map(async (actor) => {
-                  await actor.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-                });
-            },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.actors
+              .filter((actor) => actor.data.folder === folderObject.id)
+              .map(async (actor) => {
+                await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+              });
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.actors
-                .filter((actor) => actor.data.folder === folderObject.id)
-                .map(async (actor) => {
-                  await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-                });
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );// ].concat(options);
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.actors
+              .filter((actor) => actor.data.folder === folderObject.id)
+              .map(async (actor) => {
+                await actor.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.actors
+              .filter((actor) => actor.data.folder === folderObject.id)
+              .map(async (actor) => {
+                await actor.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+              });
+          },
+        },
+      ); // ].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
   }
 
   // =======================
@@ -1714,87 +1771,87 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
     Hooks.on('getRollTableDirectoryEntryContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-            },
+          callback: async (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const rolltable = game.tables.get(li.data('entityId'))
-                ? game.tables.get(li.data('entityId'))
-                : game.tables.get(li.data('documentId'));
-              await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(rolltable) == game[HiddenEntityLinks.API]._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const rolltable = game.tables.get(li.data('entityId'))
+              ? game.tables.get(li.data('entityId'))
+              : game.tables.get(li.data('documentId'));
+            await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
 
     // libWrapper.register(
     //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
@@ -1802,81 +1859,81 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
     Hooks.on('getRollTableDirectoryFolderContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.tables
-                .filter((rolltable) => rolltable.data.folder === folderObject.id)
-                .map(async (rolltable) => {
-                  await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-                });
-            },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.tables
-                .filter((rolltable) => rolltable.data.folder === folderObject.id)
-                .map(async (rolltable) => {
-                  await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-                });
-            },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.tables
+              .filter((rolltable) => rolltable.data.folder === folderObject.id)
+              .map(async (rolltable) => {
+                await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+              });
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.tables
-                .filter((rolltable) => rolltable.data.folder === folderObject.id)
-                .map(async (rolltable) => {
-                  await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-                });
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-        );//].concat(options);
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.tables
+              .filter((rolltable) => rolltable.data.folder === folderObject.id)
+              .map(async (rolltable) => {
+                await rolltable.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.tables
+              .filter((rolltable) => rolltable.data.folder === folderObject.id)
+              .map(async (rolltable) => {
+                await rolltable.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+              });
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
   }
 
   // =======================
@@ -1917,108 +1974,108 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
     Hooks.on('getSceneDirectoryEntryContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE ||
-                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-              if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
-                const updates = [
-                  {
-                    _id: scene.id,
-                    navigation: false,
-                    permission: {
-                      default: 0,
-                    },
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+            if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
+              const updates = [
+                {
+                  _id: scene.id,
+                  navigation: false,
+                  permission: {
+                    default: 0,
                   },
-                ];
-                return Scene.update(updates);
-              }
-            },
+                },
+              ];
+              return Scene.update(updates);
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              if (
-                game.user.isGM &&
-                (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
-                  game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE)
-              ) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (li) => {
-              const scene = game.scenes.get(li.data('entityId'))
-                ? game.scenes.get(li.data('entityId'))
-                : game.scenes.get(li.data('documentId'));
-              await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-              if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
-                const updates = [
-                  {
-                    _id: scene.id,
-                    navigation: true,
-                  },
-                ];
-                return Scene.update(updates);
-              }
-            },
+          callback: async (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
           },
-        );//].concat(options);
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.HIDE ||
+                game[HiddenEntityLinks.API]._checkState(scene) == game[HiddenEntityLinks.API]._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const scene = game.scenes.get(li.data('entityId'))
+              ? game.scenes.get(li.data('entityId'))
+              : game.scenes.get(li.data('documentId'));
+            await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+            if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
+              const updates = [
+                {
+                  _id: scene.id,
+                  navigation: true,
+                },
+              ];
+              return Scene.update(updates);
+            }
+          },
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
 
     // libWrapper.register(
     //   HIDDEN_ENTITY_LINKS_MODULE_NAME,
@@ -2026,112 +2083,112 @@ Hooks.once('setup', async function () {
     //   function (wrapped, ...args) {
     //     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
     Hooks.on('getSceneDirectoryFolderContext', (html, options) => {
-        if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
-          return options;
-        }
-        options.push(//return [
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
-            icon: '<i class="far fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+      if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.scenes
+              .filter((scene) => scene.data.folder === folderObject.id)
+              .map(async (scene) => {
+                await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
+              });
+
+            if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
               const updates = game.scenes
                 .filter((scene) => scene.data.folder === folderObject.id)
-                .map(async (scene) => {
-                  await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', true);
-                });
-
-              if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
-                const updates = game.scenes
-                  .filter((scene) => scene.data.folder === folderObject.id)
-                  .map((scene) => ({
-                    _id: scene.id,
-                    navigation:
+                .map((scene) => ({
+                  _id: scene.id,
+                  navigation:
+                    !scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') && scene.navigation
+                      ? false
+                      : scene.navigation,
+                  permission: {
+                    default:
                       !scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') && scene.navigation
-                        ? false
-                        : scene.navigation,
-                    permission: {
-                      default:
-                        !scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') && scene.navigation
-                          ? 0
-                          : scene.permission.default,
-                    },
-                  }));
-                return Scene.update(updates);
-              }
-            },
+                        ? 0
+                        : scene.permission.default,
+                  },
+                }));
+              return Scene.update(updates);
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
-            icon: '<i class="fas fa-low-vision"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.scenes
-                .filter((scene) => scene.data.folder === folderObject.id)
-                .map(async (scene) => {
-                  await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
-                });
-            },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
           },
-          {
-            name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
-            icon: '<i class="fas fa-lightbulb"></i>',
-            condition: (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              if (game.user.isGM) {
-                return true;
-              } else {
-                return false;
-              }
-            },
-            callback: async (header) => {
-              const folderId = header.parent().data('folderId');
-              const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
-              const updates = game.scenes
-                .filter((scene) => scene.data.folder === folderObject.id)
-                .map(async (scene) => {
-                  await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
-                });
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.scenes
+              .filter((scene) => scene.data.folder === folderObject.id)
+              .map(async (scene) => {
+                await scene.unsetFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${HIDDEN_ENTITY_LINKS_MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.scenes
+              .filter((scene) => scene.data.folder === folderObject.id)
+              .map(async (scene) => {
+                await scene.setFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden', false);
+              });
 
-              if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
-                const updates = game.scenes
-                  .filter((scene) => scene.data.folder === folderObject.id)
-                  .map((scene) => ({
-                    _id: scene.id,
-                    navigation:
-                      scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') && !scene.navigation
-                        ? true
-                        : scene.navigation,
-                  }));
-                return Scene.update(updates);
-              }
-            },
+            if (game.settings.get(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hide-scenes-nav')) {
+              const updates = game.scenes
+                .filter((scene) => scene.data.folder === folderObject.id)
+                .map((scene) => ({
+                  _id: scene.id,
+                  navigation:
+                    scene.getFlag(HIDDEN_ENTITY_LINKS_MODULE_NAME, 'hidden') && !scene.navigation
+                      ? true
+                      : scene.navigation,
+                }));
+              return Scene.update(updates);
+            }
           },
-        );//].concat(options);
+        },
+      ); //].concat(options);
       // },
       // 'MIXED',
-      }
-    );
+    });
   }
 });

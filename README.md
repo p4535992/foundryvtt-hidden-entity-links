@@ -12,7 +12,9 @@
 
 [![Foundry Hub Endorsements](https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fhidden-entity-links%2Fshield%2Fendorsements&style=for-the-badge)](https://www.foundryvtt-hub.com/package/hidden-entity-links/)
 
-![GitHub all releases](https://img.shields.io/github/downloads/p4535992/vtt-hidden-entity-links/total?style=for-the-badge) 
+![GitHub all releases](https://img.shields.io/github/downloads/p4535992/vtt-hidden-entity-links/total?style=for-the-badge)
+
+### If you want to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
 A module for FoundryVTT for hide things...
 
@@ -33,6 +35,8 @@ The concept is hide everything on the sidebar, but still have permissions , a cl
 The graphic interaction with new choices on the sidebar context let you decide the entity/document you want to make secret with a simple right click on the specific element or the folder of the sidebar, so you can hide , unhide multiple elements with one click.
 
 There is a integration based on the permission applied on the entities.
+
+
 
 ## Installation
 
@@ -276,6 +280,8 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 ## License
 
 - **[fvtt-disguise-unreachable-links](https://github.com/farling42/fvtt-disguise-unreachable-links)** : [MIT](https://github.com/farling42/fvtt-disguise-unreachable-links/blob/master/LICENSE)
+
+- **[Hidden Tables](https://github.com/kandashi/hidden-tables)** : [MIT](https://github.com/kandashi/hidden-tables/blob/master/LICENSE)
 
 - **[Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)** : [MIT](https://github.com/kandashi/Hidden-Soundtracks/blob/master/LICENSE)
 
