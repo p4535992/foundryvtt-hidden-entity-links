@@ -19,7 +19,7 @@
 A module for FoundryVTT for hide things...
 
 - Hides entities in the sidebar if players have Limited access to them. This means you can provide secret documents to your players without them seeing them in the sidebar, both permission and manual setting are allowed.
-- Hides the soundtrack name and the playlist controlls from non GM accounts (as they cant use it anyway)
+- Hides the soundtrack name and the playlist controls from non GM accounts (as they cant use it anyway)
 - Adds an option to change the table roll to GM only.
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 Plus has many settings for hide navigation to scene, soundtrack, ecc.,
@@ -30,7 +30,7 @@ Plus has many settings for hide navigation to scene, soundtrack, ecc.,
 
 In the module settings you will find options to hide each entity type (apart from Macros) from your players if they have limited access.
 
-The concept is hide everything on the sidebar, but still have permissions , a classic use is a merchant in apsecific scene cna be used only on that scene not on the sidebar.
+The concept is hide everything on the sidebar, but still have permissions , a classic use is a merchant in a specific scene cna be used only on that scene not on the sidebar.
 
 The graphic interaction with new choices on the sidebar context let you decide the entity/document you want to make secret with a simple right click on the specific element or the folder of the sidebar, so you can hide , unhide multiple elements with one click.
 
@@ -53,9 +53,6 @@ To install this module manually:
 ### libWrapper
 
 This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) library for wrapping core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
-
-### socketLib [OPTIONAL] (need some more developing...)
-This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketlib) library for socket core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
 ## Known issue
 
@@ -92,7 +89,7 @@ By module settings we can apply the css style to all the entites are not hide or
 
 ### Permission manager integration 
 
-From version 1.0.7 you can hide by default the entites based on the permissions level of the player, it very hard to mantain trace of this so for this feature it is highly recommended to install and use this module together with the module **[Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)**
+From version 1.0.7 you can hide by default the entities based on the permissions level of the player, it very hard to maintain trace of this so for this feature it is highly recommended to install and use this module together with the module **[Permission Viewer](https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer)**
 
 On the module setting you can see a dropdown menu where to choose the permission level to set for the specific type.
 
@@ -140,7 +137,7 @@ Here what player see with the value "ONLY OBSERVER":
 
 ### Other features
 
-- Hides the soundtrack name and the playlist controlls from non GM accounts (as they cant use it anyway)
+- Hides the soundtrack name and the playlist controls from non GM accounts (as they cant use it anyway)
 - Adds an option to change the table roll to GM only.
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 
@@ -189,12 +186,12 @@ Show the specific entity
 - **Enable/disable the hidden functionality globally for Scenes on navigation bar:** If enabled and you are not a GM, and the setting 'Hide Scenes' is enabled too, users will not see hidden scenes in the navigation bar and the permission on the scene wil be limited only to GM
 - **Enable/disable the hidden functionality globally for Cards:** If enabled and you are not a GM, users will not see hidden cards in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
 - **Disable the background just add the symbol image:** If enable the background of the entity is no more colored, will just add the symbol image like in the default scene directory, can be useful for compatibility with others modules
-- **Disguise unreachable links for all non GM player:** When displaying journal entries or actors to players, if the linked document is not reachable then the special link presentation will be replaced by just the normal text. Thus players will not realise that there is another document to which they don't have access. By accessible, we mean that the player has at least LIMITED permission on that document
+- **Disguise unreachable links for all non GM player:** When displaying journal entries or actors to players, if the linked document is not reachable then the special link presentation will be replaced by just the normal text. Thus players will not realize that there is another document to which they don't have access. By accessible, we mean that the player has at least LIMITED permission on that document
 - **Set level permission to show the referenced link on the javascript editor of foundry to hide for non GM user:** This property hide all the referenced link on the javascript editor for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Add css style to all the entity are not in the 'hide state' or the 'show state':** If enable this setting enable the css background/image to all the entities on the sidebars
 - **Set level permission to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Disable voice from the right click context entities and folders:** Someone can find the permission manager just enough for their use, this setting let you the possibility to disable the voice feature. ATTENTION: It will not reset already esisting entities
-- **Enable/disable the hidden functionality globally for Soundtracks:** If enabled and you are not a GM, users will not see the soundtrack name and the playlist controlls
+- **Enable/disable the hidden functionality globally for Soundtracks:** If enabled and you are not a GM, users will not see the soundtrack name and the playlist controls
 
 # Build
 
