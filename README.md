@@ -145,31 +145,31 @@ Here what player see with the value "ONLY OBSERVER":
 
 Update css on the folder (not ready need more developing...)
 
-`game.hiddenEntityLinks.updateFolderHiddenEntityLinks = async function (entityData, html, data)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.updateFolderHiddenEntityLinks = async function (entityData, html, data)`
 
 Update css on the specific entity
 
-`game.hiddenEntityLinks.updateHiddenEntityLinks = async function (entityData, html, data)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.updateHiddenEntityLinks = async function (entityData, html, data)`
 
 Rendering css on the specific sidebar tab
 
-`game.hiddenEntityLinks.directoryRenderedHiddenEntityLinks = async function (sidebarTabDirectory, html, data, entities)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.directoryRenderedHiddenEntityLinks = async function (sidebarTabDirectory, html, data, entities)`
 
 Hide all the reference link on the javascript editor of foundry based on the specific permissions
 
-`game.hiddenEntityLinks.hideRenderedHiddenEntityLinks = function (sheet, html, data)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.hideRenderedHiddenEntityLinks = function (sheet, html, data)`
 
 Hide the specific entity
 
-`game.hiddenEntityLinks.hideEntityLink = async function (entityID, entities)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.hideEntityLink = async function (entityID, entities)`
 
 UnHide/Unshow the specific entity
 
-`game.hiddenEntityLinks.unhideEntityLink = async function (entityID, entities)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.unhideEntityLink = async function (entityID, entities)`
 
 Show the specific entity
 
-`game.hiddenEntityLinks.showEntityLink = async function (entityID, entities)`
+`game.modules.get('hidden-entity-links').api.hiddenEntityLinks.showEntityLink = async function (entityID, entities)`
 
 ## Settings
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.14
+
+- Clean up and better design pattern
+- Added support for cards
+- Abbandoned support for 0.8.9
+
 ## 1.0.13
 
 - Added chanlog and concflict

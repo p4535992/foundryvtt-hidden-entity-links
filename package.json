@@ -3,7 +3,7 @@
   "name": "hidden-entity-links",
   "title": "Hidden Entity Links",
   "description": "Hides entities with limited permission from the sidebar, but links still work for players.",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "scripts": {
     "package": "gulp package",
     "build": "gulp clean && gulp build && gulp link",

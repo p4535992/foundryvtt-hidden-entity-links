@@ -1,5 +1,6 @@
 import API from './module/api.js';
 import CONSTANTS from './module/constants.js';
+import { log } from './module/lib/lib.js';
 import { registerSettings } from './module/settings.js';
 
 /* ------------------------------------ */
@@ -117,8 +118,9 @@ Hooks.once('libChangelogsReady', function () {
   libChangelogs.register(
     CONSTANTS.MODULE_NAME,
     `
-    - Added card support
     - Clean up and better design pattern
+    - Added support for cards
+    - Abbandoned support for 0.8.9
     `,
     'minor',
   );
@@ -630,6 +632,7 @@ class HiddenEntityLinks {
     RollTable: 'tables',
     Scene: 'scenes',
     Item: 'items',
+    Card: 'cards',
   };
 
   _permissions = {
@@ -764,6 +767,8 @@ class HiddenEntityLinks {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-journals');
     } else if (setting == 'level-permission-rolltables') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-rolltables');
+    } else if (setting == 'level-permission-cards') {
+      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-cards');
       // } else if (setting == 'level-permission-scenes') {
       //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
     } else if (setting == 'level-permission-disguise-unreachable-links') {
@@ -857,15 +862,15 @@ Hooks.once('socketlib.ready', () => {
 
 class HiddenEntityLinksSocketFunctions {
   static updateHiddenEntityLinks(entityData, html, data) {
-    game.hiddenEntityLinks.updateHiddenEntityLinks(entityData, html, data);
+    API.hiddenEntityLinks.updateHiddenEntityLinks(entityData, html, data);
   }
 
   static directoryRenderedHiddenEntityLinks(obj, html, data, entities) {
-    game.hiddenEntityLinks.directoryRenderedHiddenEntityLinks(obj, html, data, entities);
+    API.hiddenEntityLinks.directoryRenderedHiddenEntityLinks(obj, html, data, entities);
   }
 
   static hideRenderedHiddenEntityLinks(sheet, html, data) {
-    game.hiddenEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
+    API.hiddenEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
   }
 }
 */
@@ -2046,6 +2051,189 @@ export const setupHooks = () => {
       ); //].concat(options);
       // },
       // 'MIXED',
+    });
+  }
+
+  // ===========
+  // CARDS
+  // ===========
+
+  if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-cards')) {
+    libWrapper.register(
+      CONSTANTS.MODULE_NAME,
+      'Card.prototype.visible',
+      function (wrapped, ...args) {
+        if (game.user.isGM) {
+          return true;
+        }
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
+          return false;
+        }
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
+          return true;
+        }
+        if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-cards')) {
+          return false;
+        }
+        return true;
+      },
+      'OVERRIDE',
+    );
+
+    Hooks.on('getCardsDirectoryEntryContext', (html, options) => {
+      if (game.settings.get(CONSTANTS.MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        //return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.UNHIDE ||
+                API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            await card.setFlag(CONSTANTS.MODULE_NAME, 'hidden', true);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.HIDE ||
+                API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.SHOW)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            await card.unsetFlag(CONSTANTS.MODULE_NAME, 'hidden');
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            if (
+              game.user.isGM &&
+              (API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.HIDE ||
+                API.hiddenEntityLinks._checkState(card) == API.hiddenEntityLinks._state.UNHIDE)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (li) => {
+            const card = game.cards.get(li.data('entityId'))
+              ? game.cards.get(li.data('entityId'))
+              : game.cards.get(li.data('documentId'));
+            await card.setFlag(CONSTANTS.MODULE_NAME, 'hidden', false);
+          },
+        },
+      );
+    });
+
+    Hooks.on('getCardsDirectoryFolderContext', (html, options) => {
+      if (game.settings.get(CONSTANTS.MODULE_NAME, 'disable-voices')) {
+        return options;
+      }
+      options.push(
+        // return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
+          icon: '<i class="far fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.cards
+              .filter((card) => card.data.folder === folderObject.id)
+              .map(async (card) => {
+                await card.setFlag(CONSTANTS.MODULE_NAME, 'hidden', true);
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
+          icon: '<i class="fas fa-low-vision"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.cards
+              .filter((card) => card.data.folder === folderObject.id)
+              .map(async (card) => {
+                await card.unsetFlag(CONSTANTS.MODULE_NAME, 'hidden');
+              });
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-folder`),
+          icon: '<i class="fas fa-lightbulb"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            if (game.user.isGM) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data('folderId');
+            const folderObject = game.folders.get(folderId) || game.folders.getName(folderId);
+            const updates = game.cards
+              .filter((card) => card.data.folder === folderObject.id)
+              .map(async (card) => {
+                await card.setFlag(CONSTANTS.MODULE_NAME, 'hidden', false);
+              });
+          },
+        },
+      );
     });
   }
 };

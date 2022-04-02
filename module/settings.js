@@ -140,6 +140,31 @@ export const registerSettings = function () {
       6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
     },
   });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hide-cards', {
+    name: `${CONSTANTS.MODULE_NAME}.settings.hide-cards.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.settings.hide-cards.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-cards', {
+    name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-cards.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-cards.hint`,
+    scope: 'world',
+    config: true,
+    default: 0,
+    type: Number,
+    choices: {
+      0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
+      1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
+      2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
+      3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
+      4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
+      5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
+      6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
+    },
+  });
   game.settings.register(CONSTANTS.MODULE_NAME, 'hide-scenes', {
     name: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes.name`,
     hint: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes.hint`,
@@ -445,6 +470,31 @@ function otherSettings(apply = false) {
     'level-permission-rolltables': {
       name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-rolltables.name`,
       hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-rolltables.hint`,
+      scope: 'world',
+      config: true,
+      default: 0,
+      type: Number,
+      choices: {
+        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
+        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
+        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
+        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
+        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
+        5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
+        6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
+      },
+    },
+    'hide-cards': {
+      name: `${CONSTANTS.MODULE_NAME}.settings.hide-cards.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-cards.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    'level-permission-cards': {
+      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-cards.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-cards.hint`,
       scope: 'world',
       config: true,
       default: 0,
