@@ -23,25 +23,29 @@ Hooks.once('setup', function () {
 /* ------------------------------------ */
 Hooks.once('ready', function () {
   if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
-      let word = 'install and activate';
-      if (game.modules.get('lib-wrapper'))
-          word = 'activate';
-      throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+    let word = 'install and activate';
+    if (game.modules.get('lib-wrapper')) word = 'activate';
+    throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
   }
   if (!game.modules.get('socketlib')?.active && game.user?.isGM) {
-      let word = 'install and activate';
-      if (game.modules.get('socketlib'))
-          word = 'activate';
-      throw error(`Requires the 'socketlib' module. Please ${word} it.`);
+    let word = 'install and activate';
+    if (game.modules.get('socketlib')) word = 'activate';
+    throw error(`Requires the 'socketlib' module. Please ${word} it.`);
   }
   if (game.modules.get('disguise-unreachable-links')?.active && game.user?.isGM) {
-      dialogWarning(`With 'disguise-unreachable-links' module enabled and active. There is a Redundancy of features you can disable 'Disguise Unreachable Links' module if you want.`);
+    dialogWarning(
+      `With 'disguise-unreachable-links' module enabled and active. There is a Redundancy of features you can disable 'Disguise Unreachable Links' module if you want.`,
+    );
   }
   if (game.modules.get('hidden-tables')?.active && game.user?.isGM) {
-    dialogWarning(`With 'hidden-tables' module enabled and active. There is a Redundancy of features you can disable 'Hidden Tables' module if you want.`);
+    dialogWarning(
+      `With 'hidden-tables' module enabled and active. There is a Redundancy of features you can disable 'Hidden Tables' module if you want.`,
+    );
   }
   if (game.modules.get('hiddensoundtracks')?.active && game.user?.isGM) {
-    dialogWarning(`With 'hiddensoundtracks' module enabled and active. There is a Redundancy of features you can disable 'Hidden Soundtracks' module if you want.`);
+    dialogWarning(
+      `With 'hiddensoundtracks' module enabled and active. There is a Redundancy of features you can disable 'Hidden Soundtracks' module if you want.`,
+    );
   }
 
   // Do anything once the module is ready
@@ -61,25 +65,25 @@ export function setApi(api) {
   data.api = api;
 }
 /**
-* Returns the set API.
-* @returns Api from games module.
-*/
+ * Returns the set API.
+ * @returns Api from games module.
+ */
 export function getApi() {
   const data = game.modules.get(CONSTANTS.MODULE_NAME);
   return data.api;
 }
 /**
-* Initialization helper, to set Socket.
-* @param socket to set to game module.
-*/
+ * Initialization helper, to set Socket.
+ * @param socket to set to game module.
+ */
 export function setSocket(socket) {
   const data = game.modules.get(CONSTANTS.MODULE_NAME);
   data.socket = socket;
 }
 /*
-* Returns the set socket.
-* @returns Socket from games module.
-*/
+ * Returns the set socket.
+ * @returns Socket from games module.
+ */
 export function getSocket() {
   const data = game.modules.get(CONSTANTS.MODULE_NAME);
   return data.socket;
@@ -110,11 +114,14 @@ Hooks.once('libChangelogsReady', function () {
   );
 
   //@ts-ignore
-  libChangelogs.register(CONSTANTS.MODULE_NAME,
+  libChangelogs.register(
+    CONSTANTS.MODULE_NAME,
     `
     - Added card support
     - Clean up and better design pattern
-    `, 'minor');
+    `,
+    'minor',
+  );
 });
 
 // ==================
@@ -387,10 +394,7 @@ class HiddenEntityLinks {
             //   </div>`,
             // );
             // li.find('.entity-name').before(div);
-            if (
-              entityData instanceof Scene ||
-              game.settings.get(CONSTANTS.MODULE_NAME, 'no-background-only-symbol')
-            ) {
+            if (entityData instanceof Scene || game.settings.get(CONSTANTS.MODULE_NAME, 'no-background-only-symbol')) {
               if (li.find('.hidden-entity-links-scene').length <= 0) {
                 let div = $(
                   `<div class="hidden-entity-links-scene">
@@ -420,10 +424,7 @@ class HiddenEntityLinks {
           if (!game.user.isGM) {
             //
           } else {
-            if (
-              entityData instanceof Scene ||
-              game.settings.get(CONSTANTS.MODULE_NAME, 'no-background-only-symbol')
-            ) {
+            if (entityData instanceof Scene || game.settings.get(CONSTANTS.MODULE_NAME, 'no-background-only-symbol')) {
               if (li.find('.hidden-entity-links-scene-show').length <= 0) {
                 let div = $(
                   `<div class="hidden-entity-links-scene-show">
@@ -693,10 +694,7 @@ class HiddenEntityLinks {
           if (reference) {
             // const perm = this._checkPermission(reference, game.user,'level-permission-disguise-unreachable-links');
             // return perm;
-            const perm = game.settings.get(
-              CONSTANTS.MODULE_NAME,
-              'level-permission-disguise-unreachable-links',
-            );
+            const perm = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
             if (perm == this._permissions.EMPTY) {
               return !reference.testUserPermission(game.user, 'LIMITED');
             } else if (perm == this._permissions.NONE) {
@@ -873,16 +871,10 @@ class HiddenEntityLinksSocketFunctions {
 */
 
 export const initHooks = () => {
-
   API.hiddenEntityLinks = new HiddenEntityLinks();
   setApi(API);
 
-  libWrapper.register(
-    CONSTANTS.MODULE_NAME,
-    'RollTable.prototype.draw',
-    API.hiddenEntityLinks.hiddenTable,
-    'WRAPPER',
-  );
+  libWrapper.register(CONSTANTS.MODULE_NAME, 'RollTable.prototype.draw', API.hiddenEntityLinks.hiddenTable, 'WRAPPER');
 };
 
 export const setupHooks = () => {
@@ -985,16 +977,10 @@ export const setupHooks = () => {
         if (game.user.isGM) {
           return true;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
           return false;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-journals')) {
@@ -1227,16 +1213,10 @@ export const setupHooks = () => {
         if (game.user.isGM) {
           return true;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
           return false;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-items')) {
@@ -1430,16 +1410,10 @@ export const setupHooks = () => {
         if (game.user.isGM) {
           return true;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
           return false;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-actors')) {
@@ -1633,16 +1607,10 @@ export const setupHooks = () => {
         if (game.user.isGM) {
           return true;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
           return false;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-rolltables')) {
@@ -1847,16 +1815,10 @@ export const setupHooks = () => {
         if (game.user.isGM) {
           return true;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.HIDE) {
           return false;
         }
-        if (
-          !game.user.isGM &&
-          API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW
-        ) {
+        if (!game.user.isGM && API.hiddenEntityLinks._checkState(this) == API.hiddenEntityLinks._state.SHOW) {
           return true;
         }
         // if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-scenes')) {
@@ -2014,9 +1976,7 @@ export const setupHooks = () => {
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    !scene.getFlag(CONSTANTS.MODULE_NAME, 'hidden') && scene.navigation
-                      ? false
-                      : scene.navigation,
+                    !scene.getFlag(CONSTANTS.MODULE_NAME, 'hidden') && scene.navigation ? false : scene.navigation,
                   permission: {
                     default:
                       !scene.getFlag(CONSTANTS.MODULE_NAME, 'hidden') && scene.navigation
@@ -2077,9 +2037,7 @@ export const setupHooks = () => {
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    scene.getFlag(CONSTANTS.MODULE_NAME, 'hidden') && !scene.navigation
-                      ? true
-                      : scene.navigation,
+                    scene.getFlag(CONSTANTS.MODULE_NAME, 'hidden') && !scene.navigation ? true : scene.navigation,
                 }));
               return Scene.update(updates);
             }
@@ -2093,7 +2051,6 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
-
   if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-soundtracks') && !game.user.isGM) {
     document.documentElement.style.setProperty('--hidden-entity-links-Display', 'none');
     document.documentElement.style.setProperty('--hidden-entity-links-Hidden', 'hidden');
