@@ -1,6 +1,6 @@
 import API from './module/api.js';
 import CONSTANTS from './module/constants.js';
-import { log } from './module/lib/lib.js';
+import { log, resetNavbar } from './module/lib/lib.js';
 import { registerSettings } from './module/settings.js';
 
 /* ------------------------------------ */
@@ -46,6 +46,12 @@ Hooks.once('ready', function () {
   if (game.modules.get('hiddensoundtracks')?.active && game.user?.isGM) {
     dialogWarning(
       `With 'hiddensoundtracks' module enabled and active. There is a Redundancy of features you can disable 'Hidden Soundtracks' module if you want.`,
+    );
+  }
+
+  if (game.modules.get('navbar-tweaks')?.active && game.user?.isGM) {
+    dialogWarning(
+      `With 'navbar-tweaks' module enabled and active. There is a Redundancy of features you can disable 'Navbar Tweaks' module if you want.`,
     );
   }
 
@@ -113,214 +119,24 @@ Hooks.once('libChangelogsReady', function () {
     `Redundancy of features you can disable 'Hidden Soundtracks' module if you want`,
     'major',
   );
+  //@ts-ignore
+  libChangelogs.registerConflict(
+    CONSTANTS.MODULE_NAME,
+    'navbar-tweaks',
+    `Redundancy of features you can disable 'Navbar Tweaks' module if you want`,
+    'major',
+  );
 
   //@ts-ignore
   libChangelogs.register(
     CONSTANTS.MODULE_NAME,
     `
-    - Clean up and better design pattern
-    - Added support for cards
-    - Abbandoned support for 0.8.9
+    - Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/2
+    - Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/1
     `,
     'minor',
   );
 });
-
-// ==================
-// SETTINGS SUPPORT
-// ==================
-/*
-class Settings {
-  static registerSettings() {
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-actors', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-actors.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-actors.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-actors', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-actors.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-actors.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-        5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
-        6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
-      },
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-items', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-items.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-items.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-items', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-items.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-items.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-        5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
-        6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
-      },
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-journals', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-journals.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-journals.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-journals', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-journals.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-journals.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-        5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
-        6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
-      },
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-rolltables', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-rolltables.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-rolltables.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-rolltables', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-rolltables.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-rolltables.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-        5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlylimited`),
-        6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.onlyobserver`),
-      },
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-scenes', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-scenes-nav', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes-nav.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-scenes-nav.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    // game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-scenes', {
-    //   name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-scenes.name`,
-    //   hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-scenes.hint`,
-    //   scope: 'world',
-    //   config: true,
-    //   default: 0,
-    //   type: Number,
-    //   choices: {
-    //     0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-    //     1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-    //     2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-    //     3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-    //     4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-    //   },
-    // });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'no-background-only-symbol', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.no-background-only-symbol.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.no-background-only-symbol.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'disguise-unreachable-links', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.disguise-unreachable-links.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.disguise-unreachable-links.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.level-permission-disguise-unreachable-links.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.level-permission-disguise-unreachable-links.hint`,
-      scope: 'world',
-      config: true,
-      default: 0,
-      type: Number,
-      choices: {
-        0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.empty`),
-        1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.none`),
-        2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.limited`),
-        3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.observer`),
-        4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.level-permission.owner`),
-      },
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'add-css-unhideshow', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.add-css-unhideshow.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.add-css-unhideshow.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'disable-voices', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.disable-voices.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.disable-voices.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-    game.settings.register(CONSTANTS.MODULE_NAME, 'hide-soundtracks', {
-      name: `${CONSTANTS.MODULE_NAME}.settings.hide-soundtracks.name`,
-      hint: `${CONSTANTS.MODULE_NAME}.settings.hide-soundtracks.hint`,
-      scope: 'world',
-      config: true,
-      type: Boolean,
-      default: false,
-    });
-  }
-}
-*/
 
 // ==================
 // API SUPPORT
@@ -769,10 +585,16 @@ class HiddenEntityLinks {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-rolltables');
     } else if (setting == 'level-permission-cards') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-cards');
-      // } else if (setting == 'level-permission-scenes') {
-      //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
+    // } else if (setting == 'level-permission-scenes') {
+    //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
+    } else if (setting == 'level-permission-scenes-nav') {
+      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav');
+    } else if (setting == 'level-permission-scenes-nav-name') {
+      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav-name');
     } else if (setting == 'level-permission-disguise-unreachable-links') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
+    }else{
+      throw new Error(`NO module setting found for key '${setting}'`);
     }
     if (set == this._permissions.EMPTY) {
       result = false;
@@ -2243,6 +2065,46 @@ export const readyHooks = () => {
     document.documentElement.style.setProperty('--hidden-entity-links-Display', 'none');
     document.documentElement.style.setProperty('--hidden-entity-links-Hidden', 'hidden');
     document.documentElement.style.setProperty('--hidden-entity-links-Flex', 'none');
+  }
+
+  if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes')  && !game.user.isGM) {
+    // Hook SceneNavigation methods and implement the main module functionality
+    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.render', function(wrapper, ...args) {
+      let result = wrapper.apply(this, args);
+      if(!game.user.isGM){
+        result.scenes.forEach(data => {
+          const scene =  game.scenes.get(data._id);
+          if(scene.data.navigation){
+            const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav');
+            if(!neededRole) {
+              this.element.empty();
+              return;
+            }
+          }
+        });
+      }
+      return result;
+    });
+
+    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.getData', function(wrapper, ...args) {
+      let result = wrapper.apply(this, args);
+      if(!game.user.isGM){
+        result.scenes.forEach(data => {
+          const scene =  game.scenes.get(data._id);
+          if(scene.data.navigation){
+            const navNameRole  = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav-name');
+            if(!navNameRole) {
+              // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
+              data.name = game.scenes.get(data._id).name;
+            }
+          }
+        });
+      }
+
+      return result;
+    }, 'WRAPPER');
+
+    resetNavbar();
   }
 
   // API.hiddenEntityLinks.socket = hiddenEntityLinksSocket;

@@ -181,10 +181,11 @@ Show the specific entity
 - **Set level permission journals to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Enable/disable the hidden functionality globally for Roll Tables:** If enabled and you are not a GM, users will not see hidden roll tables in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
 - **Set level permission rolltables to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
+- **Enable/disable the hidden functionality globally for Cards:** If enabled and you are not a GM, users will not see hidden cards in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
+- **Set level permission cards to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Enable/disable the hidden functionality globally for Scenes:** If enabled and you are not a GM, users will not see hidden scenes in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
 - **Set level permission scenes to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Enable/disable the hidden functionality globally for Scenes on navigation bar:** If enabled and you are not a GM, and the setting 'Hide Scenes' is enabled too, users will not see hidden scenes in the navigation bar and the permission on the scene wil be limited only to GM
-- **Enable/disable the hidden functionality globally for Cards:** If enabled and you are not a GM, users will not see hidden cards in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
 - **Disable the background just add the symbol image:** If enable the background of the entity is no more colored, will just add the symbol image like in the default scene directory, can be useful for compatibility with others modules
 - **Disguise unreachable links for all non GM player:** When displaying journal entries or actors to players, if the linked document is not reachable then the special link presentation will be replaced by just the normal text. Thus players will not realize that there is another document to which they don't have access. By accessible, we mean that the player has at least LIMITED permission on that document
 - **Set level permission to show the referenced link on the javascript editor of foundry to hide for non GM user:** This property hide all the referenced link on the javascript editor for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
@@ -282,6 +283,8 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 - **[Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)** : [MIT](https://github.com/kandashi/Hidden-Soundtracks/blob/master/LICENSE)
 
+- **[Navbar Tweaks](https://github.com/kandashi/Hidden-Soundtracks)** : [GPLv3.0](https://github.com/ruipin/fvtt-navbar-tweaks/blob/master/LICENSE)
+
 This Foundry VTT module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
@@ -297,3 +300,5 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 - A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Soundtrack](https://github.com/kandashi/Hidden-Soundtracks)
 
 - A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Tables](https://github.com/kandashi/hidden-tables)
+
+- A little part of code is inspired from [ruipin](https://github.com/ruipin) and the module [Navbar Tweaks](https://github.com/ruipin/fvtt-navbar-tweaks)
