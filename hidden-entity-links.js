@@ -585,15 +585,15 @@ class HiddenEntityLinks {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-rolltables');
     } else if (setting == 'level-permission-cards') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-cards');
-    // } else if (setting == 'level-permission-scenes') {
-    //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
+      // } else if (setting == 'level-permission-scenes') {
+      //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
     } else if (setting == 'level-permission-scenes-nav') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav');
     } else if (setting == 'level-permission-scenes-nav-name') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav-name');
     } else if (setting == 'level-permission-disguise-unreachable-links') {
       set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
-    }else{
+    } else {
       throw new Error(`NO module setting found for key '${setting}'`);
     }
     if (set == this._permissions.EMPTY) {
@@ -2067,16 +2067,16 @@ export const readyHooks = () => {
     document.documentElement.style.setProperty('--hidden-entity-links-Flex', 'none');
   }
 
-  if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes')  && !game.user.isGM) {
+  if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes') && !game.user.isGM) {
     // Hook SceneNavigation methods and implement the main module functionality
-    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.render', function(wrapper, ...args) {
+    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.render', function (wrapper, ...args) {
       let result = wrapper.apply(this, args);
-      if(!game.user.isGM){
-        result.scenes.forEach(data => {
-          const scene =  game.scenes.get(data._id);
-          if(scene.data.navigation){
+      if (!game.user.isGM) {
+        result.scenes.forEach((data) => {
+          const scene = game.scenes.get(data._id);
+          if (scene.data.navigation) {
             const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav');
-            if(!neededRole) {
+            if (!neededRole) {
               this.element.empty();
               return;
             }
@@ -2086,23 +2086,32 @@ export const readyHooks = () => {
       return result;
     });
 
-    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.getData', function(wrapper, ...args) {
-      let result = wrapper.apply(this, args);
-      if(!game.user.isGM){
-        result.scenes.forEach(data => {
-          const scene =  game.scenes.get(data._id);
-          if(scene.data.navigation){
-            const navNameRole  = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav-name');
-            if(!navNameRole) {
-              // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-              data.name = game.scenes.get(data._id).name;
+    libWrapper.register(
+      CONSTANTS.MODULE_NAME,
+      'SceneNavigation.prototype.getData',
+      function (wrapper, ...args) {
+        let result = wrapper.apply(this, args);
+        if (!game.user.isGM) {
+          result.scenes.forEach((data) => {
+            const scene = game.scenes.get(data._id);
+            if (scene.data.navigation) {
+              const navNameRole = API.hiddenEntityLinks._checkPermission(
+                scene,
+                game.user,
+                'level-permission-scenes-nav-name',
+              );
+              if (!navNameRole) {
+                // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
+                data.name = game.scenes.get(data._id).name;
+              }
             }
-          }
-        });
-      }
+          });
+        }
 
-      return result;
-    }, 'WRAPPER');
+        return result;
+      },
+      'WRAPPER',
+    );
 
     resetNavbar();
   }

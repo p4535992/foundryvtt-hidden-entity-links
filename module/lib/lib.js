@@ -266,6 +266,6 @@ function getElevationPlaceableObject(placeableObject) {
 // Module specific function
 // =============================
 
-export const resetNavbar = function() {
+export const resetNavbar = function () {
   ui.nav.render(true);
 };

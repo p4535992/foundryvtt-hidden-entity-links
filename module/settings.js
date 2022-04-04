@@ -206,13 +206,13 @@ export const registerSettings = function () {
     default: 0,
     type: Number,
     choices: {
-    0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.empty`),
-    1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.none`),
-    2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.limited`),
-    3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.observer`),
-    4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.owner`),
-    5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
-    6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
+      0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.empty`),
+      1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.none`),
+      2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.limited`),
+      3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.observer`),
+      4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.owner`),
+      5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
+      6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
     },
   });
   game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav-name', {
@@ -223,13 +223,13 @@ export const registerSettings = function () {
     default: 0,
     type: Number,
     choices: {
-    0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.empty`),
-    1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.none`),
-    2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.limited`),
-    3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.observer`),
-    4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.owner`),
-    5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
-    6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
+      0: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.empty`),
+      1: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.none`),
+      2: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.limited`),
+      3: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.observer`),
+      4: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.owner`),
+      5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
+      6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
     },
   });
   game.settings.register(CONSTANTS.MODULE_NAME, 'no-background-only-symbol', {
