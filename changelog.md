@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.15
+
+- Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/2
+- Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/1
+
 ## 1.0.14
 
 - Clean up and better design pattern

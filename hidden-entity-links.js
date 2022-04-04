@@ -2073,7 +2073,7 @@ export const readyHooks = () => {
       let result = wrapper.apply(this, args);
       if (!game.user.isGM) {
         result.scenes.forEach((data) => {
-          const scene = game.scenes.get(data._id);
+          const scene = game.scenes.get(data.data._id);
           if (scene.data.navigation) {
             const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav');
             if (!neededRole) {
@@ -2100,9 +2100,9 @@ export const readyHooks = () => {
                 game.user,
                 'level-permission-scenes-nav-name',
               );
-              if (!navNameRole) {
+              if (!navNameRole && scene?.name) {
                 // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-                data.name = game.scenes.get(data._id).name;
+                data.name = scene?.name;
               }
             }
           });
