@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.16
+
+- Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/2
+
 ## 1.0.15
 
 - Bug fix https://github.com/p4535992/vtt-hidden-entity-links/issues/2
