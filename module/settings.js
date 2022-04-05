@@ -1,5 +1,5 @@
 import CONSTANTS from './constants.js';
-import { dialogWarning, warn } from './lib/lib.js';
+import { dialogWarning, resetNavbar, warn } from './lib/lib.js';
 
 /**
  * Because typescript doesn't know when in the lifecycle of foundry your code runs, we have to assume that the
@@ -592,6 +592,7 @@ function otherSettings(apply = false) {
         5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
         6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
       },
+      onChange: (value) => resetNavbar()
     },
     'level-permission-scenes-nav-name': {
       name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-scenes-nav-name.name`,
@@ -609,6 +610,7 @@ function otherSettings(apply = false) {
         5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
         6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
       },
+      onChange: (value) => resetNavbar()
     },
     'no-background-only-symbol': {
       name: `${CONSTANTS.MODULE_NAME}.setting.no-background-only-symbol.name`,

@@ -2074,13 +2074,23 @@ export const readyHooks = () => {
       if (!game.user.isGM) {
         result.scenes.forEach((data) => {
           const scene = game.scenes.get(data.data._id);
-          if (scene.data.navigation) {
+          // if (game.user.isGM) {
+          //   return;
+          // }
+          // if (!game.user.isGM && API.hiddenEntityLinks._checkState(scene) == API.hiddenEntityLinks._state.HIDE) {
+          //   this.element.empty();
+          //   return;
+          // }
+          // if (!game.user.isGM && API.hiddenEntityLinks._checkState(scene) == API.hiddenEntityLinks._state.SHOW) {
+          //   return;
+          // }
+          // if (scene.data.navigation) {
             const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, 'level-permission-scenes-nav');
             if (!neededRole) {
               this.element.empty();
               return;
             }
-          }
+          // }
         });
       }
       return result;
@@ -2094,6 +2104,16 @@ export const readyHooks = () => {
         if (!game.user.isGM) {
           result.scenes.forEach((data) => {
             const scene = game.scenes.get(data._id);
+            // if (game.user.isGM) {
+            //   return;
+            // }
+            // if (!game.user.isGM && API.hiddenEntityLinks._checkState(scene) == API.hiddenEntityLinks._state.HIDE) {
+            //   this.element.empty();
+            //   return;
+            // }
+            // if (!game.user.isGM && API.hiddenEntityLinks._checkState(scene) == API.hiddenEntityLinks._state.SHOW) {
+            //   return;
+            // }
             if (scene.data.navigation) {
               const navNameRole = API.hiddenEntityLinks._checkPermission(
                 scene,
