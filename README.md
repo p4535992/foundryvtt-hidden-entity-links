@@ -23,6 +23,7 @@ A module for FoundryVTT for hide things...
 - Adds an option to change the table roll to GM only.
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 Plus has many settings for hide navigation to scene, soundtrack, ecc.,
+- Hide or change name of entity
 
 ![hidden_links6](./wiki/shocase_hidden_entity_link.gif)
 
@@ -36,7 +37,7 @@ The graphic interaction with new choices on the sidebar context let you decide t
 
 There is a integration based on the permission applied on the entities.
 
-
+## NOTE: If you are a javascript developer and not a typescript developer, you can just use the javascript files under the dist folder
 
 ## Installation
 
@@ -287,6 +288,8 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 - **[Navbar Tweaks](https://github.com/kandashi/Hidden-Soundtracks)** : [GPLv3.0](https://github.com/ruipin/fvtt-navbar-tweaks/blob/master/LICENSE)
 
+- **[Navigation Name](https://github.com/kandashi/navigation-name)** : [MIT](https://github.com/kandashi/navigation-name/blob/master/LICENSE)
+
 This Foundry VTT module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
@@ -304,3 +307,5 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 - A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [Hidden Tables](https://github.com/kandashi/hidden-tables)
 
 - A little part of code is inspired from [ruipin](https://github.com/ruipin) and the module [Navbar Tweaks](https://github.com/ruipin/fvtt-navbar-tweaks)
+
+- A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [navigation name](https://github.com/kandashi/navigation-name/)
