@@ -141,7 +141,7 @@ Here what player see with the value "ONLY OBSERVER":
 - Hides the soundtrack name and the playlist controls from non GM accounts (as they cant use it anyway)
 - Adds an option to change the table roll to GM only.
 - Hide link on the text editor tinymce based on the level of permission for that entity.
-
+- Always displays original scene name to the GM, but shows the Navigation Name for any players.
 ## API
 
 Update css on the folder (not ready need more developing...)
