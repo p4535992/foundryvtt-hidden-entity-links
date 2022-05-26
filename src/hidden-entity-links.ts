@@ -111,53 +111,6 @@ export function getSocket() {
   return data.socket;
 }
 
-Hooks.once('libChangelogsReady', function () {
-  //@ts-ignore
-  libChangelogs.registerConflict(
-    CONSTANTS.MODULE_NAME,
-    'disguise-unreachable-links',
-    `Redundancy of features you can disable 'Disguise Unreachable Links' module if you want`,
-    'major',
-  );
-
-  //@ts-ignore
-  libChangelogs.registerConflict(
-    CONSTANTS.MODULE_NAME,
-    'hidden-tables',
-    `Redundancy of features you can disable 'Hidden Tables' module if you want`,
-    'major',
-  );
-  //@ts-ignore
-  libChangelogs.registerConflict(
-    CONSTANTS.MODULE_NAME,
-    'hiddensoundtracks',
-    `Redundancy of features you can disable 'Hidden Soundtracks' module if you want`,
-    'major',
-  );
-  //@ts-ignore
-  libChangelogs.registerConflict(
-    CONSTANTS.MODULE_NAME,
-    'navbar-tweaks',
-    `Redundancy of features you can disable 'Navbar Tweaks' module if you want`,
-    'major',
-  );
-  //@ts-ignore
-  libChangelogs.registerConflict(
-    CONSTANTS.MODULE_NAME,
-    'navigation-name',
-    `Redundancy of features you can disable 'Navbar Tweaks' module if you want`,
-    'major',
-  );
-
-  //@ts-ignore
-  libChangelogs.register(
-    CONSTANTS.MODULE_NAME,
-    `
-    `,
-    'minor',
-  );
-});
-
 // ==================
 // API SUPPORT
 // ==================
@@ -2106,8 +2059,11 @@ export const readyHooks = () => {
           });
           */
           // Modify Scene data
-          const scenes = result.scenes.map(scene => {
-            const data = scene.data.toObject(false);
+          // TODO execute as GM
+          // const scenes = result.scenes.map(scene => {
+          //   const data = scene.data.toObject(false);
+          const scenes = result.scenes.forEach((data) => {
+            const scene = <StoredDocument<Scene>>game.scenes?.get(data._id);
             const users = <StoredDocument<User>[]>game.users?.filter(u => u.active && (u.viewedScene === scene.id));
             if (scene.data.navigation) {
               const navNameRole = API.hiddenEntityLinks._checkPermission(
@@ -2118,7 +2074,7 @@ export const readyHooks = () => {
               if (!navNameRole) {
                 // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
                 //data.name = scene?.name;
-                let name = scene?.name; // game.user?.isGM ? data.name : data.navName
+                let name = <string>scene?.name; // game.user?.isGM ? data.name : data.navName
                 if(name === ""){
                   name = data.name;
                 }
