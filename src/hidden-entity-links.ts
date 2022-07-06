@@ -1,7 +1,7 @@
 import API from './module/api.js';
 import CONSTANTS from './module/constants.js';
 import { HiddenEntityLinkEntityMap, HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from './module/hidden-entity-link-models.js';
-import { HiddenEntityLinks } from './module/HiddenEntityLinks.js';
+import { HiddenEntityLinks } from './module/hidden-entity-links-class.js';
 import { dialogWarning, error, log, resetNavbar } from './module/lib/lib.js';
 import { registerSettings } from './module/settings.js';
 
@@ -293,9 +293,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(journal) == HiddenEntityLinkState.UNHIDE ||
@@ -307,9 +305,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
           },
         },
@@ -317,9 +313,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(journal) == HiddenEntityLinkState.HIDE ||
@@ -331,9 +325,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             await journal.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -341,9 +333,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(journal) == HiddenEntityLinkState.HIDE ||
@@ -355,9 +345,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const journal = game.journal?.get(li.data('entityId'))
-              ? <StoredDocument<JournalEntry>>game.journal?.get(li.data('entityId'))
-              : <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
+            const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
           },
         },
@@ -488,9 +476,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(item) == HiddenEntityLinkState.UNHIDE ||
@@ -502,9 +488,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
           },
         },
@@ -512,9 +496,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(item) == HiddenEntityLinkState.HIDE ||
@@ -526,9 +508,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             await item.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -536,9 +516,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(item) == HiddenEntityLinkState.HIDE ||
@@ -550,9 +528,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const item = game.items?.get(li.data('entityId'))
-              ? <StoredDocument<Item>>game.items?.get(li.data('entityId'))
-              : <StoredDocument<Item>>game.items?.get(li.data('documentId'));
+            const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
           },
         },
@@ -683,9 +659,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(actor) == HiddenEntityLinkState.UNHIDE ||
@@ -697,9 +671,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
           },
         },
@@ -707,9 +679,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(actor) == HiddenEntityLinkState.HIDE ||
@@ -721,9 +691,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             await actor.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -731,9 +699,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(actor) == HiddenEntityLinkState.HIDE ||
@@ -745,9 +711,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const actor = game.actors?.get(li.data('entityId'))
-              ? <StoredDocument<Actor>>game.actors?.get(li.data('entityId'))
-              : <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
+            const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
           },
         },
@@ -890,9 +854,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(rolltable) == HiddenEntityLinkState.UNHIDE ||
@@ -904,9 +866,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
           },
         },
@@ -914,9 +874,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(rolltable) == HiddenEntityLinkState.HIDE ||
@@ -928,9 +886,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -938,9 +894,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(rolltable) == HiddenEntityLinkState.HIDE ||
@@ -952,9 +906,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const rolltable = game.tables?.get(li.data('entityId'))
-              ? <StoredDocument<RollTable>>game.tables?.get(li.data('entityId'))
-              : <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
+            const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
           },
         },
@@ -1085,9 +1037,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(scene) == HiddenEntityLinkState.UNHIDE ||
@@ -1099,9 +1049,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
             if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes-nav')) {
               const updates = [
@@ -1121,9 +1069,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(scene) == HiddenEntityLinkState.HIDE ||
@@ -1135,9 +1081,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             await scene.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -1145,9 +1089,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(scene) == HiddenEntityLinkState.HIDE ||
@@ -1159,9 +1101,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const scene = game.scenes?.get(li.data('entityId'))
-              ? <StoredDocument<Scene>>game.scenes?.get(li.data('entityId'))
-              : <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
+            const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
             if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes-nav')) {
               const updates = [
@@ -1322,9 +1262,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(card) == HiddenEntityLinkState.UNHIDE ||
@@ -1336,9 +1274,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
           },
         },
@@ -1346,9 +1282,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(card) == HiddenEntityLinkState.HIDE ||
@@ -1360,9 +1294,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             await card.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           },
         },
@@ -1370,9 +1302,7 @@ export const setupHooks = () => {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.show-entity`),
           icon: '<i class="fas fa-lightbulb"></i>',
           condition: (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
               (API._checkState(card) == HiddenEntityLinkState.HIDE ||
@@ -1384,9 +1314,7 @@ export const setupHooks = () => {
             }
           },
           callback: async (li) => {
-            const card = game.cards?.get(li.data('entityId'))
-              ? <StoredDocument<Cards>>game.cards?.get(li.data('entityId'))
-              : <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
+            const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
           },
         },

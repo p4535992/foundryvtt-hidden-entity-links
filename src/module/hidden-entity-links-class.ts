@@ -433,7 +433,6 @@ export class HiddenEntityLinks {
   };
 
   _checkPermission = function (entity, user:User, setting:string):boolean {
-    return API._checkPermission(entity, user, setting);
     /*
     let result = true;
     let set;
@@ -484,6 +483,7 @@ export class HiddenEntityLinks {
 
     return result;
     */
+    return API._checkPermission(entity, user, setting);
   };
 
   _checkState = function (entity):number {

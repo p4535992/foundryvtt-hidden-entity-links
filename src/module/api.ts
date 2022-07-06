@@ -1,4 +1,4 @@
-import { HiddenEntityLinks } from './HiddenEntityLinks';
+import type { HiddenEntityLinks } from './hidden-entity-links-class';
 
 import CONSTANTS from './constants.js';
 import { HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from './hidden-entity-link-models.js';
@@ -73,12 +73,30 @@ const API = {
     }
   },
 
-  isHidden(document, user:User):boolean{
-    // Before check permission we check the flags
-    if (game.user?.isGM){
+  isHidden(documentId:string, userId:string):boolean{
+    if(!documentId){
+      error(`No documentId is passed '${documentId}'`, true);
       return false;
     }
-    const isHiddenByFlag = this._checkState(document);
+    if(!userId){
+      error(`No userId is passed '${userId}'`, true);
+      return false;
+    }
+    const myUser = <User>game.users?.get(userId);
+    if(!myUser){
+      error(`No user founded by id '${userId}'`, true);
+      return false;
+    }
+    if (myUser?.isGM){
+      return false;
+    }
+    const myDocument = fromUuid(documentId);
+    if(!myDocument){
+      error(`No document founded by id '${documentId}'`, true);
+      return false;
+    }
+    // Before check permission we check the flags
+    const isHiddenByFlag = this._checkState(myDocument);
     if(isHiddenByFlag == HiddenEntityLinkState.HIDE){
       return true;
     }
@@ -87,23 +105,23 @@ const API = {
     }
 
     let keySetting = '';
-    if(document instanceof Actor){
+    if(myDocument instanceof Actor){
       keySetting = 'level-permission-actors';
-    }else if(document instanceof Item){
+    }else if(myDocument instanceof Item){
       keySetting = 'level-permission-items';
-    }else if(document instanceof Journal){
+    }else if(myDocument instanceof Journal){
       keySetting = 'level-permission-journals';
-    }else if(document instanceof RollTable){
+    }else if(myDocument instanceof RollTable){
       keySetting = 'level-permission-rolltables';
-    }else if(document instanceof Card){
+    }else if(myDocument instanceof Card){
       keySetting = 'level-permission-cards';
-    }else if(document instanceof Scene){
+    }else if(myDocument instanceof Scene){
       keySetting = 'level-permission-scenes-nav';
     }else {
-      error(`The entity '${document}' is not a recognized instance it must be Actor, Item, Journal, RollTable, Card, Scene`, true);
+      error(`The entity '${myDocument}' is not a recognized instance it must be Actor, Item, Journal, RollTable, Card, Scene`, true);
       return false;
     }
-    return this._checkPermission(document, user, keySetting);
+    return this._checkPermission(myDocument, myUser, keySetting);
   }
 };
 export default API;
