@@ -1,7 +1,7 @@
 export enum HiddenEntityLinkFlags {
   HIDDEN = 'hidden',
   HIDDEN_TABLE = 'hiddenTable',
-  HIDDEN_TITLE = 'hiddenTitle'
+  HIDDEN_TITLE = 'hiddenTitle',
 }
 
 export const HiddenEntityLinkEntityMap = {

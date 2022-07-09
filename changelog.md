@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.20
+
+- Confirmed compatibility with Monk's Enhanced Journal 
+
 ### 1.0.19
 
 - bug fix
