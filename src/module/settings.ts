@@ -1,7 +1,6 @@
 import CONSTANTS from './constants.js';
 import { dialogWarning, resetNavbar, warn } from './lib/lib.js';
 
-
 export const registerSettings = function () {
   game.settings.registerMenu(CONSTANTS.MODULE_NAME, 'resetAllSettings', {
     name: `${CONSTANTS.MODULE_NAME}.setting.reset.name`,
@@ -563,7 +562,7 @@ function otherSettings(apply = false) {
         5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
         6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
       },
-      onChange: (value) => resetNavbar()
+      onChange: (value) => resetNavbar(),
     },
     'level-permission-scenes-nav-name': {
       name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-scenes-nav-name.name`,
@@ -581,7 +580,7 @@ function otherSettings(apply = false) {
         5: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlylimited`),
         6: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.setting.level-permission.onlyobserver`),
       },
-      onChange: (value) => resetNavbar()
+      onChange: (value) => resetNavbar(),
     },
     'no-background-only-symbol': {
       name: `${CONSTANTS.MODULE_NAME}.setting.no-background-only-symbol.name`,

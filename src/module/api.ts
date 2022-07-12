@@ -1,12 +1,16 @@
 import type { HiddenEntityLinks } from './hidden-entity-links-class';
 
 import CONSTANTS from './constants.js';
-import { HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from './hidden-entity-link-models.js';
+import {
+  HiddenEntityLinkFlags,
+  HiddenEntityLinkPermissions,
+  HiddenEntityLinkState,
+} from './hidden-entity-link-models.js';
 import { error } from './lib/lib.js';
 const API = {
   hiddenEntityLinks: <HiddenEntityLinks>{},
 
-  _checkPermission(entity, user:User, setting:string) {
+  _checkPermission(entity, user: User, setting: string) {
     let result = true;
     let set;
     if (setting == 'level-permission-actors') {
@@ -57,7 +61,7 @@ const API = {
     return result;
   },
 
-  _checkState(entity):number {
+  _checkState(entity): number {
     const hasFlagHide =
       hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
       entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) != null &&
@@ -73,55 +77,58 @@ const API = {
     }
   },
 
-  isHidden(documentId:string, userId:string):boolean{
-    if(!documentId){
+  isHidden(documentId: string, userId: string): boolean {
+    if (!documentId) {
       error(`No documentId is passed '${documentId}'`, true);
       return false;
     }
-    if(!userId){
+    if (!userId) {
       error(`No userId is passed '${userId}'`, true);
       return false;
     }
     const myUser = <User>game.users?.get(userId);
-    if(!myUser){
+    if (!myUser) {
       error(`No user founded by id '${userId}'`, true);
       return false;
     }
-    if (myUser?.isGM){
+    if (myUser?.isGM) {
       return false;
     }
     const myDocument = fromUuid(documentId);
-    if(!myDocument){
+    if (!myDocument) {
       error(`No document founded by id '${documentId}'`, true);
       return false;
     }
     // Before check permission we check the flags
     const isHiddenByFlag = this._checkState(myDocument);
-    if(isHiddenByFlag == HiddenEntityLinkState.HIDE){
+    if (isHiddenByFlag == HiddenEntityLinkState.HIDE) {
       return true;
     }
-    if(isHiddenByFlag == HiddenEntityLinkState.SHOW){
+    if (isHiddenByFlag == HiddenEntityLinkState.SHOW) {
       return false;
     }
 
     let keySetting = '';
-    if(myDocument instanceof Actor){
+    if (myDocument instanceof Actor) {
       keySetting = 'level-permission-actors';
-    }else if(myDocument instanceof Item){
+    } else if (myDocument instanceof Item) {
       keySetting = 'level-permission-items';
-    }else if(myDocument instanceof Journal){
+    } else if (myDocument instanceof Journal) {
       keySetting = 'level-permission-journals';
-    }else if(myDocument instanceof RollTable){
+    } else if (myDocument instanceof RollTable) {
       keySetting = 'level-permission-rolltables';
-    }else if(myDocument instanceof Card){
+    } else if (myDocument instanceof Card) {
       keySetting = 'level-permission-cards';
-    }else if(myDocument instanceof Scene){
+    } else if (myDocument instanceof Scene) {
       keySetting = 'level-permission-scenes-nav';
-    }else {
-      error(`The entity '${myDocument}' is not a recognized instance it must be Actor, Item, Journal, RollTable, Card, Scene`, true);
+    } else {
+      error(
+        `The entity '${myDocument}' is not a recognized instance it must be Actor, Item, Journal, RollTable, Card, Scene`,
+        true,
+      );
       return false;
     }
     return this._checkPermission(myDocument, myUser, keySetting);
-  }
+  },
 };
 export default API;

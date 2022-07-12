@@ -1,6 +1,11 @@
-import API from "./api";
-import CONSTANTS from "./constants";
-import { HiddenEntityLinkEntityMap, HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from "./hidden-entity-link-models";
+import API from './api';
+import CONSTANTS from './constants';
+import {
+  HiddenEntityLinkEntityMap,
+  HiddenEntityLinkFlags,
+  HiddenEntityLinkPermissions,
+  HiddenEntityLinkState,
+} from './hidden-entity-link-models';
 
 export class HiddenEntityLinks {
   // static API = 'hiddenEntityLinks';
@@ -432,7 +437,7 @@ export class HiddenEntityLinks {
     }
   };
 
-  _checkPermission = function (entity, user:User, setting:string):boolean {
+  _checkPermission = function (entity, user: User, setting: string): boolean {
     /*
     let result = true;
     let set;
@@ -486,7 +491,7 @@ export class HiddenEntityLinks {
     return API._checkPermission(entity, user, setting);
   };
 
-  _checkState = function (entity):number {
+  _checkState = function (entity): number {
     /*
     const hasFlagHide =
       hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
@@ -515,7 +520,7 @@ export class HiddenEntityLinks {
   // }
 
   hiddenTable(wrapped, ...args) {
-    if ((<RollTable><unknown>this).getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE)) {
+    if ((<RollTable>(<unknown>this)).getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE)) {
       try {
         args[0].rollMode = 'gmroll';
       } catch {

@@ -1,6 +1,11 @@
 import API from './module/api.js';
 import CONSTANTS from './module/constants.js';
-import { HiddenEntityLinkEntityMap, HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from './module/hidden-entity-link-models.js';
+import {
+  HiddenEntityLinkEntityMap,
+  HiddenEntityLinkFlags,
+  HiddenEntityLinkPermissions,
+  HiddenEntityLinkState,
+} from './module/hidden-entity-link-models.js';
 import { HiddenEntityLinks } from './module/hidden-entity-links-class.js';
 import { dialogWarning, error, log, resetNavbar } from './module/lib/lib.js';
 import { registerSettings } from './module/settings.js';
@@ -132,7 +137,9 @@ export const setupHooks = () => {
     const checkboxHTML = `
     <div class="form-group">
         <label>${game.i18n.format('hidden-entity-links.label.tableTextHiddenTable')}</label>
-        <input type="checkbox" name="flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN_TABLE}" ${isHidden ? 'checked' : ''}>
+        <input type="checkbox" name="flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN_TABLE}" ${
+      isHidden ? 'checked' : ''
+    }>
     </div>
     `;
     lastBox.before(checkboxHTML);
@@ -380,7 +387,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.journal?.filter((journal) => journal.data.folder === folderObject.id)
+            const updates = game.journal
+              ?.filter((journal) => journal.data.folder === folderObject.id)
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
@@ -401,7 +409,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.journal?.filter((journal) => journal.data.folder === folderObject.id)
+            const updates = game.journal
+              ?.filter((journal) => journal.data.folder === folderObject.id)
               .map(async (journal) => {
                 await journal.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -422,7 +431,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.journal?.filter((journal) => journal.data.folder === folderObject.id)
+            const updates = game.journal
+              ?.filter((journal) => journal.data.folder === folderObject.id)
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
@@ -563,7 +573,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.items?.filter((item) => item.data.folder === folderObject.id)
+            const updates = game.items
+              ?.filter((item) => item.data.folder === folderObject.id)
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
@@ -584,7 +595,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.items?.filter((item) => item.data.folder === folderObject.id)
+            const updates = game.items
+              ?.filter((item) => item.data.folder === folderObject.id)
               .map(async (item) => {
                 await item.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -605,7 +617,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.items?.filter((item) => item.data.folder === folderObject.id)
+            const updates = game.items
+              ?.filter((item) => item.data.folder === folderObject.id)
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
@@ -746,7 +759,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.actors?.filter((actor) => actor.data.folder === folderObject.id)
+            const updates = game.actors
+              ?.filter((actor) => actor.data.folder === folderObject.id)
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
@@ -767,7 +781,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.actors?.filter((actor) => actor.data.folder === folderObject.id)
+            const updates = game.actors
+              ?.filter((actor) => actor.data.folder === folderObject.id)
               .map(async (actor) => {
                 await actor.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -788,7 +803,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.actors?.filter((actor) => actor.data.folder === folderObject.id)
+            const updates = game.actors
+              ?.filter((actor) => actor.data.folder === folderObject.id)
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
@@ -941,7 +957,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.tables?.filter((rolltable) => rolltable.data.folder === folderObject.id)
+            const updates = game.tables
+              ?.filter((rolltable) => rolltable.data.folder === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
@@ -962,7 +979,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.tables?.filter((rolltable) => rolltable.data.folder === folderObject.id)
+            const updates = game.tables
+              ?.filter((rolltable) => rolltable.data.folder === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -983,7 +1001,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.tables?.filter((rolltable) => rolltable.data.folder === folderObject.id)
+            const updates = game.tables
+              ?.filter((rolltable) => rolltable.data.folder === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
@@ -1058,7 +1077,7 @@ export const setupHooks = () => {
                   navigation: false,
                   permission: {
                     default: <0 | 1 | 2 | 3 | undefined>0,
-                  }
+                  },
                 },
               ];
               return Scene.updateDocuments(updates);
@@ -1145,17 +1164,21 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.scenes?.filter((scene) => scene.data.folder === folderObject.id)
+            const updates = game.scenes
+              ?.filter((scene) => scene.data.folder === folderObject.id)
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
 
             if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes-nav')) {
-              const updates = game.scenes?.filter((scene) => scene.data.folder === folderObject.id)
+              const updates = game.scenes
+                ?.filter((scene) => scene.data.folder === folderObject.id)
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && scene.data.navigation ? false : scene.data.navigation,
+                    !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && scene.data.navigation
+                      ? false
+                      : scene.data.navigation,
                   permission: {
                     default:
                       !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && scene.data.navigation
@@ -1182,7 +1205,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.scenes?.filter((scene) => scene.data.folder === folderObject.id)
+            const updates = game.scenes
+              ?.filter((scene) => scene.data.folder === folderObject.id)
               .map(async (scene) => {
                 await scene.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -1203,17 +1227,21 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.scenes?.filter((scene) => scene.data.folder === folderObject.id)
+            const updates = game.scenes
+              ?.filter((scene) => scene.data.folder === folderObject.id)
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
 
             if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes-nav')) {
-              const updates = game.scenes?.filter((scene) => scene.data.folder === folderObject.id)
+              const updates = game.scenes
+                ?.filter((scene) => scene.data.folder === folderObject.id)
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && !scene.data.navigation ? true : scene.data.navigation,
+                    scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && !scene.data.navigation
+                      ? true
+                      : scene.data.navigation,
                 }));
               return Scene.updateDocuments(updates);
             }
@@ -1342,7 +1370,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.cards?.filter((card) => card.data.folder === folderObject.id)
+            const updates = game.cards
+              ?.filter((card) => card.data.folder === folderObject.id)
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
@@ -1363,7 +1392,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.cards?.filter((card) => card.data.folder === folderObject.id)
+            const updates = game.cards
+              ?.filter((card) => card.data.folder === folderObject.id)
               .map(async (card) => {
                 await card.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
@@ -1384,7 +1414,8 @@ export const setupHooks = () => {
           callback: async (header) => {
             const folderId = header.parent().data('folderId');
             const folderObject = <StoredDocument<Folder>>game.folders?.get(folderId) || game.folders?.getName(folderId);
-            const updates = game.cards?.filter((card) => card.data.folder === folderObject.id)
+            const updates = game.cards
+              ?.filter((card) => card.data.folder === folderObject.id)
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
@@ -1405,36 +1436,36 @@ export const readyHooks = () => {
   if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-scenes') && !game.user?.isGM) {
     // Hook SceneNavigation methods and implement the main module functionality
     //@ts-ignore
-    libWrapper.register(
-      CONSTANTS.MODULE_NAME,
-      'SceneNavigation.prototype.render',
-      function (wrapper, ...args) {
-        const result = wrapper.apply(this, args);
-        if (!game.user?.isGM) {
-          result.scenes.forEach((data) => {
-            const scene = game.scenes?.get(data.data._id);
-            // if (game.user?.isGM) {
-            //   return;
-            // }
-            // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.HIDE) {
-            //   this.element.empty();
-            //   return;
-            // }
-            // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
-            //   return;
-            // }
-            // if (scene.data.navigation) {
-              const neededRole = API.hiddenEntityLinks._checkPermission(scene, <User>game.user, 'level-permission-scenes-nav');
-              if (!neededRole) {
-                this.element.empty();
-                return;
-              }
-            // }
-          });
-        }
-        return result;
+    libWrapper.register(CONSTANTS.MODULE_NAME, 'SceneNavigation.prototype.render', function (wrapper, ...args) {
+      const result = wrapper.apply(this, args);
+      if (!game.user?.isGM) {
+        result.scenes.forEach((data) => {
+          const scene = game.scenes?.get(data.data._id);
+          // if (game.user?.isGM) {
+          //   return;
+          // }
+          // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.HIDE) {
+          //   this.element.empty();
+          //   return;
+          // }
+          // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
+          //   return;
+          // }
+          // if (scene.data.navigation) {
+          const neededRole = API.hiddenEntityLinks._checkPermission(
+            scene,
+            <User>game.user,
+            'level-permission-scenes-nav',
+          );
+          if (!neededRole) {
+            this.element.empty();
+            return;
+          }
+          // }
+        });
       }
-    );
+      return result;
+    });
     //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
@@ -1474,7 +1505,7 @@ export const readyHooks = () => {
           //   const data = scene.data.toObject(false);
           const scenes = result.scenes.forEach((data) => {
             const scene = <StoredDocument<Scene>>game.scenes?.get(data._id);
-            const users = <StoredDocument<User>[]>game.users?.filter(u => u.active && (u.viewedScene === scene.id));
+            const users = <StoredDocument<User>[]>game.users?.filter((u) => u.active && u.viewedScene === scene.id);
             if (scene.data.navigation) {
               const navNameRole = API.hiddenEntityLinks._checkPermission(
                 scene,
@@ -1485,28 +1516,32 @@ export const readyHooks = () => {
                 // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
                 //data.name = scene?.name;
                 let name = <string>scene?.name; // game.user?.isGM ? data.name : data.navName
-                if(name === ""){
+                if (name === '') {
                   name = data.name;
                 }
-                data.name = TextEditor.truncateText(name, {maxLength: 32});
+                data.name = TextEditor.truncateText(name, { maxLength: 32 });
               }
             }
-            data.users = users.map(u => { return {letter: u.name, color: u.data.color} });
-            data.visible = (game.user?.isGM || scene.isOwner || scene.active);
+            data.users = users.map((u) => {
+              return { letter: u.name, color: u.data.color };
+            });
+            data.visible = game.user?.isGM || scene.isOwner || scene.active;
             data.css = [
-              scene.isView ? "view" : null,
-              scene.active ? "active" : null,
-              data.permission.default === 0 ? "gm" : null
-            ].filter(c => !!c).join(" ");
+              scene.isView ? 'view' : null,
+              scene.active ? 'active' : null,
+              data.permission.default === 0 ? 'gm' : null,
+            ]
+              .filter((c) => !!c)
+              .join(' ');
             return data;
           });
 
           // Return data for rendering
           return {
             collapsed: this._collapsed,
-            scenes: scenes
-          }
-        }else {
+            scenes: scenes,
+          };
+        } else {
           return result;
         }
       },
