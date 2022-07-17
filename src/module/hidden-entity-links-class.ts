@@ -1,11 +1,12 @@
 import API from './api';
 import CONSTANTS from './constants';
 import {
-  HiddenEntityLinkEntityMap,
+  HiddenEntityLinkTypeMap,
   HiddenEntityLinkFlags,
   HiddenEntityLinkPermissions,
   HiddenEntityLinkState,
 } from './hidden-entity-link-models';
+import { warn } from './lib/lib';
 
 export class HiddenEntityLinks {
   // static API = 'hiddenEntityLinks';
@@ -45,7 +46,7 @@ export class HiddenEntityLinks {
     for (let liFolder of listFolder) {
       liFolder = $(liFolder);
       const folder = game.folders?.find((folderObject) => {
-        return folderObject.id == liFolder.attr('data-folder-id');
+        return folderObject.id === liFolder.attr('data-folder-id');
       });
       if (folder) {
         // let list =
@@ -64,10 +65,10 @@ export class HiddenEntityLinks {
         : html.find('li.directory-item.entity');
     for (let li of list) {
       li = $(li);
-      if (entityData.id == li.attr('data-document-id') || entityData.id == li.attr('data-entity-id')) {
+      if (entityData.id === li.attr('data-document-id') || entityData.id === li.attr('data-entity-id')) {
         //let isHidden = data.flags[CONSTANTS.MODULE_NAME]?.hidden; // why is undefined ??
         const state = API._checkState(entityData);
-        if (state == HiddenEntityLinkState.HIDE) {
+        if (state === HiddenEntityLinkState.HIDE) {
           if (!game.user?.isGM) {
             // do nothing
           } else {
@@ -103,7 +104,7 @@ export class HiddenEntityLinks {
             li.removeClass('hidden-entity-links-unhideshow');
             // }
           }
-        } else if (state == HiddenEntityLinkState.SHOW) {
+        } else if (state === HiddenEntityLinkState.SHOW) {
           if (!game.user?.isGM) {
             // do nothing
           } else {
@@ -183,7 +184,7 @@ export class HiddenEntityLinks {
     // const contextOptions = obj._getEntryContextOptions();
     // let collection = obj.constructor.collection;
     const collection = entities.directory?.documents;
-    if (!collection || collection.length == 0) {
+    if (!collection || collection.length === 0) {
       return;
     }
 
@@ -194,7 +195,7 @@ export class HiddenEntityLinks {
     for (let li of list) {
       li = $(li);
       const document = collection.find((d) => {
-        return d.id == li.attr('data-document-id') || d.id == li.attr('data-entity-id');
+        return d.id === li.attr('data-document-id') || d.id === li.attr('data-entity-id');
       });
       // let document = collection.get(li.attr("data-document-id"))
       if (document) {
@@ -204,7 +205,7 @@ export class HiddenEntityLinks {
           //   : document.getFlag(mod, HiddenEntityLinkFlags.HIDDEN);
           // let isHidden = document.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
           const state = API._checkState(document);
-          if (state == HiddenEntityLinkState.HIDE) {
+          if (state === HiddenEntityLinkState.HIDE) {
             if (!game.user?.isGM) {
               //setProperty(document, 'visible', false);
               // TODO why i must do this ?????
@@ -235,7 +236,7 @@ export class HiddenEntityLinks {
                 }
               }
             }
-          } else if (state == HiddenEntityLinkState.SHOW) {
+          } else if (state === HiddenEntityLinkState.SHOW) {
             if (!game.user?.isGM) {
               //setProperty(document, 'visible', false);
               // TODO why i must do this ?????
@@ -348,11 +349,13 @@ export class HiddenEntityLinks {
       return;
     }
     // Original link:
-    //     <a class="entity-link" draggable="true" [ data-entity="JournalEntry" | data-pack="packname" ] data-id=".....">
+    //     <a class="content-link" draggable="true" [ data-type="JournalEntry" | data-pack="packname" ] [ data-id="{id}" ] data-uuid="JournalEntry.{id}>">
     //     <i class="fas fa-th-list">::before</i>
     //     plain text
     //     </a>
     // If the "data-id" isn't observable by the current user, then replace with just "plain text"
+
+    // OLD FOUNDRYVTT 9
     html
       .find('a.entity-link')
       .filter((index, a) => {
@@ -362,13 +365,13 @@ export class HiddenEntityLinks {
           // Compendium packs are only limited at the PACK level, not an individual document level
           return game.packs.get(a.getAttribute('data-pack'))?.private;
         }
-        const entity = HiddenEntityLinkEntityMap[dataentity];
+        const entity = HiddenEntityLinkTypeMap[dataentity];
         if (!entity) {
-          console.warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
+          warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
           return false;
         }
         if (
-          game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links') ==
+          game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links') ===
           HiddenEntityLinkPermissions.EMPTY
         ) {
           const item = game[entity].get(a.getAttribute('data-id'));
@@ -379,15 +382,15 @@ export class HiddenEntityLinks {
             // const perm = this._checkPermission(reference, game.user,'level-permission-disguise-unreachable-links');
             // return perm;
             const perm = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
-            if (perm == HiddenEntityLinkPermissions.EMPTY) {
+            if (perm === HiddenEntityLinkPermissions.EMPTY) {
               return !reference.testUserPermission(game.user, 'LIMITED');
-            } else if (perm == HiddenEntityLinkPermissions.NONE) {
+            } else if (perm === HiddenEntityLinkPermissions.NONE) {
               return !reference.testUserPermission(game.user, 'NONE');
-            } else if (perm == HiddenEntityLinkPermissions.LIMITED) {
+            } else if (perm === HiddenEntityLinkPermissions.LIMITED) {
               return !reference.testUserPermission(game.user, 'LIMITED');
-            } else if (perm == HiddenEntityLinkPermissions.OBSERVER) {
+            } else if (perm === HiddenEntityLinkPermissions.OBSERVER) {
               return !reference.testUserPermission(game.user, 'OBSERVER');
-            } else if (perm == HiddenEntityLinkPermissions.OWNER) {
+            } else if (perm === HiddenEntityLinkPermissions.OWNER) {
               return !reference.testUserPermission(game.user, 'OWNER');
             }
           } else {
@@ -399,11 +402,63 @@ export class HiddenEntityLinks {
         const pos = a.indexOf('</i> ');
         return pos < 0 ? a : a.slice(pos + 5);
       });
+
+    html
+      .find('a.content-link')
+      .filter((index, a) => {
+        // This filter function needs to return true if the link is to be replaced by normal text
+
+        // Firstly, check packs at the compendium level
+        const pack = a.getAttribute('data-pack');
+        if (pack) {
+          return game.packs.get(pack)?.private;
+        }
+        const datatype = a.getAttribute('data-type'); // RollTable, JournalEntry, Actor
+        if (!datatype) return false;
+
+        const gametype = HiddenEntityLinkTypeMap[datatype];
+        if (!gametype) {
+          warn(`checkRenderLinks#TypeMap does not have '${datatype}'`);
+          return false;
+        }
+        let id = a.getAttribute('data-id');
+        if (!id) {
+          id = a.getAttribute('data-uuid').split('.').pop();
+        }
+        const item = game[gametype].get(id);
+        if (
+          game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links') ===
+          HiddenEntityLinkPermissions.EMPTY
+        ) {
+          return !item || !item.testUserPermission(game.user, 'LIMITED');
+        } else {
+          if (item) {
+            const perm = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
+            if (perm === HiddenEntityLinkPermissions.EMPTY) {
+              return !item.testUserPermission(game.user, 'LIMITED');
+            } else if (perm === HiddenEntityLinkPermissions.NONE) {
+              return !item.testUserPermission(game.user, 'NONE');
+            } else if (perm === HiddenEntityLinkPermissions.LIMITED) {
+              return !item.testUserPermission(game.user, 'LIMITED');
+            } else if (perm === HiddenEntityLinkPermissions.OBSERVER) {
+              return !item.testUserPermission(game.user, 'OBSERVER');
+            } else if (perm === HiddenEntityLinkPermissions.OWNER) {
+              return !item.testUserPermission(game.user, 'OWNER');
+            }
+          } else {
+            return true;
+          }
+        }
+      })
+      .replaceWith((index, a) => {
+        const pos = a.indexOf('</i>');
+        return pos < 0 ? a : a.slice(pos + 4);
+      });
   };
 
   hideEntityLink = async function (entityID, entities) {
     const entity = entities.find((e) => {
-      return e && e.id == entityID;
+      return e && e.id === entityID;
     });
     if (entity) {
       const hasFlagHide = hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`);
@@ -415,7 +470,7 @@ export class HiddenEntityLinks {
 
   unhideEntityLink = async function (entityID, entities) {
     const entity = entities.find((e) => {
-      return e && e.id == entityID;
+      return e && e.id === entityID;
     });
     if (entity) {
       const hasFlagHide = hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`);
@@ -427,7 +482,7 @@ export class HiddenEntityLinks {
 
   showEntityLink = async function (entityID, entities) {
     const entity = entities.find((e) => {
-      return e && e.id == entityID;
+      return e && e.id === entityID;
     });
     if (entity) {
       const hasFlagHide = hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`);

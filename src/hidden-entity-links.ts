@@ -1,7 +1,7 @@
 import API from './module/api.js';
 import CONSTANTS from './module/constants.js';
 import {
-  HiddenEntityLinkEntityMap,
+  HiddenEntityLinkTypeMap,
   HiddenEntityLinkFlags,
   HiddenEntityLinkPermissions,
   HiddenEntityLinkState,
@@ -231,10 +231,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, <User>game.user, 'level-permission-journals')) {
@@ -303,8 +303,8 @@ export const setupHooks = () => {
             const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(journal) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(journal) == HiddenEntityLinkState.SHOW)
+              (API._checkState(journal) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(journal) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -323,8 +323,8 @@ export const setupHooks = () => {
             const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(journal) == HiddenEntityLinkState.HIDE ||
-                API._checkState(journal) == HiddenEntityLinkState.SHOW)
+              (API._checkState(journal) === HiddenEntityLinkState.HIDE ||
+                API._checkState(journal) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -343,8 +343,8 @@ export const setupHooks = () => {
             const journal = <StoredDocument<JournalEntry>>game.journal?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(journal) == HiddenEntityLinkState.HIDE ||
-                API._checkState(journal) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(journal) === HiddenEntityLinkState.HIDE ||
+                API._checkState(journal) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -457,10 +457,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, <User>game.user, 'level-permission-items')) {
@@ -489,8 +489,8 @@ export const setupHooks = () => {
             const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(item) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(item) == HiddenEntityLinkState.SHOW)
+              (API._checkState(item) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(item) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -509,8 +509,8 @@ export const setupHooks = () => {
             const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(item) == HiddenEntityLinkState.HIDE ||
-                API._checkState(item) == HiddenEntityLinkState.SHOW)
+              (API._checkState(item) === HiddenEntityLinkState.HIDE ||
+                API._checkState(item) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -529,8 +529,8 @@ export const setupHooks = () => {
             const item = <StoredDocument<Item>>game.items?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(item) == HiddenEntityLinkState.HIDE ||
-                API._checkState(item) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(item) === HiddenEntityLinkState.HIDE ||
+                API._checkState(item) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -643,10 +643,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, <User>game.user, 'level-permission-actors')) {
@@ -675,8 +675,8 @@ export const setupHooks = () => {
             const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(actor) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(actor) == HiddenEntityLinkState.SHOW)
+              (API._checkState(actor) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(actor) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -695,8 +695,8 @@ export const setupHooks = () => {
             const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(actor) == HiddenEntityLinkState.HIDE ||
-                API._checkState(actor) == HiddenEntityLinkState.SHOW)
+              (API._checkState(actor) === HiddenEntityLinkState.HIDE ||
+                API._checkState(actor) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -715,8 +715,8 @@ export const setupHooks = () => {
             const actor = <StoredDocument<Actor>>game.actors?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(actor) == HiddenEntityLinkState.HIDE ||
-                API._checkState(actor) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(actor) === HiddenEntityLinkState.HIDE ||
+                API._checkState(actor) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -829,10 +829,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, <User>game.user, 'level-permission-rolltables')) {
@@ -873,8 +873,8 @@ export const setupHooks = () => {
             const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(rolltable) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(rolltable) == HiddenEntityLinkState.SHOW)
+              (API._checkState(rolltable) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(rolltable) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -893,8 +893,8 @@ export const setupHooks = () => {
             const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(rolltable) == HiddenEntityLinkState.HIDE ||
-                API._checkState(rolltable) == HiddenEntityLinkState.SHOW)
+              (API._checkState(rolltable) === HiddenEntityLinkState.HIDE ||
+                API._checkState(rolltable) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -913,8 +913,8 @@ export const setupHooks = () => {
             const rolltable = <StoredDocument<RollTable>>game.tables?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(rolltable) == HiddenEntityLinkState.HIDE ||
-                API._checkState(rolltable) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(rolltable) === HiddenEntityLinkState.HIDE ||
+                API._checkState(rolltable) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -1027,10 +1027,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         // if (API.hiddenEntityLinks._checkPermission(this, game.user, 'level-permission-scenes')) {
@@ -1059,8 +1059,8 @@ export const setupHooks = () => {
             const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(scene) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(scene) == HiddenEntityLinkState.SHOW)
+              (API._checkState(scene) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(scene) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -1091,8 +1091,8 @@ export const setupHooks = () => {
             const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(scene) == HiddenEntityLinkState.HIDE ||
-                API._checkState(scene) == HiddenEntityLinkState.SHOW)
+              (API._checkState(scene) === HiddenEntityLinkState.HIDE ||
+                API._checkState(scene) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -1111,8 +1111,8 @@ export const setupHooks = () => {
             const scene = <StoredDocument<Scene>>game.scenes?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(scene) == HiddenEntityLinkState.HIDE ||
-                API._checkState(scene) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(scene) === HiddenEntityLinkState.HIDE ||
+                API._checkState(scene) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -1266,10 +1266,10 @@ export const setupHooks = () => {
         if (game.user?.isGM) {
           return true;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.HIDE) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.HIDE) {
           return false;
         }
-        if (!game.user?.isGM && API._checkState(this) == HiddenEntityLinkState.SHOW) {
+        if (!game.user?.isGM && API._checkState(this) === HiddenEntityLinkState.SHOW) {
           return true;
         }
         if (API.hiddenEntityLinks._checkPermission(this, <User>game.user, 'level-permission-cards')) {
@@ -1293,8 +1293,8 @@ export const setupHooks = () => {
             const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(card) == HiddenEntityLinkState.UNHIDE ||
-                API._checkState(card) == HiddenEntityLinkState.SHOW)
+              (API._checkState(card) === HiddenEntityLinkState.UNHIDE ||
+                API._checkState(card) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -1313,8 +1313,8 @@ export const setupHooks = () => {
             const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(card) == HiddenEntityLinkState.HIDE ||
-                API._checkState(card) == HiddenEntityLinkState.SHOW)
+              (API._checkState(card) === HiddenEntityLinkState.HIDE ||
+                API._checkState(card) === HiddenEntityLinkState.SHOW)
             ) {
               return true;
             } else {
@@ -1333,8 +1333,8 @@ export const setupHooks = () => {
             const card = <StoredDocument<Cards>>game.cards?.get(li.data('documentId'));
             if (
               game.user?.isGM &&
-              (API._checkState(card) == HiddenEntityLinkState.HIDE ||
-                API._checkState(card) == HiddenEntityLinkState.UNHIDE)
+              (API._checkState(card) === HiddenEntityLinkState.HIDE ||
+                API._checkState(card) === HiddenEntityLinkState.UNHIDE)
             ) {
               return true;
             } else {
@@ -1637,6 +1637,11 @@ export const readyHooks = () => {
     //   }
     // }
   });
+
+  Hooks.on('renderJournalPageSheet', (sheet, html, data) => {
+    API.hiddenEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
+  });
+
   // Hooks.on('renderSceneSheet', (sheet, html, data) => {});
   Hooks.on('renderActorSheet', (sheet, html, data) => {
     // if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-actors')) {
