@@ -52,6 +52,11 @@
   "bugs": "https://github.com/p4535992/vtt-hidden-entity-links/issues",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
+  "compatibility": {
+    "minimum": 9,
+    "verified": 9,
+    "maximum": 9
+  },
   "allowBugReporter": true,
   "manifestPlusVersion": "1.2.0",
   "dependencies": [
@@ -81,6 +86,10 @@
       },
       {
         "name": "navigation-name",
+        "description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
+      },
+      {
+        "name": "hide-sidebars",
         "description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
       }
     ]

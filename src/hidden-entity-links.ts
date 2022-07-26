@@ -67,7 +67,16 @@ Hooks.once('ready', function () {
       `With 'navigation-name' module enabled and active. There is a Redundancy of features you can disable 'Navigation Name' module if you want.`,
     );
   }
-
+  if (game.modules.get('hide-sidebars')?.active && game.user?.isGM) {
+    dialogWarning(
+      `With 'hide-sidebars' module enabled and active. There is a Redundancy of features you can disable 'Hide Sidebar Tabs' module if you want.`,
+    );
+  }
+  // if (game.modules.get('compendium-permissions')?.active && game.user?.isGM) {
+  //   dialogWarning(
+  //     `With 'compendium-permissions' module enabled and active. There is a Redundancy of features you can disable 'Compendium Permissions' module if you want.`,
+  //   );
+  // }
   // Do anything once the module is ready
   readyHooks();
 });
@@ -1427,6 +1436,43 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
+  // Hide-Sidebars feature
+  if (!game.user?.isGM) {
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidechat') !== false) {
+      $('[data-tab=chat]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidecombat') !== false) {
+      $('[data-tab=combat]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidescenes') !== false) {
+      $('[data-tab=scenes]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hideactors') !== false) {
+      $('[data-tab=items]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hideitems') !== false) {
+      $('[data-tab=items]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidejournal') !== false) {
+      $('[data-tab=journal]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidetables') !== false) {
+      $('[data-tab=tables]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidecards') !== false) {
+      $('[data-tab=cards]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hideplaylists') !== false) {
+      $('[data-tab=playlists]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidecompendium') !== false) {
+      $('[data-tab=compendium]').hide();
+    }
+    if (game.settings.get(CONSTANTS.MODULE_NAME, 'hidesettings') !== false) {
+      $('[data-tab=settings]').hide();
+    }
+  }
+
   if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-soundtracks') && !game.user?.isGM) {
     document.documentElement.style.setProperty('--hidden-entity-links-Display', 'none');
     document.documentElement.style.setProperty('--hidden-entity-links-Hidden', HiddenEntityLinkFlags.HIDDEN);

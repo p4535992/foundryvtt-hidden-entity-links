@@ -258,6 +258,98 @@ export const registerSettings = function () {
     default: false,
   });
   // ========================================================================
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidechat', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidechat.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidechat.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidecombat', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidecombat.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidecombat.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidescenes', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidescenes.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidescenes.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hideactors', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hideactors.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hideactors.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hideitems', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hideitems.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hideitems.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidejournal', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidejournal.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidejournal.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidetables', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidetables.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidetables.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidecards', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidecards.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidecards.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hideplaylists', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hideplaylists.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hideplaylists.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidecompendium', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidecompendium.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidecompendium.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+  game.settings.register(CONSTANTS.MODULE_NAME, 'hidesettings', {
+    name: `${CONSTANTS.MODULE_NAME}.setting.hidesettings.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.hidesettings.hint`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+    onChange: (_) => {
+      window.location.reload();
+    },
+  });
+  // ========================================================================
   game.settings.register(CONSTANTS.MODULE_NAME, 'debug', {
     name: `${CONSTANTS.MODULE_NAME}.setting.debug.name`,
     hint: `${CONSTANTS.MODULE_NAME}.setting.debug.hint`,
@@ -637,5 +729,97 @@ function otherSettings(apply = false) {
       type: Boolean,
       default: false,
     },
+    hidechat: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidechat.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidechat.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidecombat: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidecombat.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidecombat.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidescenes: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidescenes.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidescenes.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hideactors: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hideactors.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hideactors.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hideitems: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hideitems.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hideitems.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidejournal: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidejournal.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidejournal.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidetables: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidetables.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidetables.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidecards: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidecards.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidecards.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hideplaylists: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hideplaylists.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hideplaylists.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidecompendium: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidecompendium.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidecompendium.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    },
+    hidesettings: {
+      name: `${CONSTANTS.MODULE_NAME}.setting.hidesettings.name`,
+      hint: `${CONSTANTS.MODULE_NAME}.setting.hidesettings.hint`,
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+      onChange: (_) => {
+        window.location.reload();
+      },
+    },
+    // ========================================================================
   };
 }

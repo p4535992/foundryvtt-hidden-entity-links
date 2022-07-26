@@ -50,6 +50,29 @@
   "hidden-entity-links.setting.level-permission.onlyobserver": "ONLY OBSERVER",
   "hidden-entity-links.setting.level-permission.onlylimited": "ONLY LIMITED",
 
+  "hidden-entity-links.setting.hidechat.name": "Hidden Chat",
+  "hidden-entity-links.setting.hidechat.hint": " ",
+  "hidden-entity-links.setting.hidecombat.name": "Hidden Combat",
+  "hidden-entity-links.setting.hidecombat.hint": " ",
+  "hidden-entity-links.setting.hidescenes.name": "Hidden Scenes",
+  "hidden-entity-links.setting.hidescenes.hint": " ",
+  "hidden-entity-links.setting.hideactors.name": "Hidden Actors",
+  "hidden-entity-links.setting.hideactors.hint": " ",
+  "hidden-entity-links.setting.hideitems.name": "Hidden Items",
+  "hidden-entity-links.setting.hideitems.hint": " ",
+  "hidden-entity-links.setting.hidejournal.name": "Hidden Journal",
+  "hidden-entity-links.setting.hidejournal.hint": " ",
+  "hidden-entity-links.setting.hidetables.name": "Hidden Tables",
+  "hidden-entity-links.setting.hidetables.hint": " ",
+  "hidden-entity-links.setting.hidecards.name": "Hidden Cards",
+  "hidden-entity-links.setting.hidecards.hint": " ",
+  "hidden-entity-links.setting.hideplaylists.name": "Hidden Playlists",
+  "hidden-entity-links.setting.hideplaylists.hint": " ",
+  "hidden-entity-links.setting.hidecompendium.name": "Hidden Compendiums",
+  "hidden-entity-links.setting.hidecompendium.hint": " ",
+  "hidden-entity-links.setting.hidesettings.name": "Hidden Settings",
+  "hidden-entity-links.setting.hidesettings.hint": "Not recommended",
+
   "hidden-entity-links.setting.reset.name": "Reset settings to default",
   "hidden-entity-links.setting.reset.label": "Reset Settings To Default",
   "hidden-entity-links.setting.reset.hint": "This will reset all of the settings of back to the active game system's default.",
@@ -70,5 +93,11 @@
   "hidden-entity-links.dialogs.resetsettings.title": "Reset Module Settings",
   "hidden-entity-links.dialogs.resetsettings.content": "Are you sure you want to reset all of the module settings to the current system's defaults? <strong>THIS CANNOT BE UNDONE!</strong>",
   "hidden-entity-links.dialogs.resetsettings.confirm": "Reset Module Settings",
-  "hidden-entity-links.dialogs.resetsettings.cancel": "Cancel"
+  "hidden-entity-links.dialogs.resetsettings.cancel": "Cancel",
+
+  "hidden-entity-links.dialogs.compendiumpermissions.AllPlayers": "All Players",
+  "hidden-entity-links.dialogs.compendiumpermissions.CanAccess": "Can Access",
+  "hidden-entity-links.dialogs.compendiumpermissions.Default": "Default",
+  "hidden-entity-links.dialogs.compendiumpermissions.HeaderText": "Configure access to this compendium, choosing to allow All Users to see it in the Compendium list, or this on a per User basis.  Note that a Compendium's Visibility overrides this - a compendium that you have set to not be visible will always be hidden to Users.",
+  "hidden-entity-links.dialogs.compendiumpermissions.Hidden": "Hidden"
 }

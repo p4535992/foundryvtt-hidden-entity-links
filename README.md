@@ -142,6 +142,8 @@ Here what player see with the value "ONLY OBSERVER":
 - Adds an option to change the table roll to GM only.
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 - Always displays original scene name to the GM, but shows the Navigation Name for any players.
+- Allows the GM to hide sidebars (Chat, Scenes, Items, etc) for players, simplifying the player UI. By default it disables Scenes, Items, Tables, Cards, Playlists, and Compendiums. Each tab can be toggled in the module settings, even the Settings tab. Removing the Settings tab for players is not recommended.
+
 ## API
 
 Update css on the folder (not ready need more developing...)
@@ -290,6 +292,11 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 - **[Navigation Name](https://github.com/kandashi/navigation-name)** : [MIT](https://github.com/kandashi/navigation-name/blob/master/LICENSE)
 
+- **[Hide Sidebar Tabs](https://github.com/NutritiousCookie/Hide-Sidebars)** : [???](https://github.com/NutritiousCookie/Hide-Sidebars/blob/master/LICENSE)
+
+- **[Compendium Permissions](https://gitlab.com/geekswordsman/compendium-permissions/-/tree/main/)** : [MIT](https://gitlab.com/geekswordsman/compendium-permissions/-/blob/main/LICENSE)
+
+
 This Foundry VTT module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
@@ -309,3 +316,7 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 - A little part of code is inspired from [ruipin](https://github.com/ruipin) and the module [Navbar Tweaks](https://github.com/ruipin/fvtt-navbar-tweaks)
 
 - A little part of code is inspired from [kandashi](https://github.com/kandashi/) and the module [navigation name](https://github.com/kandashi/navigation-name/)
+
+- A little part of code is inspired from [NutritiousCookie](https://github.com/NutritiousCookie) and the module [hide-sidebars](https://github.com/NutritiousCookie/Hide-Sidebars)
+
+- A little part of code is inspired from [geekswordsman](https://gitlab.com/geekswordsman/) and the module [compendium-permissions](https://gitlab.com/geekswordsman/compendium-permissions/)
