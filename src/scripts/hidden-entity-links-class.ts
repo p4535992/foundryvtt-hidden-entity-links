@@ -340,7 +340,7 @@ export class HiddenEntityLinks {
    * @param {jQuery}     [html]  HTML  for renderJournalSheet and renderActorSheet hooks
    * @param {Object}     [data]  Data for renderJournalSheet and renderActorSheet hooks
    */
-  hideRenderedHiddenEntityLinks = function (sheet, html, data) {
+  hideRenderedHiddenEntityLinks = function (sheet, html, data):void {
     if (!game.settings.get(CONSTANTS.MODULE_NAME, 'disguise-unreachable-links')) {
       return;
     }
@@ -392,6 +392,8 @@ export class HiddenEntityLinks {
               return !reference.testUserPermission(game.user, 'OBSERVER');
             } else if (perm === HiddenEntityLinkPermissions.OWNER) {
               return !reference.testUserPermission(game.user, 'OWNER');
+            } else {
+              return false;
             }
           } else {
             return true;
@@ -444,6 +446,8 @@ export class HiddenEntityLinks {
               return !item.testUserPermission(game.user, 'OBSERVER');
             } else if (perm === HiddenEntityLinkPermissions.OWNER) {
               return !item.testUserPermission(game.user, 'OWNER');
+            } else {
+              return false;
             }
           } else {
             return true;
@@ -454,6 +458,7 @@ export class HiddenEntityLinks {
         const pos = a.indexOf('</i>');
         return pos < 0 ? a : a.slice(pos + 4);
       });
+      return;
   };
 
   hideEntityLink = async function (entityID, entities) {

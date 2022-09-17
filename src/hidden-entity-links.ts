@@ -1,20 +1,21 @@
-import API from './module/api.js';
-import CONSTANTS from './module/constants.js';
+import API from './scripts/api.js';
+import CONSTANTS from './scripts/constants.js';
 import {
   HiddenEntityLinkTypeMap,
   HiddenEntityLinkFlags,
   HiddenEntityLinkPermissions,
   HiddenEntityLinkState,
-} from './module/hidden-entity-link-models.js';
-import { HiddenEntityLinks } from './module/hidden-entity-links-class.js';
-import { dialogWarning, error, log, resetNavbar } from './module/lib/lib.js';
-import { registerSettings } from './module/settings.js';
+} from './scripts/hidden-entity-link-models.js';
+import { HiddenEntityLinks } from './scripts/hidden-entity-links-class.js';
+import { dialogWarning, error, log, resetNavbar } from './scripts/lib/lib.js';
+import { registerSettings } from './scripts/settings.js';
+import { debug } from './scripts/lib/lib.js';
 
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', function () {
-  log(' init ' + CONSTANTS.MODULE_NAME);
+  debug(' init ' + CONSTANTS.MODULE_NAME);
   // Register custom module settings
   registerSettings();
   // Register custom sheets (if any)
@@ -1090,6 +1091,8 @@ export const setupHooks = () => {
                 },
               ];
               return Scene.updateDocuments(updates);
+            } else {
+              return;
             }
           },
         },
@@ -1139,6 +1142,8 @@ export const setupHooks = () => {
                 },
               ];
               return Scene.updateDocuments(updates);
+            } else {
+              return;
             }
           },
         },
@@ -1196,6 +1201,8 @@ export const setupHooks = () => {
                   },
                 }));
               return Scene.updateDocuments(updates);
+            } else {
+              return;
             }
           },
         },
@@ -1253,6 +1260,8 @@ export const setupHooks = () => {
                       : scene.data.navigation,
                 }));
               return Scene.updateDocuments(updates);
+            } else {
+              return;
             }
           },
         },

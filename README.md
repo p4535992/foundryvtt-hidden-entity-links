@@ -6,15 +6,15 @@
 
 [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fhidden-entity-links&colorB=006400&style=for-the-badge)](https://forge-vtt.com/bazaar#package=hidden-entity-links) 
 
-![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Fvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
+![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
 
-![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Fvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Latest%20Release&prefix=v&query=$.version&colorB=red&style=for-the-badge)
+![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Latest%20Release&prefix=v&query=$.version&colorB=red&style=for-the-badge)
 
 [![Foundry Hub Endorsements](https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fhidden-entity-links%2Fshield%2Fendorsements&style=for-the-badge)](https://www.foundryvtt-hub.com/package/hidden-entity-links/)
 
 ![GitHub all releases](https://img.shields.io/github/downloads/p4535992/foundryvtt-hidden-entity-links/total?style=for-the-badge)
 
-[![Translation status](https://weblate.foundryvtt-hub.com/widgets/vtt-hidden-entity-links/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/vtt-hidden-entity-links/)
+[![Translation status](https://weblate.foundryvtt-hub.com/widgets/hidden-entity-links/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/hidden-entity-links/)
 
 ### If you want to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
@@ -145,6 +145,8 @@ Here what player see with the value "ONLY OBSERVER":
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 - Always displays original scene name to the GM, but shows the Navigation Name for any players.
 - Allows the GM to hide sidebars (Chat, Scenes, Items, etc) for players, simplifying the player UI. By default it disables Scenes, Items, Tables, Cards, Playlists, and Compendiums. Each tab can be toggled in the module settings, even the Settings tab. Removing the Settings tab for players is not recommended.
+
+![img](/wiki/hide_sidebar_voice.jpg)
 
 ## API
 
