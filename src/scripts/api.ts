@@ -63,7 +63,7 @@ const API = {
 
 	_checkState(entity): number {
 		const hasFlagHide =
-			hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
+			hasProperty(entity, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
 			entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) !== null &&
 			entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) !== undefined;
 		if (hasFlagHide) {

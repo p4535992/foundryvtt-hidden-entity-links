@@ -472,7 +472,7 @@ export class HiddenEntityLinks {
 		});
 		if (entity) {
 			const hasFlagHide = hasProperty(
-				entity.data,
+				entity,
 				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
 			);
 			if (hasFlagHide) {
@@ -487,7 +487,7 @@ export class HiddenEntityLinks {
 		});
 		if (entity) {
 			const hasFlagHide = hasProperty(
-				entity.data,
+				entity,
 				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
 			);
 			if (hasFlagHide) {
@@ -502,7 +502,7 @@ export class HiddenEntityLinks {
 		});
 		if (entity) {
 			const hasFlagHide = hasProperty(
-				entity.data,
+				entity,
 				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
 			);
 			if (hasFlagHide) {
@@ -568,7 +568,7 @@ export class HiddenEntityLinks {
 	_checkState = function (entity): number {
 		/*
     const hasFlagHide =
-      hasProperty(entity.data, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
+      hasProperty(entity, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
       entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) != null &&
       entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) != undefined;
     if (hasFlagHide) {
