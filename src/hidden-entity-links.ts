@@ -15,7 +15,7 @@ import { debug } from "./scripts/lib/lib.js";
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once("init", function () {
-	debug(" init " + CONSTANTS.MODULE_NAME);
+	// debug(" init " + CONSTANTS.MODULE_NAME);
 	// Register custom module settings
 	registerSettings();
 	// Register custom sheets (if any)

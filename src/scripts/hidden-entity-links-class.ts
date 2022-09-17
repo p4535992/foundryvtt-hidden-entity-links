@@ -304,11 +304,6 @@ export class HiddenEntityLinks {
 				} catch (e) {
 					// This is just a patch for a bug during the beta of the beta
 					// we can probably remove in the future
-					// if (hasProperty(document.data, `flags.${CONSTANTS.MODULE_NAME}`)) {
-					//   await document.unsetFlag(CONSTANTS.MODULE_NAME, 'true');
-					//   await document.unsetFlag(CONSTANTS.MODULE_NAME, 'false');
-					// }
-					// throw e;
 				}
 			}
 		}
@@ -593,7 +588,7 @@ export class HiddenEntityLinks {
 	//   for (let user_div of $('.hidden-entity-links-user')) {
 	//     let id = $(user_div).attr('data-user-id');
 	//     if (id == user.id) {
-	//       $(user_div).css('background-color', user.data.color);
+	//       $(user_div).css('background-color', user.color);
 	//     }
 	//   }
 	// }

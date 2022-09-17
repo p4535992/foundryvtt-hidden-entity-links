@@ -30,10 +30,10 @@ export function getOwnedTokens(priorityToControlledIfGM: boolean): Token[] {
 			return arr;
 		}
 	}
-	let ownedTokens = <Token[]>canvas.tokens?.placeables.filter((token) => token.isOwner && (!token.data.hidden || gm));
+	let ownedTokens = <Token[]>canvas.tokens?.placeables.filter((token) => token.isOwner && (!token.document.hidden || gm));
 	if (ownedTokens.length === 0 || !canvas.tokens?.controlled[0]) {
 		ownedTokens = <Token[]>(
-			canvas.tokens?.placeables.filter((token) => (token.observer || token.isOwner) && (!token.data.hidden || gm))
+			canvas.tokens?.placeables.filter((token) => (token.observer || token.isOwner) && (!token.document.hidden || gm))
 		);
 	}
 	return ownedTokens;
@@ -83,7 +83,7 @@ export function getActiveGMs() {
 
 export function isResponsibleGM() {
 	if (!game.user?.isGM) return false;
-	return !getActiveGMs()?.some((other) => other.data._id < <string>game.user?.data._id);
+	return !getActiveGMs()?.some((other) => other.id < <string>game.user?.id);
 }
 
 // ================================
