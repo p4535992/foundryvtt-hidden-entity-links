@@ -1,18 +1,20 @@
 # Hidden Entity Links
 
-![GitHub issues](https://img.shields.io/github/issues-raw/p4535992/vtt-hidden-entity-links?style=for-the-badge) 
+![GitHub issues](https://img.shields.io/github/issues-raw/p4535992/foundryvtt-hidden-entity-links?style=for-the-badge) 
 
-![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/vtt-hidden-entity-links/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) 
+![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/foundryvtt-hidden-entity-links/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) 
 
 [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fhidden-entity-links&colorB=006400&style=for-the-badge)](https://forge-vtt.com/bazaar#package=hidden-entity-links) 
 
-![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Fvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange&style=for-the-badge)
+![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Fvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
 
 ![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Fvtt-hidden-entity-links%2Fmaster%2Fmodule.json&label=Latest%20Release&prefix=v&query=$.version&colorB=red&style=for-the-badge)
 
 [![Foundry Hub Endorsements](https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fhidden-entity-links%2Fshield%2Fendorsements&style=for-the-badge)](https://www.foundryvtt-hub.com/package/hidden-entity-links/)
 
-![GitHub all releases](https://img.shields.io/github/downloads/p4535992/vtt-hidden-entity-links/total?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/p4535992/foundryvtt-hidden-entity-links/total?style=for-the-badge)
+
+[![Translation status](https://weblate.foundryvtt-hub.com/widgets/vtt-hidden-entity-links/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/vtt-hidden-entity-links/)
 
 ### If you want to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
@@ -47,7 +49,7 @@ To install this module manually:
 1.  Inside the Foundry "Configuration and Setup" screen, click "Add-on Modules"
 2.  Click "Install Module"
 3.  In the "Manifest URL" field, paste the following url:
-`https://raw.githubusercontent.com/p4535992/vtt-hidden-entity-links/master/module.json`
+`https://raw.githubusercontent.com/p4535992/foundryvtt-hidden-entity-links/master/module.json`
 1.  Click 'Install' and wait for installation to complete
 2.  Don't forget to enable the module in game using the "Manage Module" button
 
@@ -64,9 +66,9 @@ This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) li
 
 ![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)
 
-### Hide entity with right cick context integration
+### Hide entity with right click context integration
 
-You can force to hide some specifc entity.
+You can force to hide some specific entity.
 
 NOTE: this bypass the check used with the feature "Permission manager integration".
 
@@ -84,7 +86,7 @@ NOTE: this bypass the check used with the feature "Permission manager integratio
 
 From version 1.0.7 you can remove the flag of hidden with a voice on the right context.
 
-By module settings we can apply the css style to all the entites are not hide or show
+By module settings we can apply the css style to all the entities are not hide or show
 
 ![nohideshow](./wiki/actor_nohideshow.png)
 
@@ -244,19 +246,6 @@ npm run-script build:watch
 ```bash
 npm run-script clean
 ```
-### lint and lintfix
-
-`lint` launch the eslint process based on the configuration [here](./.eslintrc)
-
-```bash
-npm run-script lint
-```
-
-`lintfix` launch the eslint process with the fix argument
-
-```bash
-npm run-script lintfix
-```
 
 ### prettier-format
 
@@ -278,7 +267,7 @@ npm run-script package
 
 ## Issues
 
-Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/vtt-hidden-entity-links/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
+Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/foundryvtt-hidden-entity-links/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
 
 ## License
 
