@@ -1,76 +1,76 @@
 .hidden-entity-links {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) 10px,
-    rgba(255, 255, 0, 0.2) 10px,
-    rgba(255, 255, 0, 0.2) 20px
-  ) !important;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.2),
+		rgba(0, 0, 0, 0.2) 10px,
+		rgba(255, 255, 0, 0.2) 10px,
+		rgba(255, 255, 0, 0.2) 20px
+	) !important;
 }
 
 .hidden-entity-links-show {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) 10px,
-    rgba(28, 189, 233, 0.2) 10px,
-    rgba(28, 189, 233, 0.2) 20px
-  ) !important;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.2),
+		rgba(0, 0, 0, 0.2) 10px,
+		rgba(28, 189, 233, 0.2) 10px,
+		rgba(28, 189, 233, 0.2) 20px
+	) !important;
 }
 
 .hidden-entity-links-unhideshow {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) 10px,
-    rgba(233, 103, 28, 0.2) 10px,
-    rgba(233, 103, 28, 0.2) 20px
-  ) !important;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.2),
+		rgba(0, 0, 0, 0.2) 10px,
+		rgba(233, 103, 28, 0.2) 10px,
+		rgba(233, 103, 28, 0.2) 20px
+	) !important;
 }
 
 .hidden-entity-links-scene {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 1) 10px,
-    rgba(255, 255, 0, 1) 10px,
-    rgba(255, 255, 0, 1) 20px
-  ) !important;
-  max-width: max-content;
-  margin: auto 5px;
-  /* line-height: initial; */
-  display: block ruby;
-  height: 100%;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 1) 10px,
+		rgba(255, 255, 0, 1) 10px,
+		rgba(255, 255, 0, 1) 20px
+	) !important;
+	max-width: max-content;
+	margin: auto 5px;
+	/* line-height: initial; */
+	display: block ruby;
+	height: 100%;
 }
 
 .hidden-entity-links-scene-show {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 1) 10px,
-    rgba(28, 189, 233, 1) 10px,
-    rgba(28, 189, 233, 1) 20px
-  ) !important;
-  max-width: max-content;
-  margin: auto 5px;
-  /* line-height: initial; */
-  display: block ruby;
-  height: 100%;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 1) 10px,
+		rgba(28, 189, 233, 1) 10px,
+		rgba(28, 189, 233, 1) 20px
+	) !important;
+	max-width: max-content;
+	margin: auto 5px;
+	/* line-height: initial; */
+	display: block ruby;
+	height: 100%;
 }
 
 .hidden-entity-links-scene-unhideshow {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 1) 10px,
-    rgb(233, 103, 28, 1) 10px,
-    rgba(233, 103, 28, 1) 20px
-  ) !important;
-  max-width: max-content;
-  margin: auto 5px;
-  /* line-height: initial; */
-  display: block ruby;
-  height: 100%;
+	background: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 1) 10px,
+		rgb(233, 103, 28, 1) 10px,
+		rgba(233, 103, 28, 1) 20px
+	) !important;
+	max-width: max-content;
+	margin: auto 5px;
+	/* line-height: initial; */
+	display: block ruby;
+	height: 100%;
 }
 
 .hidden-entity-links-scene .fa-lightbulb,
@@ -79,27 +79,27 @@
 .hidden-entity-links-scene-show .fa-low-vision,
 .hidden-entity-links-scene-unhideshow .fa-lightbulb,
 .hidden-entity-links-scene-unhideshow .fa-low-vision {
-  color: transparent;
-  text-shadow: 0 0 8px transparent;
+	color: transparent;
+	text-shadow: 0 0 8px transparent;
 }
 
 :root {
-  --hidden-entity-links-Hidden: initial;
-  --hidden-entity-links-Display: block;
-  --hidden-entity-links-Flex: flex;
+	--hidden-entity-links-Hidden: initial;
+	--hidden-entity-links-Display: block;
+	--hidden-entity-links-Flex: flex;
 }
 
 #currently-playing .playlist-sounds .sound > .sound-name {
-  display: var(--hidden-entity-links-Display);
+	display: var(--hidden-entity-links-Display);
 }
 
 #currently-playing .playlist-sounds .sound > .sound-controls {
-  display: var(--hidden-entity-links-Flex);
+	display: var(--hidden-entity-links-Flex);
 }
 #currently-playing .playlist-sounds .sound .sound-playback .sound-control {
-  display: var(--hidden-entity-links-Display);
+	display: var(--hidden-entity-links-Display);
 }
 
 #playlists .directory-list {
-  display: var(--hidden-entity-links-Display);
+	display: var(--hidden-entity-links-Display);
 }
