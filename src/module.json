@@ -106,11 +106,11 @@
 			},
 			{
 				"id": "navigation-name",
-				"description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
+				"description": "Redundancy of features you can disable 'Navigation Name' module if you want"
 			},
 			{
 				"id": "hide-sidebars",
-				"description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
+				"description": "Redundancy of features you can disable 'Hide Sidebar' module if you want"
 			}
 		]
 	}
