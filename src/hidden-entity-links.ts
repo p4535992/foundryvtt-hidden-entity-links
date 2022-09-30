@@ -1458,37 +1458,37 @@ export const readyHooks = () => {
 		}
 	} else {
         if (game.settings.get(CONSTANTS.MODULE_NAME, "hidechat") !== false) {
-			$("[data-tab=chat]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=chat]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecombat") !== false) {
-			$("[data-tab=combat]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=combat]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidescenes") !== false) {
-			$("[data-tab=scenes]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=scenes]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideactors") !== false) {
-			$("[data-tab=items]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=items]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideitems") !== false) {
-			$("[data-tab=items]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=items]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidejournal") !== false) {
-			$("[data-tab=journal]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=journal]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidetables") !== false) {
-			$("[data-tab=tables]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=tables]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecards") !== false) {
-			$("[data-tab=cards]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=cards]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideplaylists") !== false) {
-			$("[data-tab=playlists]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=playlists]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecompendium") !== false) {
-			$("[data-tab=compendium]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=compendium]").addClass("hidden-entity-links");
 		}
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidesettings") !== false) {
-			$("[data-tab=settings]").addClass("hidden-entity-links-scene");
+			$("a[data-tab=settings]").addClass("hidden-entity-links");
 		}
     }
 
