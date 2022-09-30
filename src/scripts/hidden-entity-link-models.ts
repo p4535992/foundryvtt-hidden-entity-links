@@ -4,15 +4,15 @@ export enum HiddenEntityLinkFlags {
 	HIDDEN_TITLE = "hiddenTitle",
 }
 
-export const HiddenEntityLinkTypeMap = {
-	JournalEntry: "journal",
-	Actor: "actors",
-	RollTable: "tables",
-	Scene: "scenes",
-	Card: "cards",
-	Playlist: "playlists",
-	Item: "items",
-};
+// export const HiddenEntityLinkTypeMap = {
+// 	JournalEntry: "journal",
+// 	Actor: "actors",
+// 	RollTable: "tables",
+// 	Scene: "scenes",
+// 	Card: "cards",
+// 	Playlist: "playlists",
+// 	Item: "items",
+// };
 
 export const HiddenEntityLinkPermissions = {
 	EMPTY: 0,

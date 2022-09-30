@@ -1,7 +1,6 @@
 import API from "./scripts/api.js";
 import CONSTANTS from "./scripts/constants.js";
 import {
-	HiddenEntityLinkTypeMap,
 	HiddenEntityLinkFlags,
 	HiddenEntityLinkPermissions,
 	HiddenEntityLinkState,
@@ -300,11 +299,6 @@ export const setupHooks = () => {
 			"MIXED"
 		);
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'JournalDirectory.prototype._getEntryContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
 		Hooks.on("getJournalDirectoryEntryContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -376,11 +370,6 @@ export const setupHooks = () => {
 			// 'MIXED',
 		});
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'JournalDirectory.prototype._getFolderContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
 		Hooks.on("getJournalDirectoryFolderContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -489,11 +478,6 @@ export const setupHooks = () => {
 			"OVERRIDE"
 		);
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'ItemDirectory.prototype._getEntryContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
 		Hooks.on("getItemDirectoryEntryContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -565,11 +549,6 @@ export const setupHooks = () => {
 			// 'MIXED',
 		});
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'ItemDirectory.prototype._getFolderContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
 		Hooks.on("getItemDirectoryFolderContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -678,11 +657,6 @@ export const setupHooks = () => {
 			"OVERRIDE"
 		);
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'ActorDirectory.prototype._getEntryContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
 		Hooks.on("getActorDirectoryEntryContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -754,11 +728,6 @@ export const setupHooks = () => {
 			// 'MIXED',
 		});
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'ActorDirectory.prototype._getFolderContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
 		Hooks.on("getActorDirectoryFolderContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -879,11 +848,6 @@ export const setupHooks = () => {
 			"WRAPPER"
 		);
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'RollTableDirectory.prototype._getEntryContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
 		Hooks.on("getRollTableDirectoryEntryContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -955,11 +919,6 @@ export const setupHooks = () => {
 			// 'MIXED',
 		});
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'RollTableDirectory.prototype._getFolderContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
 		Hooks.on("getRollTableDirectoryFolderContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -1068,11 +1027,6 @@ export const setupHooks = () => {
 			"OVERRIDE"
 		);
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'SceneDirectory.prototype._getEntryContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getEntryContextOptions.call(this);
 		Hooks.on("getSceneDirectoryEntryContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -1169,11 +1123,6 @@ export const setupHooks = () => {
 			// 'MIXED',
 		});
 
-		// libWrapper.register(
-		//   CONSTANTS.MODULE_NAME,
-		//   'SceneDirectory.prototype._getFolderContextOptions',
-		//   function (wrapped, ...args) {
-		//     const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
 		Hooks.on("getSceneDirectoryFolderContext", (html, options) => {
 			if (game.settings.get(CONSTANTS.MODULE_NAME, "disable-voices")) {
 				return options;
@@ -1507,7 +1456,41 @@ export const readyHooks = () => {
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidesettings") !== false) {
 			$("[data-tab=settings]").hide();
 		}
-	}
+	} else {
+        if (game.settings.get(CONSTANTS.MODULE_NAME, "hidechat") !== false) {
+			$("[data-tab=chat]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecombat") !== false) {
+			$("[data-tab=combat]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidescenes") !== false) {
+			$("[data-tab=scenes]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideactors") !== false) {
+			$("[data-tab=items]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideitems") !== false) {
+			$("[data-tab=items]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidejournal") !== false) {
+			$("[data-tab=journal]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidetables") !== false) {
+			$("[data-tab=tables]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecards") !== false) {
+			$("[data-tab=cards]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hideplaylists") !== false) {
+			$("[data-tab=playlists]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidecompendium") !== false) {
+			$("[data-tab=compendium]").addClass("hidden-entity-links-scene");
+		}
+		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidesettings") !== false) {
+			$("[data-tab=settings]").addClass("hidden-entity-links-scene");
+		}
+    }
 
 	if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-soundtracks") && !game.user?.isGM) {
 		document.documentElement.style.setProperty("--hidden-entity-links-Display", "none");

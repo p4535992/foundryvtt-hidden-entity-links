@@ -34,6 +34,7 @@ const API = {
 		} else {
 			throw new Error(`NO module setting found for key '${setting}'`);
 		}
+        /*
 		if (set === HiddenEntityLinkPermissions.EMPTY) {
 			result = false;
 		} else if (set === HiddenEntityLinkPermissions.NONE) {
@@ -57,7 +58,41 @@ const API = {
 				entity.testUserPermission(user, "OBSERVER", { exact: true }) &&
 				!entity.testUserPermission(user, "OWNER", { exact: true });
 		}
-
+        */
+		if (set === HiddenEntityLinkPermissions.EMPTY) {
+			result = false;
+		} else if (set === HiddenEntityLinkPermissions.NONE) {
+            //@ts-ignore
+			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
+		} else if (set === HiddenEntityLinkPermissions.LIMITED) {
+            //@ts-ignore
+			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER);
+		} else if (set === HiddenEntityLinkPermissions.OBSERVER) {
+            //@ts-ignore
+			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
+		} else if (set === HiddenEntityLinkPermissions.OWNER) {
+			result = true;
+		} else if (set === HiddenEntityLinkPermissions.ONLY_LIMITED) {
+			result =
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, { exact: true }) &&
+                //@ts-ignore
+				entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED, { exact: true }) &&
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER, { exact: true }) &&
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, { exact: true });
+		} else if (set === HiddenEntityLinkPermissions.ONLY_OBSERVER) {
+			result =
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, { exact: true }) &&
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED, { exact: true }) &&
+                //@ts-ignore
+				entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER, { exact: true }) &&
+                //@ts-ignore
+				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, { exact: true });
+		}
 		return result;
 	},
 
@@ -94,7 +129,9 @@ const API = {
 		if (myUser?.isGM) {
 			return false;
 		}
-		const myDocument = fromUuid(documentId);
+		// const myDocument = fromUuid(documentId);
+        //@ts-ignore
+        const myDocument = fromUuidSync(documentId);
 		if (!myDocument) {
 			error(`No document founded by id '${documentId}'`, true);
 			return false;

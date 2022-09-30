@@ -1,7 +1,6 @@
 import API from "./api";
 import CONSTANTS from "./constants";
 import {
-	HiddenEntityLinkTypeMap,
 	HiddenEntityLinkFlags,
 	HiddenEntityLinkPermissions,
 	HiddenEntityLinkState,
@@ -9,9 +8,6 @@ import {
 import { warn } from "./lib/lib";
 
 export class HiddenEntityLinks {
-	// static API = 'hiddenEntityLinks';
-
-	// socket = undefined;
 
 	// /**
 	//  * For each folder
@@ -309,31 +305,6 @@ export class HiddenEntityLinks {
 		}
 	};
 
-	// _EntityMap = {
-	//   JournalEntry: 'journal',
-	//   Actor: 'actors',
-	//   RollTable: 'tables',
-	//   Scene: 'scenes',
-	//   Item: 'items',
-	//   Card: 'cards',
-	// };
-
-	// _permissions = {
-	//   EMPTY: 0,
-	//   NONE: 1,
-	//   LIMITED: 2,
-	//   OBSERVER: 3,
-	//   OWNER: 4,
-	//   ONLY_LIMITED: 5,
-	//   ONLY_OBSERVER: 6,
-	// };
-
-	// _state = {
-	//   HIDE: 0,
-	//   UNHIDE: 1,
-	//   SHOW: 2,
-	// };
-
 	/**
 	 * For any link in the text which points to a document which is not visible to the current player
 	 * it will be replaced by the non-link text (so the player will be NOT aware that a link exists)
@@ -357,6 +328,7 @@ export class HiddenEntityLinks {
 		// If the "data-id" isn't observable by the current user, then replace with just "plain text"
 
 		// OLD FOUNDRYVTT 9
+        /*
 		html.find("a.entity-link")
 			.filter((index, a) => {
 				// This filter function needs to return true if the link is to be replaced by normal text
@@ -407,7 +379,7 @@ export class HiddenEntityLinks {
 				const pos = a.indexOf("</i> ");
 				return pos < 0 ? a : a.slice(pos + 5);
 			});
-
+        */
 		html.find("a.content-link")
 			.filter((index, a) => {
 				// This filter function needs to return true if the link is to be replaced by normal text
@@ -417,6 +389,7 @@ export class HiddenEntityLinks {
 				if (pack) {
 					return game.packs.get(pack)?.private;
 				}
+                /*
 				const datatype = a.getAttribute("data-type"); // RollTable, JournalEntry, Actor
 				if (!datatype) return false;
 
@@ -451,6 +424,51 @@ export class HiddenEntityLinks {
 							return !item.testUserPermission(game.user, "OBSERVER");
 						} else if (perm === HiddenEntityLinkPermissions.OWNER) {
 							return !item.testUserPermission(game.user, "OWNER");
+						} else {
+							return false;
+						}
+					} else {
+						return true;
+					}
+				}
+                */
+                // Now we can use the uuid to check for general access to the relevant document
+                let uuid = a.getAttribute('data-uuid');
+                if (!uuid) {
+                    return false;
+                }
+                //@ts-ignore
+                let doc = fromUuidSync(uuid);
+                if (!doc) {
+                    return false;
+                }
+                if (
+					game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-disguise-unreachable-links") ===
+					HiddenEntityLinkPermissions.EMPTY
+				) {
+                    //@ts-ignore
+					return !doc || !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
+				} else {
+					if (doc) {
+						const perm = game.settings.get(
+							CONSTANTS.MODULE_NAME,
+							"level-permission-disguise-unreachable-links"
+						);
+						if (perm === HiddenEntityLinkPermissions.EMPTY) {
+                            //@ts-ignore
+							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
+						} else if (perm === HiddenEntityLinkPermissions.NONE) {
+                            //@ts-ignore
+							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE);
+						} else if (perm === HiddenEntityLinkPermissions.LIMITED) {
+                            //@ts-ignore
+							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
+						} else if (perm === HiddenEntityLinkPermissions.OBSERVER) {
+                            //@ts-ignore
+							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER);
+						} else if (perm === HiddenEntityLinkPermissions.OWNER) {
+                            //@ts-ignore
+							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 						} else {
 							return false;
 						}
@@ -512,75 +530,10 @@ export class HiddenEntityLinks {
 	};
 
 	_checkPermission = function (entity, user: User, setting: string): boolean {
-		/*
-    let result = true;
-    let set;
-    if (setting == 'level-permission-actors') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-actors');
-    } else if (setting == 'level-permission-items') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-items');
-    } else if (setting == 'level-permission-journals') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-journals');
-    } else if (setting == 'level-permission-rolltables') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-rolltables');
-    } else if (setting == 'level-permission-cards') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-cards');
-      // } else if (setting == 'level-permission-scenes') {
-      //   set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes');
-    } else if (setting == 'level-permission-scenes-nav') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav');
-    } else if (setting == 'level-permission-scenes-nav-name') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-scenes-nav-name');
-    } else if (setting == 'level-permission-disguise-unreachable-links') {
-      set = game.settings.get(CONSTANTS.MODULE_NAME, 'level-permission-disguise-unreachable-links');
-    } else {
-      throw new Error(`NO module setting found for key '${setting}'`);
-    }
-    if (set == HiddenEntityLinkPermissions.EMPTY) {
-      result = false;
-    } else if (set == HiddenEntityLinkPermissions.NONE) {
-      result = !entity.testUserPermission(user, 'LIMITED');
-    } else if (set == HiddenEntityLinkPermissions.LIMITED) {
-      result = !entity.testUserPermission(user, 'OBSERVER');
-    } else if (set == HiddenEntityLinkPermissions.OBSERVER) {
-      result = !entity.testUserPermission(user, 'OWNER');
-    } else if (set == HiddenEntityLinkPermissions.OWNER) {
-      result = true;
-    } else if (set == HiddenEntityLinkPermissions.ONLY_LIMITED) {
-      result =
-        !entity.testUserPermission(user, 'NONE', { exact: true }) &&
-        entity.testUserPermission(user, 'LIMITED', { exact: true }) &&
-        !entity.testUserPermission(user, 'OBSERVER', { exact: true }) &&
-        !entity.testUserPermission(user, 'OWNER', { exact: true });
-    } else if (set == HiddenEntityLinkPermissions.ONLY_OBSERVER) {
-      result =
-        !entity.testUserPermission(user, 'NONE', { exact: true }) &&
-        !entity.testUserPermission(user, 'LIMITED', { exact: true }) &&
-        entity.testUserPermission(user, 'OBSERVER', { exact: true }) &&
-        !entity.testUserPermission(user, 'OWNER', { exact: true });
-    }
-
-    return result;
-    */
 		return API._checkPermission(entity, user, setting);
 	};
 
 	_checkState = function (entity): number {
-		/*
-    const hasFlagHide =
-      hasProperty(entity, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
-      entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) != null &&
-      entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) != undefined;
-    if (hasFlagHide) {
-      if (entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN)) {
-        return HiddenEntityLinkState.HIDE;
-      } else {
-        return HiddenEntityLinkState.SHOW;
-      }
-    } else {
-      return HiddenEntityLinkState.UNHIDE;
-    }
-    */
 		return API._checkState(entity);
 	};
 

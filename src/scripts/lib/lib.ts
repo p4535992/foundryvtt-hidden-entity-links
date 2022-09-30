@@ -5,7 +5,9 @@ import CONSTANTS from "../constants.js";
 // =============================
 
 export async function getToken(documentUuid) {
-	const document = await fromUuid(documentUuid);
+	// const document = await fromUuid(documentUuid);
+    //@ts-ignore
+    const document = fromUuidSync(documentUuid);
 	//@ts-ignore
 	return document?.token ?? document;
 }

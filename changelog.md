@@ -1,12 +1,15 @@
 # Changelog
 
+### 1.1.2
+
+- Some patches
 ### 1.1.0
 
 - Update for Foundryvtt 10
 
 ### 1.0.20
 
-- Confirmed compatibility with Monk's Enhanced Journal 
+- Confirmed compatibility with Monk's Enhanced Journal
 
 ### 1.0.19
 
