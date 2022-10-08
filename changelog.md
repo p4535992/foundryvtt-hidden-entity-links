@@ -1,8 +1,14 @@
 # Changelog
 
+### 1.1.4
+
+- Some bug ficx for fvtt10
+- Now you don't need to refresh the page fro update the sidebar
+
 ### 1.1.2-3
 
 - Some patches
+  
 ### 1.1.0
 
 - Update for Foundryvtt 10

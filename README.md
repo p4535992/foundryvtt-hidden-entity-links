@@ -59,9 +59,6 @@ This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) li
 
 ## Known issue
 
-- I hate myself for this, but I could not find a way to update the elements on the sidebar to change the flag on the entities the method ui.sidebar.render (true); it should have worked, but that doesn't seem to be the case ... if anyone can find a solution let me know. FOR NOW YOU ARE FORCED TO REFRESH THE WEB PAGE.
-- When change the modules setting it's required (preferable) A REFRESH OF THE WEB PAGE.
-
 ## Features
 
 ![img1](./wiki/scene_hide_1.png)![img2](./wiki/scene_hide_2.png)![img3](./wiki/scene_hide_3.png)![img4](./wiki/actor_hide_all.png)![img5](./wiki/actor_hide_1.png)![img6](./wiki/item_hide_1.png)![img7](./wiki/journalentry_hide_1.png)![img8](./wiki/rolltable_hide_1.png)

@@ -6,8 +6,8 @@ import CONSTANTS from "../constants.js";
 
 export async function getToken(documentUuid) {
 	// const document = await fromUuid(documentUuid);
-    //@ts-ignore
-    const document = fromUuidSync(documentUuid);
+	//@ts-ignore
+	const document = fromUuidSync(documentUuid);
 	//@ts-ignore
 	return document?.token ?? document;
 }
@@ -32,10 +32,14 @@ export function getOwnedTokens(priorityToControlledIfGM: boolean): Token[] {
 			return arr;
 		}
 	}
-	let ownedTokens = <Token[]>canvas.tokens?.placeables.filter((token) => token.isOwner && (!token.document.hidden || gm));
+	let ownedTokens = <Token[]>(
+		canvas.tokens?.placeables.filter((token) => token.isOwner && (!token.document.hidden || gm))
+	);
 	if (ownedTokens.length === 0 || !canvas.tokens?.controlled[0]) {
 		ownedTokens = <Token[]>(
-			canvas.tokens?.placeables.filter((token) => (token.observer || token.isOwner) && (!token.document.hidden || gm))
+			canvas.tokens?.placeables.filter(
+				(token) => (token.observer || token.isOwner) && (!token.document.hidden || gm)
+			)
 		);
 	}
 	return ownedTokens;
@@ -68,7 +72,7 @@ export function isGMConnected() {
 }
 
 export function isGMConnectedAndSocketLibEnable() {
-	return isGMConnected() && !game.settings.get(CONSTANTS.MODULE_NAME, "doNotUseSocketLibFeature");
+	return isGMConnected();
 }
 
 export function wait(ms) {

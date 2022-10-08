@@ -6,7 +6,7 @@ import {
 	HiddenEntityLinkPermissions,
 	HiddenEntityLinkState,
 } from "./hidden-entity-link-models.js";
-import { error } from "./lib/lib.js";
+import { error, warn } from "./lib/lib.js";
 const API = {
 	hiddenEntityLinks: <HiddenEntityLinks>{},
 
@@ -34,7 +34,7 @@ const API = {
 		} else {
 			throw new Error(`NO module setting found for key '${setting}'`);
 		}
-        /*
+		/*
 		if (set === HiddenEntityLinkPermissions.EMPTY) {
 			result = false;
 		} else if (set === HiddenEntityLinkPermissions.NONE) {
@@ -62,35 +62,35 @@ const API = {
 		if (set === HiddenEntityLinkPermissions.EMPTY) {
 			result = false;
 		} else if (set === HiddenEntityLinkPermissions.NONE) {
-            //@ts-ignore
+			//@ts-ignore
 			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
 		} else if (set === HiddenEntityLinkPermissions.LIMITED) {
-            //@ts-ignore
+			//@ts-ignore
 			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER);
 		} else if (set === HiddenEntityLinkPermissions.OBSERVER) {
-            //@ts-ignore
+			//@ts-ignore
 			result = !entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 		} else if (set === HiddenEntityLinkPermissions.OWNER) {
 			result = true;
 		} else if (set === HiddenEntityLinkPermissions.ONLY_LIMITED) {
 			result =
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, { exact: true });
 		} else if (set === HiddenEntityLinkPermissions.ONLY_OBSERVER) {
 			result =
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER, { exact: true }) &&
-                //@ts-ignore
+				//@ts-ignore
 				!entity.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, { exact: true });
 		}
 		return result;
@@ -130,8 +130,8 @@ const API = {
 			return false;
 		}
 		// const myDocument = fromUuid(documentId);
-        //@ts-ignore
-        const myDocument = fromUuidSync(documentId);
+		//@ts-ignore
+		const myDocument = fromUuidSync(documentId);
 		if (!myDocument) {
 			error(`No document founded by id '${documentId}'`, true);
 			return false;
@@ -166,6 +166,34 @@ const API = {
 			return false;
 		}
 		return this._checkPermission(myDocument, myUser, keySetting);
+	},
+
+	async renderSpecificSidebarArr(...inAttributes) {
+		if (!Array.isArray(inAttributes)) {
+			throw error("renderSpecificSidebarArr | inAttributes must be of type array");
+		}
+		const [documentName] = inAttributes; // e.g. { action: "createFolder" }
+
+		if (Scene.documentName === documentName) {
+			game.scenes?.render();
+		} else if (Actor.documentName === documentName) {
+			game.actors?.render();
+		} else if (Item.documentName === documentName) {
+			game.items?.render();
+		} else if (Journal.documentName === documentName) {
+			game.journal?.render();
+		} else if (Macro.documentName === documentName) {
+			game.macros?.render();
+		} else if (RollTable.documentName === documentName) {
+			game.tables?.render();
+		} else if (Card.documentName === documentName) {
+			game.cards?.render();
+		} else if (Playlist.documentName === documentName) {
+			game.playlists?.render();
+			// } else if (CompendiumCollection.documentName === documentName) {
+		} else {
+			warn(`Document name is not passed '${documentName}'`, true);
+		}
 	},
 };
 export default API;

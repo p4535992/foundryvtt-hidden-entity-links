@@ -1,14 +1,9 @@
 import API from "./api";
 import CONSTANTS from "./constants";
-import {
-	HiddenEntityLinkFlags,
-	HiddenEntityLinkPermissions,
-	HiddenEntityLinkState,
-} from "./hidden-entity-link-models";
+import { HiddenEntityLinkFlags, HiddenEntityLinkPermissions, HiddenEntityLinkState } from "./hidden-entity-link-models";
 import { warn } from "./lib/lib";
 
 export class HiddenEntityLinks {
-
 	// /**
 	//  * For each folder
 	// */
@@ -328,7 +323,7 @@ export class HiddenEntityLinks {
 		// If the "data-id" isn't observable by the current user, then replace with just "plain text"
 
 		// OLD FOUNDRYVTT 9
-        /*
+		/*
 		html.find("a.entity-link")
 			.filter((index, a) => {
 				// This filter function needs to return true if the link is to be replaced by normal text
@@ -389,7 +384,7 @@ export class HiddenEntityLinks {
 				if (pack) {
 					return game.packs.get(pack)?.private;
 				}
-                /*
+				/*
 				const datatype = a.getAttribute("data-type"); // RollTable, JournalEntry, Actor
 				if (!datatype) return false;
 
@@ -432,21 +427,21 @@ export class HiddenEntityLinks {
 					}
 				}
                 */
-                // Now we can use the uuid to check for general access to the relevant document
-                let uuid = a.getAttribute('data-uuid');
-                if (!uuid) {
-                    return false;
-                }
-                //@ts-ignore
-                let doc = fromUuidSync(uuid);
-                if (!doc) {
-                    return false;
-                }
-                if (
+				// Now we can use the uuid to check for general access to the relevant document
+				let uuid = a.getAttribute("data-uuid");
+				if (!uuid) {
+					return false;
+				}
+				//@ts-ignore
+				let doc = fromUuidSync(uuid);
+				if (!doc) {
+					return false;
+				}
+				if (
 					game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-disguise-unreachable-links") ===
 					HiddenEntityLinkPermissions.EMPTY
 				) {
-                    //@ts-ignore
+					//@ts-ignore
 					return !doc || !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
 				} else {
 					if (doc) {
@@ -455,19 +450,19 @@ export class HiddenEntityLinks {
 							"level-permission-disguise-unreachable-links"
 						);
 						if (perm === HiddenEntityLinkPermissions.EMPTY) {
-                            //@ts-ignore
+							//@ts-ignore
 							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
 						} else if (perm === HiddenEntityLinkPermissions.NONE) {
-                            //@ts-ignore
+							//@ts-ignore
 							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE);
 						} else if (perm === HiddenEntityLinkPermissions.LIMITED) {
-                            //@ts-ignore
+							//@ts-ignore
 							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
 						} else if (perm === HiddenEntityLinkPermissions.OBSERVER) {
-                            //@ts-ignore
+							//@ts-ignore
 							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER);
 						} else if (perm === HiddenEntityLinkPermissions.OWNER) {
-                            //@ts-ignore
+							//@ts-ignore
 							return !doc.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 						} else {
 							return false;
@@ -484,50 +479,50 @@ export class HiddenEntityLinks {
 		return;
 	};
 
-	hideEntityLink = async function (entityID, entities) {
-		const entity = entities.find((e) => {
-			return e && e.id === entityID;
-		});
-		if (entity) {
-			const hasFlagHide = hasProperty(
-				entity,
-				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
-			);
-			if (hasFlagHide) {
-				await entity.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-			}
-		}
-	};
+	// hideEntityLink = async function (entityID, entities) {
+	// 	const entity = entities.find((e) => {
+	// 		return e && e.id === entityID;
+	// 	});
+	// 	if (entity) {
+	// 		const hasFlagHide = hasProperty(
+	// 			entity,
+	// 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
+	// 		);
+	// 		if (hasFlagHide) {
+	// 			await entity.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+	// 		}
+	// 	}
+	// };
 
-	unhideEntityLink = async function (entityID, entities) {
-		const entity = entities.find((e) => {
-			return e && e.id === entityID;
-		});
-		if (entity) {
-			const hasFlagHide = hasProperty(
-				entity,
-				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
-			);
-			if (hasFlagHide) {
-				await entity.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-			}
-		}
-	};
+	// unhideEntityLink = async function (entityID, entities) {
+	// 	const entity = entities.find((e) => {
+	// 		return e && e.id === entityID;
+	// 	});
+	// 	if (entity) {
+	// 		const hasFlagHide = hasProperty(
+	// 			entity,
+	// 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
+	// 		);
+	// 		if (hasFlagHide) {
+	// 			await entity.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+	// 		}
+	// 	}
+	// };
 
-	showEntityLink = async function (entityID, entities) {
-		const entity = entities.find((e) => {
-			return e && e.id === entityID;
-		});
-		if (entity) {
-			const hasFlagHide = hasProperty(
-				entity,
-				`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
-			);
-			if (hasFlagHide) {
-				await entity.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-			}
-		}
-	};
+	// showEntityLink = async function (entityID, entities) {
+	// 	const entity = entities.find((e) => {
+	// 		return e && e.id === entityID;
+	// 	});
+	// 	if (entity) {
+	// 		const hasFlagHide = hasProperty(
+	// 			entity,
+	// 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
+	// 		);
+	// 		if (hasFlagHide) {
+	// 			await entity.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+	// 		}
+	// 	}
+	// };
 
 	_checkPermission = function (entity, user: User, setting: string): boolean {
 		return API._checkPermission(entity, user, setting);

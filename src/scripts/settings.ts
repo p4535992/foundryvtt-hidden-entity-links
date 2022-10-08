@@ -386,11 +386,11 @@ export const registerSettings = function () {
 	// });
 
 	// const settings = defaultSettings();
-	// for (const [name, data] of Object.entries(settings)) {
-	//     game.settings.register(CONSTANTS.MODULE_NAME, name, data);
+	// for (const [settingName, settingValue] of Object.entries(settings)) {
+	//     game.settings.register(CONSTANTS.MODULE_NAME, settingName, settingValue);
 	// }
-	for (const [name, data] of Object.entries(otherSettings)) {
-		game.settings.register(CONSTANTS.MODULE_NAME, name, data);
+	for (const [settingName, settingValue] of Object.entries(otherSettings)) {
+		game.settings.register(CONSTANTS.MODULE_NAME, settingName, settingValue);
 	}
 };
 class ResetSettingsDialog extends FormApplication {
