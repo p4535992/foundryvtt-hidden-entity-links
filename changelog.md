@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.5
+
+- Remove some deprecation code
+
 ### 1.1.4
 
 - Some bug ficx for fvtt10

@@ -1235,15 +1235,19 @@ export const setupHooks = () => {
 									_id: scene.id,
 									navigation:
 										!scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-										scene.data.navigation
+										//@ts-ignore
+										scene.navigation
 											? false
-											: scene.data.navigation,
-									permission: {
+											//@ts-ignore
+											: scene.navigation,
+									ownership: {
 										default:
 											!scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-											scene.data.navigation
+											//@ts-ignore
+											scene.navigation
 												? 0
-												: scene.data.permission.default,
+												//@ts-ignore
+												: scene.data.ownership.default,
 									},
 								}));
 							return Scene.updateDocuments(updates);
@@ -1309,9 +1313,11 @@ export const setupHooks = () => {
 									_id: scene.id,
 									navigation:
 										scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-										!scene.data.navigation
+										//@ts-ignore
+										!scene.navigation
 											? true
-											: scene.data.navigation,
+											//@ts-ignore
+											: scene.navigation,
 								}));
 							return Scene.updateDocuments(updates);
 						} else {
@@ -1598,7 +1604,7 @@ export const readyHooks = () => {
 			const result = wrapper.apply(this, args);
 			if (!game.user?.isGM) {
 				result.scenes.forEach((data) => {
-					const scene = game.scenes?.get(data.data._id);
+					const scene = game.scenes?.get(data.id);
 					// if (game.user?.isGM) {
 					//   return;
 					// }
@@ -1609,7 +1615,7 @@ export const readyHooks = () => {
 					// if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
 					//   return;
 					// }
-					// if (scene.data.navigation) {
+					// if (scene.navigation) {
 					const neededRole = API.hiddenEntityLinks._checkPermission(
 						scene,
 						<User>game.user,
@@ -1633,7 +1639,7 @@ export const readyHooks = () => {
 				if (!game.user?.isGM) {
 					/*
           result.scenes.forEach((data) => {
-            const scene = <StoredDocument<Scene>>game.scenes?.get(data._id);
+            const scene = <StoredDocument<Scene>>game.scenes?.get(data.id);
             // if (game.user?.isGM) {
             //   return;
             // }
@@ -1644,7 +1650,7 @@ export const readyHooks = () => {
             // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
             //   return;
             // }
-            if (scene.data.navigation) {
+            if (scene.navigation) {
               const navNameRole = API.hiddenEntityLinks._checkPermission(
                 scene,
                 game.user,
@@ -1662,11 +1668,12 @@ export const readyHooks = () => {
 					// const scenes = result.scenes.map(scene => {
 					//   const data = scene.data.toObject(false);
 					const scenes = result.scenes.forEach((data) => {
-						const scene = <StoredDocument<Scene>>game.scenes?.get(data._id);
+						const scene = <StoredDocument<Scene>>game.scenes?.get(data.id);
 						const users = <StoredDocument<User>[]>(
 							game.users?.filter((u) => u.active && u.viewedScene === scene.id)
 						);
-						if (scene.data.navigation) {
+						//@ts-ignore
+						if (scene.navigation) {
 							const navNameRole = API.hiddenEntityLinks._checkPermission(
 								scene,
 								<User>game.user,
@@ -1683,13 +1690,13 @@ export const readyHooks = () => {
 							}
 						}
 						data.users = users.map((u) => {
-							return { letter: u.name, color: u.data.color };
+							return { letter: u.name, color: u.color };
 						});
 						data.visible = game.user?.isGM || scene.isOwner || scene.active;
 						data.css = [
 							scene.isView ? "view" : null,
 							scene.active ? "active" : null,
-							data.permission.default === 0 ? "gm" : null,
+							data.ownership.default === 0 ? "gm" : null,
 						]
 							.filter((c) => !!c)
 							.join(" ");

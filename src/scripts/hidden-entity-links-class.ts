@@ -197,7 +197,7 @@ export class HiddenEntityLinks {
 			// let document = collection.get(li.attr("data-document-id"))
 			if (document) {
 				try {
-					// let isHidden = data._id == document.id && data.flags[CONSTANTS.MODULE_NAME]?.hidden
+					// let isHidden = data.id == document.id && data.flags[CONSTANTS.MODULE_NAME]?.hidden
 					//   ? data.flags[CONSTANTS.MODULE_NAME]?.hidden
 					//   : document.getFlag(mod, HiddenEntityLinkFlags.HIDDEN);
 					// let isHidden = document.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
