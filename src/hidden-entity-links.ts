@@ -1238,16 +1238,16 @@ export const setupHooks = () => {
 										//@ts-ignore
 										scene.navigation
 											? false
-											//@ts-ignore
-											: scene.navigation,
+											: //@ts-ignore
+											  scene.navigation,
 									ownership: {
 										default:
 											!scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
 											//@ts-ignore
 											scene.navigation
 												? 0
-												//@ts-ignore
-												: scene.data.ownership.default,
+												: //@ts-ignore
+												  scene.data.ownership.default,
 									},
 								}));
 							return Scene.updateDocuments(updates);
@@ -1316,8 +1316,8 @@ export const setupHooks = () => {
 										//@ts-ignore
 										!scene.navigation
 											? true
-											//@ts-ignore
-											: scene.navigation,
+											: //@ts-ignore
+											  scene.navigation,
 								}));
 							return Scene.updateDocuments(updates);
 						} else {
@@ -1604,7 +1604,7 @@ export const readyHooks = () => {
 			const result = wrapper.apply(this, args);
 			if (!game.user?.isGM) {
 				result.scenes.forEach((data) => {
-					const scene = game.scenes?.get(data.id);
+					const scene = game.scenes?.get(data._id);
 					// if (game.user?.isGM) {
 					//   return;
 					// }
@@ -1668,7 +1668,10 @@ export const readyHooks = () => {
 					// const scenes = result.scenes.map(scene => {
 					//   const data = scene.data.toObject(false);
 					const scenes = result.scenes.forEach((data) => {
-						const scene = <StoredDocument<Scene>>game.scenes?.get(data.id);
+						const scene = <StoredDocument<Scene>>game.scenes?.get(data._id);
+						if (!scene) {
+							error(`It shouldn't happen check out the logs`);
+						}
 						const users = <StoredDocument<User>[]>(
 							game.users?.filter((u) => u.active && u.viewedScene === scene.id)
 						);
