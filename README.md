@@ -142,6 +142,7 @@ Here what player see with the value "ONLY OBSERVER":
 - Hide link on the text editor tinymce based on the level of permission for that entity.
 - Always displays original scene name to the GM, but shows the Navigation Name for any players.
 - Allows the GM to hide sidebars (Chat, Scenes, Items, etc) for players, simplifying the player UI. By default it disables Scenes, Items, Tables, Cards, Playlists, and Compendiums. Each tab can be toggled in the module settings, even the Settings tab. Removing the Settings tab for players is not recommended.
+- Ovverride the dialog user configuration for hide all the hidden linked entities (even for gm)
 
 ![img](/wiki/hide_sidebar_voice.jpg)
 

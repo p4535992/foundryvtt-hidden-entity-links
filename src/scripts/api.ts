@@ -112,7 +112,7 @@ const API = {
 		}
 	},
 
-	isHidden(documentId: string, userId: string): boolean {
+	isHidden(documentId: string, userId: string, evenForGm: boolean): boolean {
 		if (!documentId) {
 			error(`No documentId is passed '${documentId}'`, true);
 			return false;
@@ -126,7 +126,7 @@ const API = {
 			error(`No user founded by id '${userId}'`, true);
 			return false;
 		}
-		if (myUser?.isGM) {
+		if (myUser?.isGM && !evenForGm) {
 			return false;
 		}
 		// const myDocument = fromUuid(documentId);

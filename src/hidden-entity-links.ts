@@ -1520,6 +1520,31 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
+	//@ts-ignore
+	libWrapper.register(
+		CONSTANTS.MODULE_NAME,
+		"UserConfig.prototype.getData",
+		function (wrapped, ...args) {
+			const controlled:Actor[]|undefined = game.users?.reduce((arr:Actor[], u:User) => {
+				if (u.character) arr.push(<Actor>u.character);
+				return arr;
+			}, []);
+			const actors = game.actors?.filter(
+				//@ts-ignore
+				(a:Actor) => a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(<string>a.id)
+			);
+			// MOD 4535992
+			const newActors = actors?.filter((a) => !API.isHidden(<string>a.uuid, <string>game.user?.id, true));
+			// END MOD 4535992
+			return {
+				user: this.object,
+				actors: newActors,
+				options: this.options,
+			};
+		},
+		"OVERRIDE"
+	);
+
 	// Hide-Sidebars feature
 	if (!game.user?.isGM) {
 		if (game.settings.get(CONSTANTS.MODULE_NAME, "hidechat") !== false) {

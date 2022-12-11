@@ -1,6 +1,10 @@
 # Changelog
 
-### 1.1.5
+### 1.1.7
+
+- Override the `UserConfig.prototype.getData`
+
+### 1.1.5-6
 
 - Remove some deprecation code
 
