@@ -55,7 +55,7 @@
   ],
   "scripts": [],
   "system": [],
-  "esmodules": ["hidden-entity-links.js"],
+  "esmodules": ["module.js"],
   "styles": ["./styles/hidden-entity-links.css"],
   "packs": [],
   "url": "https://github.com/p4535992/foundryvtt-hidden-entity-links",
