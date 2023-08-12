@@ -1,117 +1,117 @@
 {
-	"id": "hidden-entity-links",
-	"title": "Hidden Entity Links",
-	"description": "Hides entities with limited permission from the sidebar, but links still work for players.",
-	"version": "1.1.7",
-	"authors": [
-		{ "name": "Erceron" },
-		{
-			"name": "p4535992",
-			"url": "https://github.com/p4535992",
-			"discord": "",
-			"twitter": "",
-			"patreon": "",
-			"github": "p4535992",
-			"ko-fi": "",
-			"reddit": "",
-			"email": ""
-		}
-	],
-	"type": "module",
-	"socket": true,
-	"includes": [
-		"./assets/**",
-		"./lang/**",
-		"./languages/**",
-		"./scripts/**",
-		"./styles/**",
-		"./templates/**",
-		"./module.json",
-		"./README.md",
-		"./icons/**",
-		"./images/**",
-		"./packs/**"
-	],
-	"media": [
-		{
-			"type": "icon",
-			"location": ""
-		},
-		{
-			"type": "cover",
-			"location": ""
-		},
-		{
-			"type": "screenshot",
-			"location": ""
-		}
-	],
-	"languages": [
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "languages/en.json"
-		}
-	],
-	"scripts": [],
-	"system": [],
-	"esmodules": ["hidden-entity-links.js"],
-	"styles": ["./styles/hidden-entity-links.css"],
-	"packs": [],
-	"url": "https://github.com/p4535992/foundryvtt-hidden-entity-links",
-	"manifest": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/latest/download/module.json",
-	"download": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/latest/download/module.zip",
-	"readme": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.1.7/README.md",
-	"changelog": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.1.7/changelog.md",
-	"bugs": "https://github.com/p4535992/foundryvtt-hidden-entity-links/issues",
-	"compatibility": {
-		"minimum": 10,
-		"verified": 10,
-		"maximum": 10
-	},
-	"manifestPlusVersion": "1.2.0",
-	"allowBugReporter": true,
-	"relationships": {
-		"systems": [],
-		"requires": [
-			{
-				"id": "lib-wrapper",
-				"type": "module",
-				"manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
-				"compatibility": {}
-			},
-			{
-				"id": "socketlib",
-				"type": "module",
-				"manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/develop/module.json",
-				"compatibility": {}
-			}
-		],
-		"conflicts": [
-			{
-				"id": "disguise-unreachable-links",
-				"description": "Redundancy of features you can disable 'Disguise Unreachable Links' module if you want"
-			},
-			{
-				"id": "hidden-tables",
-				"description": "Redundancy of features you can disable 'Hidden Tables' module if you want"
-			},
-			{
-				"id": "hiddensoundtracks",
-				"description": "Redundancy of features you can disable 'Hidden Soundtracks' module if you want"
-			},
-			{
-				"id": "navbar-tweaks",
-				"description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
-			},
-			{
-				"id": "navigation-name",
-				"description": "Redundancy of features you can disable 'Navigation Name' module if you want"
-			},
-			{
-				"id": "hide-sidebars",
-				"description": "Redundancy of features you can disable 'Hide Sidebar' module if you want"
-			}
-		]
-	}
+  "id": "hidden-entity-links",
+  "title": "Hidden Entity Links",
+  "description": "Hides entities with limited permission from the sidebar, but links still work for players.",
+  "version": "1.2.0",
+  "authors": [
+    { "name": "Erceron" },
+    {
+      "name": "p4535992",
+      "url": "https://github.com/p4535992",
+      "discord": "",
+      "twitter": "",
+      "patreon": "",
+      "github": "p4535992",
+      "ko-fi": "",
+      "reddit": "",
+      "email": ""
+    }
+  ],
+  "type": "module",
+  "socket": true,
+  "includes": [
+    "./assets/**",
+    "./lang/**",
+    "./languages/**",
+    "./scripts/**",
+    "./styles/**",
+    "./templates/**",
+    "./module.json",
+    "./README.md",
+    "./icons/**",
+    "./images/**",
+    "./packs/**"
+  ],
+  "media": [
+    {
+      "type": "icon",
+      "location": ""
+    },
+    {
+      "type": "cover",
+      "location": ""
+    },
+    {
+      "type": "screenshot",
+      "location": ""
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "scripts": [],
+  "system": [],
+  "esmodules": ["hidden-entity-links.js"],
+  "styles": ["./styles/hidden-entity-links.css"],
+  "packs": [],
+  "url": "https://github.com/p4535992/foundryvtt-hidden-entity-links",
+  "manifest": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/v1.2.0/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/v1.2.0/module.zip",
+  "readme": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.2.0/README.md",
+  "changelog": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.2.0/changelog.md",
+  "bugs": "https://github.com/p4535992/foundryvtt-hidden-entity-links/issues",
+  "compatibility": {
+    "minimum": 11,
+    "verified": 11,
+    "maximum": 11
+  },
+  "manifestPlusVersion": "1.2.0",
+  "allowBugReporter": true,
+  "relationships": {
+    "systems": [],
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+        "compatibility": {}
+      },
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/develop/module.json",
+        "compatibility": {}
+      }
+    ],
+    "conflicts": [
+      {
+        "id": "disguise-unreachable-links",
+        "description": "Redundancy of features you can disable 'Disguise Unreachable Links' module if you want"
+      },
+      {
+        "id": "hidden-tables",
+        "description": "Redundancy of features you can disable 'Hidden Tables' module if you want"
+      },
+      {
+        "id": "hiddensoundtracks",
+        "description": "Redundancy of features you can disable 'Hidden Soundtracks' module if you want"
+      },
+      {
+        "id": "navbar-tweaks",
+        "description": "Redundancy of features you can disable 'Navbar Tweaks' module if you want"
+      },
+      {
+        "id": "navigation-name",
+        "description": "Redundancy of features you can disable 'Navigation Name' module if you want"
+      },
+      {
+        "id": "hide-sidebars",
+        "description": "Redundancy of features you can disable 'Hide Sidebar' module if you want"
+      }
+    ]
+  }
 }
