@@ -1,4 +1,7 @@
 # Changelog
+### 1.2.0 - 1.2.1
+
+- Upgrade for fvtt11
 
 ### 1.1.7
 

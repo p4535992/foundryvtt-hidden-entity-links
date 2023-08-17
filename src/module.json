@@ -2,7 +2,7 @@
   "id": "hidden-entity-links",
   "title": "Hidden Entity Links",
   "description": "Hides entities with limited permission from the sidebar, but links still work for players.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "authors": [
     { "name": "Erceron" },
     {
@@ -59,10 +59,10 @@
   "styles": ["./styles/hidden-entity-links.css"],
   "packs": [],
   "url": "https://github.com/p4535992/foundryvtt-hidden-entity-links",
-  "manifest": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/v1.2.0/module.json",
-  "download": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/v1.2.0/module.zip",
-  "readme": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.2.0/README.md",
-  "changelog": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/v1.2.0/changelog.md",
+  "manifest": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/1.2.1/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-hidden-entity-links/releases/download/1.2.1/module.zip",
+  "readme": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/master/README.md",
+  "changelog": "https://github.com/p4535992/foundryvtt-hidden-entity-links/blob/master/changelog.md",
   "bugs": "https://github.com/p4535992/foundryvtt-hidden-entity-links/issues",
   "compatibility": {
     "minimum": 11,

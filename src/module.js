@@ -1106,7 +1106,10 @@ export const setupHooks = () => {
                 {
                   _id: scene.id,
                   navigation: false,
-                  permission: {
+                  // permission: {
+                  //   default: 0,
+                  // },
+                  ownership: {
                     default: 0,
                   },
                 },
@@ -1211,20 +1214,14 @@ export const setupHooks = () => {
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-                    //@ts-ignore
-                    scene.navigation
+                    !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && scene.navigation
                       ? false
-                      : //@ts-ignore
-                        scene.navigation,
+                      : scene.navigation,
                   ownership: {
                     default:
-                      !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-                      //@ts-ignore
-                      scene.navigation
+                      !scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && scene.navigation
                         ? 0
-                        : //@ts-ignore
-                          scene.data.ownership.default,
+                        : scene.data.ownership.default,
                   },
                 }));
               return Scene.updateDocuments(updates);
@@ -1286,12 +1283,9 @@ export const setupHooks = () => {
                 .map((scene) => ({
                   _id: scene.id,
                   navigation:
-                    scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) &&
-                    //@ts-ignore
-                    !scene.navigation
+                    scene.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) && !scene.navigation
                       ? true
-                      : //@ts-ignore
-                        scene.navigation,
+                      : scene.navigation,
                 }));
               return Scene.updateDocuments(updates);
             } else {
@@ -1600,22 +1594,20 @@ export const readyHooks = () => {
       const result = wrapper.apply(this, args);
       if (!game.user?.isGM) {
         result.scenes.forEach((data) => {
-          const scene = game.scenes?.get(data._id);
-          // if (game.user?.isGM) {
-          //   return;
-          // }
-          // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.HIDE) {
-          //   this.element.empty();
-          //   return;
-          // }
-          // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
-          //   return;
-          // }
-          // if (scene.navigation) {
-          const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, "level-permission-scenes-nav");
-          if (!neededRole) {
-            this.element.empty();
-            return;
+          const scene = game.scenes?.get(data.id);
+          const set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-scenes-nav");
+          if (set === HiddenEntityLinkPermissions.EMPTY) {
+            const isSceneHidden = API.isHidden(a.uuid, game.user?.id, true);
+            if (isSceneHidden) {
+              this.element.empty();
+              return;
+            }
+          } else {
+            const neededRole = API.hiddenEntityLinks._checkPermission(scene, game.user, "level-permission-scenes-nav");
+            if (!neededRole) {
+              this.element.empty();
+              return;
+            }
           }
           // }
         });
@@ -1629,57 +1621,45 @@ export const readyHooks = () => {
       function (wrapper, ...args) {
         const result = wrapper.apply(this, args);
         if (!game.user?.isGM) {
-          /*
-          result.scenes.forEach((data) => {
-            const scene = game.scenes?.get(data.id);
-            // if (game.user?.isGM) {
-            //   return;
-            // }
-            // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.HIDE) {
-            //   this.element.empty();
-            //   return;
-            // }
-            // if (!game.user?.isGM && API._checkState(scene) == HiddenEntityLinkState.SHOW) {
-            //   return;
-            // }
-            if (scene.navigation) {
-              const navNameRole = API.hiddenEntityLinks._checkPermission(
-                scene,
-                game.user,
-                'level-permission-scenes-nav-name',
-              );
-              if (!navNameRole && scene?.name) {
-                // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-                data.name = scene?.name;
-              }
-            }
-          });
-          */
           // Modify Scene data
           // TODO execute as GM
           // const scenes = result.scenes.map(scene => {
           //   const data = scene.data.toObject(false);
           const scenes = result.scenes.forEach((data) => {
-            const scene = game.scenes?.get(data._id);
+            const scene = game.scenes?.get(data.id);
             if (!scene) {
               error(`It shouldn't happen check out the logs`);
             }
             const users = game.users?.filter((u) => u.active && u.viewedScene === scene.id);
             //@ts-ignore
             if (scene.navigation) {
-              const navNameRole = API.hiddenEntityLinks._checkPermission(
-                scene,
-                game.user,
-                "level-permission-scenes-nav-name"
-              );
-              if (!navNameRole) {
-                // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-                //data.name = scene?.name;
-                let name = scene?.name; // game.user?.isGM ? data.name : data.navName
-                if (name === "") {
-                  name = data.name;
+              const set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-scenes-nav-name");
+              if (set === HiddenEntityLinkPermissions.EMPTY) {
+                const isSceneHidden = API.isHidden(a.uuid, game.user?.id, true);
+                if (isSceneHidden) {
+                  // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
+                  //data.name = scene?.name;
+                  let name = scene?.name; // game.user?.isGM ? data.name : data.navName
+                  if (name === "") {
+                    name = data.name;
+                  }
+                  data.name = TextEditor.truncateText(name, { maxLength: 32 });
                 }
-                data.name = TextEditor.truncateText(name, { maxLength: 32 });
+              } else {
+                const navNameRole = API.hiddenEntityLinks._checkPermission(
+                  scene,
+                  game.user,
+                  "level-permission-scenes-nav-name"
+                );
+                if (!navNameRole) {
+                  // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
+                  //data.name = scene?.name;
+                  let name = scene?.name; // game.user?.isGM ? data.name : data.navName
+                  if (name === "") {
+                    name = data.name;
+                  }
+                  data.name = TextEditor.truncateText(name, { maxLength: 32 });
+                }
               }
             }
             data.users = users.map((u) => {
@@ -1689,7 +1669,7 @@ export const readyHooks = () => {
             data.css = [
               scene.isView ? "view" : null,
               scene.active ? "active" : null,
-              data.ownership.default === 0 ? "gm" : null,
+              // data.ownership.default === 0 ? "gm" : null,
             ]
               .filter((c) => !!c)
               .join(" ");
