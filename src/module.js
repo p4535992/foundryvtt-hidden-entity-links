@@ -202,7 +202,7 @@ export const setupHooks = () => {
       // }
     }
   });
-  // Hooks.on('renderMacroDirectory', directoryRenderedHiddenEntityLinks);
+  // Hooks.on("renderMacroDirectory", directoryRenderedHiddenEntityLinks);
   Hooks.on("renderRollTableDirectory", (obj, html, data) => {
     if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-rolltables")) {
       const entities = game.tables;
@@ -623,6 +623,48 @@ export const setupHooks = () => {
       options.push(
         // return [
         {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
+          },
+        },
+        {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (header) => {
@@ -809,6 +851,48 @@ export const setupHooks = () => {
       }
       options.push(
         //return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
+          },
+        },
         {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
@@ -1007,6 +1091,48 @@ export const setupHooks = () => {
       }
       options.push(
         //return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
+          },
+        },
         {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
@@ -1222,6 +1348,48 @@ export const setupHooks = () => {
       }
       options.push(
         //return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
+          },
+        },
         {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
@@ -1443,6 +1611,48 @@ export const setupHooks = () => {
       options.push(
         // return [
         {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
+          },
+        },
+        {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
           condition: (header) => {
@@ -1532,7 +1742,7 @@ export const readyHooks = () => {
         (a) => a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(a.id)
       );
       // MOD 4535992
-      const newActors = actors?.filter((a) => !API.isHidden(a.uuid, game.user?.id, true));
+      const newActors = actors?.filter((actor) => !API.isHidden(actor.uuid, game.user?.id, true));
       // END MOD 4535992
       return {
         user: this.object,
@@ -1630,7 +1840,7 @@ export const readyHooks = () => {
           const scene = game.scenes?.get(data.id);
           const set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-scenes-nav");
           if (set === HiddenEntityLinkPermissions.EMPTY) {
-            const isSceneHidden = API.isHidden(a.uuid, game.user?.id, true);
+            const isSceneHidden = API.isHidden(scene.uuid, game.user?.id, true);
             if (isSceneHidden) {
               this.element.empty();
               return;
@@ -1668,7 +1878,7 @@ export const readyHooks = () => {
             if (scene.navigation) {
               const set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-scenes-nav-name");
               if (set === HiddenEntityLinkPermissions.EMPTY) {
-                const isSceneHidden = API.isHidden(a.uuid, game.user?.id, true);
+                const isSceneHidden = API.isHidden(scene.uuid, game.user?.id, true);
                 if (isSceneHidden) {
                   // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
                   //data.name = scene?.name;
@@ -1815,7 +2025,7 @@ export const readyHooks = () => {
     API.hiddenEntityLinks.hideRenderedHiddenEntityLinks(sheet, html, data);
   });
 
-  // Hooks.on('renderSceneSheet', (sheet, html, data) => {});
+  // Hooks.on("renderSceneSheet", (sheet, html, data) => {});
   Hooks.on("renderActorSheet", (sheet, html, data) => {
     // if (game.settings.get(CONSTANTS.MODULE_NAME, 'hide-actors')) {
     //   if (data.flags && data.flags[CONSTANTS.MODULE_NAME]) {
@@ -1830,6 +2040,6 @@ export const readyHooks = () => {
     //   }
     // }
   });
-  // Hooks.on('renderMacroSheet', (sheet, html, data) => {});
-  // Hooks.on('renderRolltableSheet', (sheet, html, data) => {});
+  // Hooks.on("renderMacroSheet", (sheet, html, data) => {});
+  // Hooks.on("renderRolltableSheet", (sheet, html, data) => {});
 };

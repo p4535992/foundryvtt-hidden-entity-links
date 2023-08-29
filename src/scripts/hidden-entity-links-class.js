@@ -44,17 +44,20 @@ export class HiddenEntityLinks {
         return folderObject.id === liFolder.attr("data-folder-id");
       });
       if (folder) {
-        const lifCreateEntry = liFolder.find(`.create-entry`);
         const isHiddenByFlag = folder.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
         if (isHiddenByFlag) {
-          const div = $(
-            `<a class="create-button hidden-entity-links-only-folder">
-                <i class="fa fa-fw"/>
-              </a>`
-          );
-          lifCreateEntry.after(div);
+          if (game.user.isGM) {
+            const lifCreateEntry = liFolder.find(`.create-entry`);
+            const div = $(
+              `<a class="create-button hidden-entity-links-only-folder">
+                  <i class="fa fa-fw"/>
+                </a>`
+            );
+            lifCreateEntry.after(div);
+          } else {
+            liFolder.remove();
+          }
         }
-
         // let list =
         //   liFolder.find('li.directory-item.document')?.length > 0
         //     ? liFolder.find('li.directory-item.document')

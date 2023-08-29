@@ -112,9 +112,9 @@ const API = {
     }
   },
 
-  isHidden(documentId, userId, evenForGm) {
-    if (!documentId) {
-      error(`No documentId is passed '${documentId}'`, true);
+  isHidden(documentUuid, userId, evenForGm) {
+    if (!documentUuid) {
+      error(`No documentId is passed '${documentUuid}'`, true);
       return false;
     }
     if (!userId) {
@@ -129,11 +129,11 @@ const API = {
     if (myUser?.isGM && !evenForGm) {
       return false;
     }
-    // const myDocument = fromUuid(documentId);
+    // const myDocument = fromUuid(documentUuid);
     //@ts-ignore
-    const myDocument = fromUuidSync(documentId);
+    const myDocument = fromUuidSync(documentUuid);
     if (!myDocument) {
-      error(`No document founded by id '${documentId}'`, true);
+      error(`No document founded by id '${documentUuid}'`, true);
       return false;
     }
     // Before check permission we check the flags
@@ -175,21 +175,21 @@ const API = {
     const [documentName] = inAttributes; // e.g. { action: "createFolder" }
 
     if (Scene.documentName === documentName) {
-      game.scenes?.render();
+      game.scenes?.render(true);
     } else if (Actor.documentName === documentName) {
-      game.actors?.render();
+      game.actors?.render(true);
     } else if (Item.documentName === documentName) {
-      game.items?.render();
+      game.items?.render(true);
     } else if (Journal.documentName === documentName) {
-      game.journal?.render();
+      game.journal?.render(true);
     } else if (Macro.documentName === documentName) {
-      game.macros?.render();
+      game.macros?.render(true);
     } else if (RollTable.documentName === documentName) {
-      game.tables?.render();
+      game.tables?.render(true);
     } else if (Card.documentName === documentName) {
-      game.cards?.render();
+      game.cards?.render(true);
     } else if (Playlist.documentName === documentName) {
-      game.playlists?.render();
+      game.playlists?.render(true);
       // } else if (CompendiumCollection.documentName === documentName) {
     } else {
       warn(`Document name is not passed '${documentName}'`, true);
