@@ -84,8 +84,12 @@
   "hidden-entity-links.label.unhide-entity": "Unhide/Unshow entity",
   "hidden-entity-links.label.show-entity": "Show entity",
   "hidden-entity-links.label.hide-folder": "Hide all entities on this folder",
-  "hidden-entity-links.label.unhide-folder": "Unhide all entities on this folder",
+  "hidden-entity-links.label.unhide-folder": "Unhide/Unshow all entities on this folder",
   "hidden-entity-links.label.show-folder": "Show all entities on this folder",
+
+  "hidden-entity-links.label.hide-folder-only": "Hide this folder",
+  "hidden-entity-links.label.unhide-folder-only": "Unhide this folder",
+
   "hidden-entity-links.setting.hide-soundtracks.name": "Enable/disable the hidden functionality globally for Soundtracks",
   "hidden-entity-links.setting.hide-soundtracks.hint": "If enabled and you are not a GM, users will not see the soundtrack name and the playlist controlls",
   "hidden-entity-links.label.tableTextHiddenTable": "Hidden Table",

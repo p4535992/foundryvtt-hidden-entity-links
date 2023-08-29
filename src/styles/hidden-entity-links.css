@@ -103,3 +103,18 @@
 #playlists .directory-list {
   display: var(--hidden-entity-links-Display);
 }
+
+.hidden-entity-links-only-folder {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1) 10px,
+    rgba(255, 255, 0, 1) 10px,
+    rgba(255, 255, 0, 1) 20px
+  ) !important;
+  max-width: max-content;
+  margin: auto 5px;
+  /* line-height: initial; */
+  display: block ruby;
+  height: 100%;
+}
