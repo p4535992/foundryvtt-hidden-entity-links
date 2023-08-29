@@ -455,9 +455,9 @@ export const setupHooks = () => {
               ?.filter((journal) => journal.folder?.id === folderObject.id)
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
         {
@@ -479,9 +479,9 @@ export const setupHooks = () => {
               ?.filter((journal) => journal.folder?.id === folderObject.id)
               .map(async (journal) => {
                 await journal.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
         {
@@ -503,9 +503,9 @@ export const setupHooks = () => {
               ?.filter((journal) => journal.folder?.id === folderObject.id)
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         }
       ); //].concat(options);
@@ -683,9 +683,9 @@ export const setupHooks = () => {
               ?.filter((item) => item.folder?.id === folderObject.id)
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
         {
@@ -707,9 +707,9 @@ export const setupHooks = () => {
               ?.filter((item) => item.folder?.id === folderObject.id)
               .map(async (item) => {
                 await item.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
         {
@@ -731,9 +731,9 @@ export const setupHooks = () => {
               ?.filter((item) => item.folder?.id === folderObject.id)
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         }
       ); //].concat(options);
@@ -912,9 +912,9 @@ export const setupHooks = () => {
               ?.filter((actor) => actor.folder?.id === folderObject.id)
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
         {
@@ -936,9 +936,9 @@ export const setupHooks = () => {
               ?.filter((actor) => actor.folder?.id === folderObject.id)
               .map(async (actor) => {
                 await actor.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
         {
@@ -960,9 +960,9 @@ export const setupHooks = () => {
               ?.filter((actor) => actor.folder?.id === folderObject.id)
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         }
       ); // ].concat(options);
@@ -1152,9 +1152,9 @@ export const setupHooks = () => {
               ?.filter((rolltable) => rolltable.folder?.id === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i nedd this ??
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
         {
@@ -1176,9 +1176,11 @@ export const setupHooks = () => {
               ?.filter((rolltable) => rolltable.folder?.id === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                +(
+                  // TODO why i need this ?
+                  (await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName))
+                );
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
         {
@@ -1200,9 +1202,9 @@ export const setupHooks = () => {
               ?.filter((rolltable) => rolltable.folder?.id === folderObject.id)
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         }
       ); //].concat(options);
@@ -1409,9 +1411,10 @@ export const setupHooks = () => {
               ?.filter((scene) => scene.folder?.id === folderObject.id)
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
               });
 
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
               const updates = game.scenes
                 ?.filter((scene) => scene.folder?.id === folderObject.id)
@@ -1453,9 +1456,9 @@ export const setupHooks = () => {
               ?.filter((scene) => scene.folder?.id === folderObject.id)
               .map(async (scene) => {
                 await scene.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
           },
         },
         {
@@ -1477,9 +1480,9 @@ export const setupHooks = () => {
               ?.filter((scene) => scene.folder?.id === folderObject.id)
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
 
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
               const updates = game.scenes
@@ -1671,13 +1674,13 @@ export const setupHooks = () => {
               ?.filter((card) => card.folder?.id === folderObject.id)
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
         {
-          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-entity`),
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder`),
           icon: '<i class="fas fa-low-vision"></i>',
           condition: (header) => {
             const folderId = header.parent().data("folderId");
@@ -1695,9 +1698,9 @@ export const setupHooks = () => {
               ?.filter((card) => card.folder?.id === folderObject.id)
               .map(async (card) => {
                 await card.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
         {
@@ -1719,9 +1722,9 @@ export const setupHooks = () => {
               ?.filter((card) => card.folder?.id === folderObject.id)
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
+                // TODO why i need this ?
+                await hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
               });
-
-            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         }
       );

@@ -1,4 +1,9 @@
 # Changelog
+### 1.2.2
+
+- A bunch of bug fixing for v11
+- New feature: Hide/Unhide Folder insetad HideAll/Unhide All
+
 ### 1.2.0 - 1.2.1
 
 - Upgrade for fvtt11
