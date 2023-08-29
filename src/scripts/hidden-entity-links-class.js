@@ -27,7 +27,7 @@ export class HiddenEntityLinks {
   //       if (isHidden && liFolder.find('.hidden-entity-links').length <= 0) {
   //         let div = $(
   //           `<div class=CONSTANTS.MODULE_NAME style="position:absolute;padding-left:20px;">
-  //             <i class="fas fa-lightbulb" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
+  //             <i class="fa fa-fw" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
   //           </div>`,
   //         );
   //         liFolder.find('h3').before(div);
@@ -36,19 +36,30 @@ export class HiddenEntityLinks {
   //   }
   // }
 
-  updateFolderHiddenEntityLinks = async function (entityData, html, data) {
-    const listFolder = html.parent().parent().find("li.directory-item.folder");
+  updateFolderHiddenEntityLinks = async function (entityData, html, data, entities) {
+    const listFolder = html.find("li.directory-item.folder");
     for (let liFolder of listFolder) {
       liFolder = $(liFolder);
       const folder = game.folders?.find((folderObject) => {
         return folderObject.id === liFolder.attr("data-folder-id");
       });
       if (folder) {
+        const lifCreateEntry = liFolder.find(`.create-entry`);
+        const isHiddenByFlag = folder.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+        if (isHiddenByFlag) {
+          const div = $(
+            `<a class="create-button hidden-entity-links-only-folder">
+                <i class="fa fa-fw"/>
+              </a>`
+          );
+          lifCreateEntry.after(div);
+        }
+
         // let list =
         //   liFolder.find('li.directory-item.document')?.length > 0
         //     ? liFolder.find('li.directory-item.document')
         //     : liFolder.find('li.directory-item.entity');
-        API.hiddenEntityLinks.updateHiddenEntityLinks(entityData, liFolder, undefined);
+        // API.hiddenEntityLinks.updateHiddenEntityLinks(entityData, liFolder, undefined);
       }
     }
   };
@@ -69,7 +80,7 @@ export class HiddenEntityLinks {
           } else {
             // let div = $(
             //   `<div class=CONSTANTS.MODULE_NAME style="position:absolute;padding-left:45px;">
-            //     <i class="fas fa-lightbulb" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
+            //     <i class="fa fa-fw" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
             //   </div>`,
             // );
             // li.find('.entity-name').before(div);
@@ -77,7 +88,7 @@ export class HiddenEntityLinks {
               if (li.find(".hidden-entity-links-scene").length <= 0) {
                 const div = $(
                   `<div class="hidden-entity-links-scene">
-                    <i class="fas fa-lightbulb"/>
+                    <i class="fa fa-fw"/>
                   </div>`
                 );
                 //li.find('.entity-name').after(div);
@@ -107,7 +118,7 @@ export class HiddenEntityLinks {
               if (li.find(".hidden-entity-links-scene-show").length <= 0) {
                 const div = $(
                   `<div class="hidden-entity-links-scene-show">
-                    <i class="fas fa-lightbulb"/>
+                    <i class="fa fa-fw"/>
                   </div>`
                 );
                 //li.find('.entity-name').after(div);
@@ -152,7 +163,7 @@ export class HiddenEntityLinks {
                 if (li.find(".hidden-entity-links-scene-unhideshow").length <= 0) {
                   const div = $(
                     `<div class="hidden-entity-links-scene-unhideshow">
-                      <i class="fas fa-lightbulb"/>
+                      <i class="fa fa-fw"/>
                     </div>`
                   );
                   //li.find('.entity-name').after(div);
@@ -183,6 +194,8 @@ export class HiddenEntityLinks {
       return;
     }
 
+    API.hiddenEntityLinks.updateFolderHiddenEntityLinks(obj, html, data, entities);
+
     const list =
       html.find("li.directory-item.document")?.length > 0
         ? html.find("li.directory-item.document")
@@ -208,7 +221,7 @@ export class HiddenEntityLinks {
             } else {
               // let div = $(
               //   `<div class=CONSTANTS.MODULE_NAME style="position:absolute;padding-left:45px;">
-              //     <i class="fas fa-lightbulb" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
+              //     <i class="fa fa-fw" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
               //   </div>`,
               // );
               // li.find('.entity-name').before(div);
@@ -219,7 +232,7 @@ export class HiddenEntityLinks {
                 if (li.find(".hidden-entity-links-scene").length <= 0) {
                   const div = $(
                     `<div class="hidden-entity-links-scene">
-                      <i class="fas fa-lightbulb"/>
+                      <i class="fa fa-fw"/>
                     </div>`
                   );
                   //li.find('.entity-name').after(div);
@@ -239,7 +252,7 @@ export class HiddenEntityLinks {
             } else {
               // let div = $(
               //   `<div class=CONSTANTS.MODULE_NAME style="position:absolute;padding-left:45px;">
-              //     <i class="fas fa-lightbulb" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
+              //     <i class="fa fa-fw" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
               //   </div>`,
               // );
               // li.find('.entity-name').before(div);
@@ -250,7 +263,7 @@ export class HiddenEntityLinks {
                 if (li.find(".hidden-entity-links-scene-show").length <= 0) {
                   const div = $(
                     `<div class="hidden-entity-links-scene-show">
-                      <i class="fas fa-lightbulb"/>
+                      <i class="fa fa-fw"/>
                     </div>`
                   );
                   //li.find('.entity-name').after(div);
@@ -276,7 +289,7 @@ export class HiddenEntityLinks {
                   if (li.find(".hidden-entity-links-scene-unhideshow").length <= 0) {
                     const div = $(
                       `<div class="hidden-entity-links-scene-unhideshow">
-                        <i class="fas fa-lightbulb"/>
+                        <i class="fa fa-fw"/>
                       </div>`
                     );
                     //li.find('.entity-name').after(div);

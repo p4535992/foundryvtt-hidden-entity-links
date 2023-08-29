@@ -133,7 +133,7 @@ export const initHooks = () => {
   // Caso particolare si setta su inti e non su setup
   API.hiddenEntityLinks = new HiddenEntityLinks();
   setApi(API);
-  //@ts-ignore
+
   libWrapper.register(CONSTANTS.MODULE_NAME, "RollTable.prototype.draw", API.hiddenEntityLinks.hiddenTable, "WRAPPER");
 };
 
@@ -232,7 +232,6 @@ export const setupHooks = () => {
   // =======================
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-journals")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "JournalEntry.prototype.visible",
@@ -289,7 +288,7 @@ export const setupHooks = () => {
     // 	return hasText || !hasImage ? "text" : "image";
     //   }
     /*
-		//@ts-ignore
+		
 		libWrapper.register(
 			CONSTANTS.MODULE_NAME,
 			"JournalSheet.prototype._inferDefaultMode",
@@ -336,7 +335,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const journal = game.journal?.get(li.data("documentId"));
             await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
@@ -358,7 +357,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const journal = game.journal?.get(li.data("documentId"));
             await journal.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
@@ -380,7 +379,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const journal = game.journal?.get(li.data("documentId"));
             await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         }
@@ -395,6 +394,48 @@ export const setupHooks = () => {
       }
       options.push(
         //return [
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
+          icon: '<i class="fas fa-folder-minus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && !isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
+          },
+        },
+        {
+          name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.unhide-folder-only`),
+          icon: '<i class="fas fa-folder-plus"></i>',
+          condition: (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            const isHiddenByFlag = folderObject.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+            if (game.user?.isGM && isHiddenByFlag) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          callback: async (header) => {
+            const folderId = header.parent().data("folderId");
+            const folderObject = game.folders?.get(folderId) || game.folders?.getName(folderId);
+            await folderObject.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
+
+            hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
+          },
+        },
         {
           name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder`),
           icon: '<i class="far fa-lightbulb"></i>',
@@ -415,7 +456,7 @@ export const setupHooks = () => {
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
@@ -439,7 +480,7 @@ export const setupHooks = () => {
               .map(async (journal) => {
                 await journal.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         },
@@ -463,7 +504,7 @@ export const setupHooks = () => {
               .map(async (journal) => {
                 await journal.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
           },
         }
@@ -478,7 +519,6 @@ export const setupHooks = () => {
   // =======================
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-items")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "Item.prototype.visible",
@@ -524,7 +564,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const item = game.items?.get(li.data("documentId"));
             await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
@@ -546,7 +586,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const item = game.items?.get(li.data("documentId"));
             await item.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
@@ -567,7 +607,7 @@ export const setupHooks = () => {
           },
           callback: async (li) => {
             const item = game.items?.get(li.data("documentId"));
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         }
@@ -602,7 +642,7 @@ export const setupHooks = () => {
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
@@ -626,7 +666,7 @@ export const setupHooks = () => {
               .map(async (item) => {
                 await item.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         },
@@ -650,7 +690,7 @@ export const setupHooks = () => {
               .map(async (item) => {
                 await item.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
           },
         }
@@ -665,7 +705,6 @@ export const setupHooks = () => {
   // =======================
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-actors")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "Actor.prototype.visible",
@@ -711,7 +750,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const actor = game.actors?.get(li.data("documentId"));
             await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
@@ -733,7 +772,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const actor = game.actors?.get(li.data("documentId"));
             await actor.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
@@ -755,7 +794,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const actor = game.actors?.get(li.data("documentId"));
             await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         }
@@ -790,7 +829,7 @@ export const setupHooks = () => {
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
@@ -814,7 +853,7 @@ export const setupHooks = () => {
               .map(async (actor) => {
                 await actor.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         },
@@ -838,7 +877,7 @@ export const setupHooks = () => {
               .map(async (actor) => {
                 await actor.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Actor.documentName);
           },
         }
@@ -853,7 +892,6 @@ export const setupHooks = () => {
   // =======================
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-rolltables")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "RollTable.prototype.visible",
@@ -875,7 +913,6 @@ export const setupHooks = () => {
       "OVERRIDE"
     );
 
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "RollTableConfig.defaultOptions",
@@ -911,7 +948,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const rolltable = game.tables?.get(li.data("documentId"));
             await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
@@ -933,7 +970,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const rolltable = game.tables?.get(li.data("documentId"));
             await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
@@ -955,7 +992,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const rolltable = game.tables?.get(li.data("documentId"));
             await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         }
@@ -990,7 +1027,7 @@ export const setupHooks = () => {
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
@@ -1014,7 +1051,7 @@ export const setupHooks = () => {
               .map(async (rolltable) => {
                 await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         },
@@ -1038,7 +1075,7 @@ export const setupHooks = () => {
               .map(async (rolltable) => {
                 await rolltable.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
           },
         }
@@ -1053,7 +1090,6 @@ export const setupHooks = () => {
   // =======================
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "Scene.prototype.visible",
@@ -1099,7 +1135,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const scene = game.scenes?.get(li.data("documentId"));
             await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
               const updates = [
@@ -1138,7 +1174,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const scene = game.scenes?.get(li.data("documentId"));
             await scene.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
           },
         },
@@ -1160,7 +1196,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const scene = game.scenes?.get(li.data("documentId"));
             await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
               const updates = [
@@ -1206,7 +1242,7 @@ export const setupHooks = () => {
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
               const updates = game.scenes
@@ -1250,7 +1286,7 @@ export const setupHooks = () => {
               .map(async (scene) => {
                 await scene.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
           },
         },
@@ -1274,7 +1310,7 @@ export const setupHooks = () => {
               .map(async (scene) => {
                 await scene.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Scene.documentName);
 
             if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes-nav")) {
@@ -1304,7 +1340,6 @@ export const setupHooks = () => {
   // ===========
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-cards")) {
-    //@ts-ignore
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "Card.prototype.visible",
@@ -1350,7 +1385,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const card = game.cards?.get(li.data("documentId"));
             await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
@@ -1372,7 +1407,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const card = game.cards?.get(li.data("documentId"));
             await card.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
@@ -1394,7 +1429,7 @@ export const setupHooks = () => {
           callback: async (li) => {
             const card = game.cards?.get(li.data("documentId"));
             await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         }
@@ -1427,7 +1462,7 @@ export const setupHooks = () => {
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, true);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
@@ -1451,7 +1486,7 @@ export const setupHooks = () => {
               .map(async (card) => {
                 await card.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         },
@@ -1475,7 +1510,7 @@ export const setupHooks = () => {
               .map(async (card) => {
                 await card.setFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN, false);
               });
-            //@ts-ignore
+
             hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Card.documentName);
           },
         }
@@ -1485,7 +1520,6 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
-  //@ts-ignore
   libWrapper.register(
     CONSTANTS.MODULE_NAME,
     "UserConfig.prototype.getData",
@@ -1495,7 +1529,6 @@ export const readyHooks = () => {
         return arr;
       }, []);
       const actors = game.actors?.filter(
-        //@ts-ignore
         (a) => a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(a.id)
       );
       // MOD 4535992
@@ -1589,7 +1622,7 @@ export const readyHooks = () => {
 
   if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-scenes") && !game.user?.isGM) {
     // Hook SceneNavigation methods and implement the main module functionality
-    //@ts-ignore
+
     libWrapper.register(CONSTANTS.MODULE_NAME, "SceneNavigation.prototype.render", function (wrapper, ...args) {
       const result = wrapper.apply(this, args);
       if (!game.user?.isGM) {
@@ -1614,7 +1647,7 @@ export const readyHooks = () => {
       }
       return result;
     });
-    //@ts-ignore
+
     libWrapper.register(
       CONSTANTS.MODULE_NAME,
       "SceneNavigation.prototype.getData",
@@ -1631,7 +1664,7 @@ export const readyHooks = () => {
               error(`It shouldn't happen check out the logs`);
             }
             const users = game.users?.filter((u) => u.active && u.viewedScene === scene.id);
-            //@ts-ignore
+
             if (scene.navigation) {
               const set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-scenes-nav-name");
               if (set === HiddenEntityLinkPermissions.EMPTY) {
@@ -1759,7 +1792,7 @@ export const readyHooks = () => {
   //       if (isHidden && liFolder.find('.hidden-entity-links').length <= 0) {
   //         let div = $(
   //           `<div class=CONSTANTS.MODULE_NAME style="position:absolute;padding-left:45px;">
-  //             <i class="fas fa-lightbulb" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
+  //             <i class="fa fa-fw" style="color:darkRed; text-shadow: 0 0 8px darkRed;"/>
   //           </div>`,
   //         );
   //         liFolder.find('h4').before(div);
