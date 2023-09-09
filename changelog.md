@@ -1,8 +1,14 @@
 # Changelog
+
+### 1.2.3
+
+- New feature: Add module setting "specificFolderActorsOnPlayerList": In the list of actors to associate with the user, limit the selection to only those actors for which the user has permissions in this specific folder.
+- Update some settings
+
 ### 1.2.2
 
 - A bunch of bug fixing for v11
-- New feature: Hide/Unhide Folder insetad HideAll/Unhide All
+- New feature: Hide/Unhide Folder as a lternative to HideAll/Unhide All
 
 ### 1.2.0 - 1.2.1
 

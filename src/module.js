@@ -1733,20 +1733,47 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
+  // Players List configurations
   libWrapper.register(
     CONSTANTS.MODULE_NAME,
     "UserConfig.prototype.getData",
     function (wrapped, ...args) {
       const controlled = game.users?.reduce((arr, u) => {
-        if (u.character) arr.push(u.character);
+        if (u.character) {
+          arr.push(u.character);
+        }
         return arr;
       }, []);
-      const actors = game.actors?.filter(
-        (a) => a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(a.id)
-      );
-      // MOD 4535992
-      const newActors = actors?.filter((actor) => !API.isHidden(actor.uuid, game.user?.id, true));
-      // END MOD 4535992
+
+      let newActors = [];
+
+      const specificFolder = game.settings.get(CONSTANTS.MODULE_NAME, "specificFolderActorsOnPlayerList");
+      let specificFolderObj = undefined;
+      if (specificFolder != 0) {
+        specificFolderObj =
+          game.actors.directory.folders.find((f) => f.name === specificFolder || f.id === specificFolder) ??
+          game.actors.directory.folders[Number(specificFolder)] ??
+          undefined;
+      }
+      if (specificFolderObj) {
+        const actors = specificFolderObj.contents?.filter((a) => {
+          return a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(a.id);
+        });
+        // MOD 4535992
+        newActors = actors?.filter((actor) => {
+          return !API.isHidden(actor.uuid, game.user?.id, true);
+        });
+      } else {
+        const actors = game.actors?.filter((a) => {
+          return a.testUserPermission(this.object, "OBSERVER") && !controlled?.includes(a.id);
+        });
+        // MOD 4535992
+        newActors = actors?.filter((actor) => {
+          return !API.isHidden(actor.uuid, game.user?.id, true);
+        });
+        // END MOD 4535992
+      }
+
       return {
         user: this.object,
         actors: newActors,

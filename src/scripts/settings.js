@@ -9,6 +9,29 @@ export const registerSettings = function () {
     type: ResetSettingsDialog,
     restricted: true,
   });
+
+  game.settings.register(CONSTANTS.MODULE_NAME, "specificFolderActorsOnPlayerList", {
+    name: `${CONSTANTS.MODULE_NAME}.setting.specificFolderActorsOnPlayerList.name`,
+    hint: `${CONSTANTS.MODULE_NAME}.setting.specificFolderActorsOnPlayerList.hint`,
+    scope: "world",
+    type: String,
+    choices: () => {
+      const folders = game.actors.directory.folders.sort((a, b) => a.name.localeCompare(b.name));
+      const arrObj = {};
+      arrObj[""] = "Select a actor folder";
+      Object.entries(folders).reduce((folder, [k, v]) => {
+        folder[v.id] = v.name;
+        arrObj[v.id] = v.name;
+        return folder;
+      }, {});
+      return arrObj;
+    },
+    default: 0,
+    config: true,
+    // onChange: (s) => {},
+    requiresReload: true,
+  });
+
   // =====================================================================
   game.settings.register(CONSTANTS.MODULE_NAME, "hide-actors", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hide-actors.name`,
@@ -17,6 +40,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "level-permission-actors", {
     name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-actors.name`,
@@ -42,6 +66,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "level-permission-items", {
     name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-items.name`,
@@ -67,6 +92,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "level-permission-journals", {
     name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-journals.name`,
@@ -92,6 +118,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "level-permission-rolltables", {
     name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-rolltables.name`,
@@ -117,6 +144,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "level-permission-cards", {
     name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-cards.name`,
@@ -142,6 +170,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hide-scenes-nav", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hide-scenes-nav.name`,
@@ -150,6 +179,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   // game.settings.register(CONSTANTS.MODULE_NAME, 'level-permission-scenes', {
   //   name: `${CONSTANTS.MODULE_NAME}.setting.level-permission-scenes.name`,
@@ -209,6 +239,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "disguise-unreachable-links", {
     name: `${CONSTANTS.MODULE_NAME}.setting.disguise-unreachable-links.name`,
@@ -240,6 +271,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "disable-voices", {
     name: `${CONSTANTS.MODULE_NAME}.setting.disable-voices.name`,
@@ -248,6 +280,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hide-soundtracks", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hide-soundtracks.name`,
@@ -256,6 +289,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   // ========================================================================
   game.settings.register(CONSTANTS.MODULE_NAME, "hidechat", {
@@ -265,6 +299,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidecombat", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidecombat.name`,
@@ -273,6 +308,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidescenes", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidescenes.name`,
@@ -281,6 +317,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hideactors", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hideactors.name`,
@@ -289,6 +326,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hideitems", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hideitems.name`,
@@ -297,6 +335,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidejournal", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidejournal.name`,
@@ -305,6 +344,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidetables", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidetables.name`,
@@ -313,6 +353,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidecards", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidecards.name`,
@@ -321,6 +362,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hideplaylists", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hideplaylists.name`,
@@ -329,6 +371,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidecompendium", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidecompendium.name`,
@@ -337,6 +380,7 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
+    requiresReload: true,
   });
   game.settings.register(CONSTANTS.MODULE_NAME, "hidesettings", {
     name: `${CONSTANTS.MODULE_NAME}.setting.hidesettings.name`,
@@ -345,9 +389,10 @@ export const registerSettings = function () {
     config: true,
     type: Boolean,
     default: false,
-    onChange: (_) => {
-      window.location.reload();
-    },
+    // onChange: (_) => {
+    //   window.location.reload();
+    // },
+    requiresReload: true,
   });
   // ========================================================================
   game.settings.register(CONSTANTS.MODULE_NAME, "debug", {

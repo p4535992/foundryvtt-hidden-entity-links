@@ -73,6 +73,9 @@
   "hidden-entity-links.setting.hidesettings.name": "Hidden Settings Directory",
   "hidden-entity-links.setting.hidesettings.hint": "Not recommended",
 
+  "hidden-entity-links.setting.specificFolderActorsOnPlayerList.name": "Specific folder actors on player list",
+  "hidden-entity-links.setting.specificFolderActorsOnPlayerList.hint": "In the list of actors to associate with the user, limit the selection to only those actors for which the user has permissions in this specific folder.",
+
   "hidden-entity-links.setting.reset.name": "Reset settings to default",
   "hidden-entity-links.setting.reset.label": "Reset Settings To Default",
   "hidden-entity-links.setting.reset.hint": "This will reset all of the settings of back to the active game system's default.",

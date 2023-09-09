@@ -143,6 +143,8 @@ Here what player see with the value "ONLY OBSERVER":
 - Always displays original scene name to the GM, but shows the Navigation Name for any players.
 - Allows the GM to hide sidebars (Chat, Scenes, Items, etc) for players, simplifying the player UI. By default it disables Scenes, Items, Tables, Cards, Playlists, and Compendiums. Each tab can be toggled in the module settings, even the Settings tab. Removing the Settings tab for players is not recommended.
 - Ovverride the dialog user configuration for hide all the hidden linked entities (even for gm)
+- Specific folder actors on player list: In the list of actors to associate with the user, limit the selection to only those actors for which the user has permissions in this specific folder.
+
 
 ![img](/wiki/hide_sidebar_voice.jpg)
 
@@ -178,6 +180,7 @@ Show the specific entity
 
 ## Settings
 
+- **Specific folder actors on player list:** In the list of actors to associate with the user, limit the selection to only those actors for which the user has permissions in this specific folder.
 - **Enable/disable the hidden functionality globally for Actors:** If enabled and you are not a GM, users will not see hidden actors in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
 - **Set level permission actors to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Enable/disable the hidden functionality globally for Items:** If enabled and you are not a GM, users will not see hidden items in the sidebar anymore, if you enabled/disabled this later the hidden entity regain the hidden state
@@ -200,6 +203,7 @@ Show the specific entity
 - **Set level permission to hide for non GM user:** This property hide all the entities of this type for non GM user with this level of permission. ATTENTION: no css visualization is active with this setting.
 - **Disable voice from the right click context entities and folders:** Someone can find the permission manager just enough for their use, this setting let you the possibility to disable the voice feature. ATTENTION: It will not reset already esisting entities
 - **Enable/disable the hidden functionality globally for Soundtracks:** If enabled and you are not a GM, users will not see the soundtrack name and the playlist controls
+
 
 # Build
 
