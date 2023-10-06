@@ -553,14 +553,14 @@ export class HiddenEntityLinks {
   //   }
   // }
 
-  hiddenTable(wrapped, ...args) {
-    if (this.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE)) {
-      try {
-        args[0].rollMode = "gmroll";
-      } catch {
-        args.push({ rollMode: "gmroll" });
-      }
-    }
-    return wrapped(...args);
-  }
+  // hiddenTable(wrapped, ...args) {
+  //   if (this.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE)) {
+  //     try {
+  //       args[0].rollMode = "gmroll";
+  //     } catch {
+  //       args.push({ rollMode: "gmroll" });
+  //     }
+  //   }
+  //   return wrapped(...args);
+  // }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.4
+
+- Removed feature for hide the rolltable, a customized version of [Hidden Tables](https://github.com/kandashi/hidden-tables/) just avoid to install another module, this feature is been transfer on the module "Better
+
 ### 1.2.3
 
 - New feature: Add module setting "specificFolderActorsOnPlayerList": In the list of actors to associate with the user, limit the selection to only those actors for which the user has permissions in this specific folder.

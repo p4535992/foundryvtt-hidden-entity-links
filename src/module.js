@@ -134,25 +134,25 @@ export const initHooks = () => {
   API.hiddenEntityLinks = new HiddenEntityLinks();
   setApi(API);
 
-  libWrapper.register(CONSTANTS.MODULE_NAME, "RollTable.prototype.draw", API.hiddenEntityLinks.hiddenTable, "WRAPPER");
+  // libWrapper.register(CONSTANTS.MODULE_NAME, "RollTable.prototype.draw", API.hiddenEntityLinks.hiddenTable, "WRAPPER");
 };
 
 export const setupHooks = () => {
   // Settings.registerSettings();
 
-  Hooks.on("renderRollTableConfig", (config, html, css) => {
-    const isHidden = config.object.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE);
-    const lastBox = html.find(".results");
-    const checkboxHTML = `
-    <div class="form-group">
-        <label>${game.i18n.format("hidden-entity-links.label.tableTextHiddenTable")}</label>
-        <input type="checkbox" name="flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN_TABLE}" ${
-      isHidden ? "checked" : ""
-    }>
-    </div>
-    `;
-    lastBox.before(checkboxHTML);
-  });
+  // Hooks.on("renderRollTableConfig", (config, html, css) => {
+  //   const isHidden = config.object.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN_TABLE);
+  //   const lastBox = html.find(".results");
+  //   const checkboxHTML = `
+  //   <div class="form-group">
+  //       <label>${game.i18n.format("hidden-entity-links.label.tableTextHiddenTable")}</label>
+  //       <input type="checkbox" name="flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN_TABLE}" ${
+  //     isHidden ? "checked" : ""
+  //   }>
+  //   </div>
+  //   `;
+  //   lastBox.before(checkboxHTML);
+  // });
 
   Hooks.on("renderJournalDirectory", (obj, html, data) => {
     if (game.settings.get(CONSTANTS.MODULE_NAME, "hide-journals")) {

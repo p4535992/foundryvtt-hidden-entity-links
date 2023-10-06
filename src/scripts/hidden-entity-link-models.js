@@ -1,6 +1,6 @@
 export const HiddenEntityLinkFlags = {
   HIDDEN: "hidden",
-  HIDDEN_TABLE: "hiddenTable",
+  // HIDDEN_TABLE: "hiddenTable",
   HIDDEN_TITLE: "hiddenTitle",
 };
 
