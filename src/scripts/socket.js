@@ -6,15 +6,15 @@ import { setSocket } from "../module.js";
 export let hiddenEntityLinkSocket;
 
 export function registerSocket() {
-  debug("Registered finalBlowSocket");
-  if (hiddenEntityLinkSocket) {
+    debug("Registered finalBlowSocket");
+    if (hiddenEntityLinkSocket) {
+        return hiddenEntityLinkSocket;
+    }
+    //@ts-ignore
+    hiddenEntityLinkSocket = socketlib.registerModule(CONSTANTS.MODULE_NAME);
+
+    hiddenEntityLinkSocket.register("renderSpecificSidebar", (...args) => API.renderSpecificSidebarArr(...args));
+
+    setSocket(hiddenEntityLinkSocket);
     return hiddenEntityLinkSocket;
-  }
-  //@ts-ignore
-  hiddenEntityLinkSocket = socketlib.registerModule(CONSTANTS.MODULE_NAME);
-
-  hiddenEntityLinkSocket.register("renderSpecificSidebar", (...args) => API.renderSpecificSidebarArr(...args));
-
-  setSocket(hiddenEntityLinkSocket);
-  return hiddenEntityLinkSocket;
 }

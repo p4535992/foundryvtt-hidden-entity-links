@@ -1,8 +1,11 @@
 # Changelog
+### 1.2.5
+
+- Update manifest for v12
 
 ### 1.2.4
 
-- Removed feature for hide the rolltable, a customized version of [Hidden Tables](https://github.com/kandashi/hidden-tables/) just avoid to install another module, this feature is been transfer on the module "Better
+- Removed feature for hide the rolltable, a customized version of [Hidden Tables](https://github.com/kandashi/hidden-tables/) just avoid to install another module, this feature is been transfer on the module "Better Rolltables"
 
 ### 1.2.3
 
