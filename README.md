@@ -293,3 +293,7 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 - A little part of code is inspired from [NutritiousCookie](https://github.com/NutritiousCookie) and the module [hide-sidebars](https://github.com/NutritiousCookie/Hide-Sidebars)
 
 - A little part of code is inspired from [geekswordsman](https://gitlab.com/geekswordsman/) and the module [compendium-permissions](https://gitlab.com/geekswordsman/compendium-permissions/)
+
+-  https://foundryvtt.com/packages/control-concealer
+
+-  https://foundryvtt.com/packages/snugugs-little-helpers 
