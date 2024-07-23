@@ -341,7 +341,9 @@
     "TextEditor": true,
     "WebRTC": true,
     "ui": true,
-    "DND5E": true
+    "DND5E": true,
+    "CONST": true,
+    "Journal": true
   }
 }
 

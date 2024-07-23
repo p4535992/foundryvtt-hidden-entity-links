@@ -223,7 +223,7 @@ export const setupHooks = () => {
         //   hiddenEntityLinksSocket.executeForEveryone('hideRenderedHiddenEntityLinks', obj, html, data);
         // } else {
         API.hiddenEntityLinks.directoryRenderedHiddenEntityLinks(obj, html, data, entities);
-        //API.hiddenEntityLinks.hideRenderedHiddenEntityLinks(obj, html, data);
+        // API.hiddenEntityLinks.hideRenderedHiddenEntityLinks(obj, html, data);
         // }
     });
 
@@ -316,7 +316,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -383,7 +383,7 @@ export const setupHooks = () => {
                         hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Journal.documentName);
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -393,7 +393,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
                     icon: '<i class="fas fa-folder-minus"></i>',
@@ -523,7 +523,7 @@ export const setupHooks = () => {
                             });
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -560,7 +560,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -626,7 +626,7 @@ export const setupHooks = () => {
                         hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", Item.documentName);
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -766,7 +766,7 @@ export const setupHooks = () => {
                             });
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -803,7 +803,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -880,7 +880,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
                     icon: '<i class="fas fa-folder-minus"></i>',
@@ -1047,7 +1047,7 @@ export const setupHooks = () => {
             "RollTableConfig.defaultOptions",
             function (wrapped, ...args) {
                 return foundry.utils.mergeObject(wrapped(...args), {
-                    viewPermission: CONST.DOCUMENT_PERMISSION_LEVELS.LIMITED,
+                    viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
                 });
             },
             "WRAPPER",
@@ -1058,7 +1058,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -1125,7 +1125,7 @@ export const setupHooks = () => {
                         hiddenEntityLinkSocket.executeForEveryone("renderSpecificSidebar", RollTable.documentName);
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -1135,7 +1135,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
                     icon: '<i class="fas fa-folder-minus"></i>',
@@ -1230,12 +1230,10 @@ export const setupHooks = () => {
                             ?.filter((rolltable) => rolltable.folder?.id === folderObject.id)
                             .map(async (rolltable) => {
                                 await rolltable.unsetFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN);
-                                +(
-                                    // TODO why i need this ?
-                                    (await hiddenEntityLinkSocket.executeForEveryone(
-                                        "renderSpecificSidebar",
-                                        RollTable.documentName,
-                                    ))
+                                // TODO why i need this ?
+                                await hiddenEntityLinkSocket.executeForEveryone(
+                                    "renderSpecificSidebar",
+                                    RollTable.documentName,
                                 );
                             });
                     },
@@ -1267,7 +1265,7 @@ export const setupHooks = () => {
                             });
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -1304,7 +1302,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -1399,7 +1397,7 @@ export const setupHooks = () => {
                         }
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -1409,7 +1407,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-folder-only`),
                     icon: '<i class="fas fa-folder-minus"></i>',
@@ -1578,7 +1576,7 @@ export const setupHooks = () => {
                         }
                     },
                 },
-            ); //].concat(options);
+            ); // ].concat(options);
             // },
             // 'MIXED',
         });
@@ -1615,7 +1613,7 @@ export const setupHooks = () => {
                 return options;
             }
             options.push(
-                //return [
+                // return [
                 {
                     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.label.hide-entity`),
                     icon: '<i class="far fa-lightbulb"></i>',
@@ -1826,6 +1824,10 @@ export const setupHooks = () => {
 };
 
 export const readyHooks = () => {
+    // TODO
+    // TODO TO UPGRADE FOR V12... FOR NOW WE COMMENT
+    // TODO
+    /*
     // Players List configurations
     libWrapper.register(
         CONSTANTS.MODULE_NAME,
@@ -1842,7 +1844,7 @@ export const readyHooks = () => {
 
             const specificFolder = game.settings.get(CONSTANTS.MODULE_NAME, "specificFolderActorsOnPlayerList");
             let specificFolderObj = undefined;
-            if (specificFolder != 0) {
+            if (specificFolder !== 0) {
                 specificFolderObj =
                     game.actors.directory.folders.find((f) => f.name === specificFolder || f.id === specificFolder) ??
                     game.actors.directory.folders[Number(specificFolder)] ??
@@ -1870,12 +1872,12 @@ export const readyHooks = () => {
             return {
                 user: this.object,
                 actors: newActors,
-                options: this.options,
+                options: this.options
             };
         },
         "OVERRIDE",
     );
-
+    */
     // Hide-Sidebars feature
     if (!game.user?.isGM) {
         if (game.settings.get(CONSTANTS.MODULE_NAME, "hidechat") !== false) {
@@ -2008,7 +2010,7 @@ export const readyHooks = () => {
                                 const isSceneHidden = API.isHidden(scene.uuid, game.user?.id, true);
                                 if (isSceneHidden) {
                                     // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-                                    //data.name = scene?.name;
+                                    // data.name = scene?.name;
                                     let name = scene?.name; // game.user?.isGM ? data.name : data.navName
                                     if (name === "") {
                                         name = data.name;
@@ -2023,7 +2025,7 @@ export const readyHooks = () => {
                                 );
                                 if (!navNameRole) {
                                     // Check if navigation is navigable for avoid the 'hide-scenes-nav' check
-                                    //data.name = scene?.name;
+                                    // data.name = scene?.name;
                                     let name = scene?.name; // game.user?.isGM ? data.name : data.navName
                                     if (name === "") {
                                         name = data.name;

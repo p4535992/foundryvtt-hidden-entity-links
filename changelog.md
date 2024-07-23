@@ -1,4 +1,9 @@
 # Changelog
+
+### 1.3.0 [BREAKING CHANGES]
+
+- Start upgrade forced for v12
+
 ### 1.2.5
 
 - Update manifest for v12
