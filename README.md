@@ -39,8 +39,6 @@ The graphic interaction with new choices on the sidebar context let you decide t
 
 There is a integration based on the permission applied on the entities.
 
-## NOTE: If you are a javascript developer and not a typescript developer, you can just use the javascript files under the dist folder
-
 ## Installation
 
 It's always easiest to install modules from the in game add-on browser.
