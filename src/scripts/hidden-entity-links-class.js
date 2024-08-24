@@ -5,7 +5,6 @@ import {
     HiddenEntityLinkPermissions,
     HiddenEntityLinkState,
 } from "./hidden-entity-link-models.js";
-import { warn } from "./lib/lib.js";
 
 export class HiddenEntityLinks {
     // /**
@@ -354,7 +353,7 @@ export class HiddenEntityLinks {
 				}
 				const entity = HiddenEntityLinkTypeMap[dataentity];
 				if (!entity) {
-					warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
+					Logger.warn(`checkRenderLinks#EntityMap does not have '${entity}'`);
 					return false;
 				}
 				if (
@@ -410,7 +409,7 @@ export class HiddenEntityLinks {
 
 				const gametype = HiddenEntityLinkTypeMap[datatype];
 				if (!gametype) {
-					warn(`checkRenderLinks#TypeMap does not have '${datatype}'`);
+					Logger.warn(`checkRenderLinks#TypeMap does not have '${datatype}'`);
 					return false;
 				}
 				let id = a.getAttribute("data-id");
@@ -504,7 +503,7 @@ export class HiddenEntityLinks {
     // 		return e && e.id === entityID;
     // 	});
     // 	if (entity) {
-    // 		const hasFlagHide = hasProperty(
+    // 		const hasFlagHide = foundry.utils.hasProperty(
     // 			entity,
     // 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
     // 		);
@@ -519,7 +518,7 @@ export class HiddenEntityLinks {
     // 		return e && e.id === entityID;
     // 	});
     // 	if (entity) {
-    // 		const hasFlagHide = hasProperty(
+    // 		const hasFlagHide = foundry.utils.hasProperty(
     // 			entity,
     // 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
     // 		);
@@ -534,7 +533,7 @@ export class HiddenEntityLinks {
     // 		return e && e.id === entityID;
     // 	});
     // 	if (entity) {
-    // 		const hasFlagHide = hasProperty(
+    // 		const hasFlagHide = foundry.utils.hasProperty(
     // 			entity,
     // 			`flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`
     // 		);

@@ -1,5 +1,9 @@
 # Changelog
 
+### 12.0.0
+
+- Manage upgrade for v12
+
 ### 1.3.0 [BREAKING CHANGES]
 
 - Start upgrade forced for v12

@@ -6,7 +6,7 @@ import {
     HiddenEntityLinkPermissions,
     HiddenEntityLinkState,
 } from "./hidden-entity-link-models.js";
-import { error, warn } from "./lib/lib.js";
+import Logger from "./lib/Logger.js";
 const API = {
     hiddenEntityLinks: {},
 
@@ -32,7 +32,7 @@ const API = {
         } else if (setting === "level-permission-disguise-unreachable-links") {
             set = game.settings.get(CONSTANTS.MODULE_NAME, "level-permission-disguise-unreachable-links");
         } else {
-            throw new Error(`NO module setting found for key '${setting}'`);
+            throw new Logger.error(`NO module setting found for key '${setting}'`);
         }
         /*
 		if (set === HiddenEntityLinkPermissions.EMPTY) {
@@ -98,7 +98,7 @@ const API = {
 
     _checkState(entity) {
         const hasFlagHide =
-            hasProperty(entity, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
+            foundry.utils.hasProperty(entity, `flags.${CONSTANTS.MODULE_NAME}.${HiddenEntityLinkFlags.HIDDEN}`) &&
             entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) !== null &&
             entity.getFlag(CONSTANTS.MODULE_NAME, HiddenEntityLinkFlags.HIDDEN) !== undefined;
         if (hasFlagHide) {
@@ -114,16 +114,16 @@ const API = {
 
     isHidden(documentUuid, userId, evenForGm) {
         if (!documentUuid) {
-            error(`No documentId is passed '${documentUuid}'`, true);
+            Logger.error(`No documentId is passed '${documentUuid}'`, true);
             return false;
         }
         if (!userId) {
-            error(`No userId is passed '${userId}'`, true);
+            Logger.error(`No userId is passed '${userId}'`, true);
             return false;
         }
         const myUser = game.users?.get(userId);
         if (!myUser) {
-            error(`No user founded by id '${userId}'`, true);
+            Logger.error(`No user founded by id '${userId}'`, true);
             return false;
         }
         if (myUser?.isGM && !evenForGm) {
@@ -133,7 +133,7 @@ const API = {
         //@ts-ignore
         const myDocument = fromUuidSync(documentUuid);
         if (!myDocument) {
-            error(`No document founded by id '${documentUuid}'`, true);
+            Logger.error(`No document founded by id '${documentUuid}'`, true);
             return false;
         }
         // Before check permission we check the flags
@@ -159,7 +159,7 @@ const API = {
         } else if (myDocument instanceof Scene) {
             keySetting = "level-permission-scenes-nav";
         } else {
-            error(
+            Logger.error(
                 `The entity '${myDocument}' is not a recognized instance it must be Actor, Item, Journal, RollTable, Card, Scene`,
                 true,
             );
@@ -170,7 +170,7 @@ const API = {
 
     async renderSpecificSidebarArr(...inAttributes) {
         if (!Array.isArray(inAttributes)) {
-            throw error("renderSpecificSidebarArr | inAttributes must be of type array");
+            throw Logger.error("renderSpecificSidebarArr | inAttributes must be of type array");
         }
         const [documentName] = inAttributes; // e.g. { action: "createFolder" }
 
@@ -192,7 +192,7 @@ const API = {
             game.playlists?.render(true);
             // } else if (CompendiumCollection.documentName === documentName) {
         } else {
-            warn(`Document name is not passed '${documentName}'`, true);
+            Logger.warn(`Document name is not passed '${documentName}'`, true);
         }
     },
 };

@@ -6,16 +6,16 @@ import {
     HiddenEntityLinkState,
 } from "./scripts/hidden-entity-link-models.js";
 import { HiddenEntityLinks } from "./scripts/hidden-entity-links-class.js";
-import { dialogWarning, error, log, resetNavbar } from "./scripts/lib/lib.js";
+import { resetNavbar } from "./scripts/lib/lib.js";
 import { registerSettings } from "./scripts/settings.js";
-import { debug } from "./scripts/lib/lib.js";
 import { hiddenEntityLinkSocket, registerSocket } from "./scripts/socket.js";
+import Logger from "./scripts/lib/Logger.js";
 
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once("init", function () {
-    // debug(" init " + CONSTANTS.MODULE_NAME);
+    // Logger.debug(" init " + CONSTANTS.MODULE_NAME);
     // Register custom module settings
     registerSettings();
     // Register custom sheets (if any)
@@ -34,47 +34,47 @@ Hooks.once("ready", function () {
     if (!game.modules.get("lib-wrapper")?.active && game.user?.isGM) {
         let word = "install and activate";
         if (game.modules.get("lib-wrapper")) word = "activate";
-        throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+        throw Logger.error(`Requires the 'libWrapper' module. Please ${word} it.`);
     }
     if (!game.modules.get("socketlib")?.active && game.user?.isGM) {
         let word = "install and activate";
         if (game.modules.get("socketlib")) word = "activate";
-        throw error(`Requires the 'socketlib' module. Please ${word} it.`);
+        throw Logger.error(`Requires the 'socketlib' module. Please ${word} it.`);
     }
     if (game.modules.get("disguise-unreachable-links")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'disguise-unreachable-links' module enabled and active. There is a Redundancy of features you can disable 'Disguise Unreachable Links' module if you want.`,
         );
     }
     if (game.modules.get("hidden-tables")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'hidden-tables' module enabled and active. There is a Redundancy of features you can disable 'Hidden Tables' module if you want.`,
         );
     }
     if (game.modules.get("hiddensoundtracks")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'hiddensoundtracks' module enabled and active. There is a Redundancy of features you can disable 'Hidden Soundtracks' module if you want.`,
         );
     }
 
     if (game.modules.get("navbar-tweaks")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'navbar-tweaks' module enabled and active. There is a Redundancy of features you can disable 'Navbar Tweaks' module if you want.`,
         );
     }
 
     if (game.modules.get("navigation-name")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'navigation-name' module enabled and active. There is a Redundancy of features you can disable 'Navigation Name' module if you want.`,
         );
     }
     if (game.modules.get("hide-sidebars")?.active && game.user?.isGM) {
-        dialogWarning(
+        Logger.dialogWarning(
             `With 'hide-sidebars' module enabled and active. There is a Redundancy of features you can disable 'Hide Sidebar Tabs' module if you want.`,
         );
     }
     // if (game.modules.get('compendium-permissions')?.active && game.user?.isGM) {
-    //   dialogWarning(
+    //   Logger.dialogWarning(
     //     `With 'compendium-permissions' module enabled and active. There is a Redundancy of features you can disable 'Compendium Permissions' module if you want.`,
     //   );
     // }
@@ -2000,7 +2000,7 @@ export const readyHooks = () => {
                     const scenes = result.scenes.forEach((data) => {
                         const scene = game.scenes?.get(data.id);
                         if (!scene) {
-                            error(`It shouldn't happen check out the logs`);
+                            Logger.error(`It shouldn't happen check out the logs`);
                         }
                         const users = game.users?.filter((u) => u.active && u.viewedScene === scene.id);
 

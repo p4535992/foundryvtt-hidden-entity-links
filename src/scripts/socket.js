@@ -1,12 +1,12 @@
 import CONSTANTS from "./constants.js";
 import API from "./api.js";
-import { debug } from "./lib/lib.js";
 import { setSocket } from "../module.js";
+import Logger from "./lib/Logger.js";
 
 export let hiddenEntityLinkSocket;
 
 export function registerSocket() {
-    debug("Registered finalBlowSocket");
+    Logger.debug("Registered finalBlowSocket");
     if (hiddenEntityLinkSocket) {
         return hiddenEntityLinkSocket;
     }
